@@ -489,14 +489,14 @@ h1, h2, h3, h4, p { margin: 0; }
 
 .job__list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
 .job__list li {
-  display: grid;
-  grid-template-columns: 22px 1fr;
+  display: flex;
   align-items: baseline;
   gap: 6px;
   font-size: 14.5px;
   color: var(--fg-dim);
   line-height: 1.55;
 }
+.job__list li .bullet { flex-shrink: 0; }
 .job__list b { color: var(--fg); font-weight: 500; }
 .bullet { color: var(--acc); font-family: var(--font-mono); }
 
@@ -564,6 +564,8 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 @media (max-width: 880px) { .featured__grid { grid-template-columns: 1fr; } }
 
+.featured__copy { min-width: 0; }
+
 .featured__lede {
   font-size: 17px; color: var(--fg-dim);
   margin-bottom: 18px;
@@ -572,10 +574,13 @@ h1, h2, h3, h4, p { margin: 0; }
 .featured__lede b { color: var(--fg); font-weight: 500; }
 .featured__points { display: flex; flex-direction: column; gap: 10px; }
 .featured__points li {
-  display: grid; grid-template-columns: 22px 1fr; gap: 6px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
   font-size: 14.5px; color: var(--fg-dim);
   line-height: 1.55;
 }
+.featured__points li .bullet { flex-shrink: 0; }
 .featured__points b { color: var(--fg); font-weight: 500; }
 .featured__points i { color: var(--acc); font-style: italic; }
 
@@ -745,7 +750,7 @@ h1, h2, h3, h4, p { margin: 0; }
   --on: 0;
   background:
     repeating-linear-gradient(90deg,
-      var(--acc-dim) 0 8px,
+      var(--fg-mute) 0 8px,
       transparent 8px 12px);
   height: 6px; border-radius: 2px;
   position: relative;
