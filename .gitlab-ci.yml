@@ -1,0 +1,24 @@
+# ─────────────────────────────────────────────────────────────────
+# GitLab Pages — Jacob Joseph · Portfolio
+# Static site (HTML / CSS / vanilla JS) — no build step required.
+# ─────────────────────────────────────────────────────────────────
+
+image: alpine:3.20
+
+stages:
+  - deploy
+
+pages:
+  stage: deploy
+  script:
+    - echo "// publishing portfolio to GitLab Pages…"
+    - mkdir -p public
+    - cp -r index.html style.css assets public/
+    - echo "// done — $(find public -type f | wc -l) files published"
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  rules:
+    # Deploy on every push to the default branch (main).
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
