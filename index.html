@@ -652,16 +652,18 @@ linkedin  = "linkedin.com/in/jacob-joseph-dev"
 
         /* ── fullscreen ── */
         var autonixFullscreen = document.getElementById('autonix-fullscreen');
-        var autonixContainer = document.getElementById('autonix-container');
-        if (autonixFullscreen && autonixContainer) {
+        if (autonixFullscreen) {
           autonixFullscreen.addEventListener('click', function () {
             var isFs = document.fullscreenElement || document.webkitFullscreenElement;
             if (isFs) {
               var exit = document.exitFullscreen || document.webkitExitFullscreen;
               if (exit) exit.call(document);
             } else {
-              var req = autonixContainer.requestFullscreen || autonixContainer.webkitRequestFullscreen;
-              if (req) req.call(autonixContainer);
+              var req = autonixVideo.requestFullscreen
+                || autonixVideo.webkitRequestFullscreen
+                || autonixVideo.mozRequestFullScreen
+                || autonixVideo.msRequestFullscreen;
+              if (req) req.call(autonixVideo);
             }
           });
           function onFsChange() {
