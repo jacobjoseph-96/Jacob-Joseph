@@ -663,6 +663,27 @@ h1, h2, h3, h4, p { margin: 0; }
 .featured__video-wrap {
   position: relative;
 }
+
+.featured__video:fullscreen,
+.featured__video:-webkit-full-screen {
+  display: flex;
+  flex-direction: column;
+  background: #000;
+}
+.featured__video:fullscreen .featured__video-wrap,
+.featured__video:-webkit-full-screen .featured__video-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.featured__video:fullscreen video,
+.featured__video:-webkit-full-screen video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 .featured__video video {
   display: block;
   width: 100%;

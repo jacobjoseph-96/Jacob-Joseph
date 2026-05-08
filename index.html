@@ -294,7 +294,7 @@
   };
 } <span class="t-comment">// satisfies MISRA C++ Rule 5-2-2</span></pre>
 
-        <div class="featured__video">
+        <div class="featured__video" id="autonix-container">
           <div class="featured__video-bar">
             <span class="card__lights"><i></i><i></i><i></i></span>
             <span class="featured__video-label">autonix_demo.mp4</span>
@@ -652,20 +652,24 @@ linkedin  = "linkedin.com/in/jacob-joseph-dev"
 
         /* ── fullscreen ── */
         var autonixFullscreen = document.getElementById('autonix-fullscreen');
-        if (autonixFullscreen) {
+        var autonixContainer = document.getElementById('autonix-container');
+        if (autonixFullscreen && autonixContainer) {
           autonixFullscreen.addEventListener('click', function () {
-            var req = autonixVideo.requestFullscreen
-              || autonixVideo.webkitRequestFullscreen
-              || autonixVideo.mozRequestFullScreen
-              || autonixVideo.msRequestFullscreen;
-            if (req) req.call(autonixVideo);
+            var isFs = document.fullscreenElement || document.webkitFullscreenElement;
+            if (isFs) {
+              var exit = document.exitFullscreen || document.webkitExitFullscreen;
+              if (exit) exit.call(document);
+            } else {
+              var req = autonixContainer.requestFullscreen || autonixContainer.webkitRequestFullscreen;
+              if (req) req.call(autonixContainer);
+            }
           });
-          document.addEventListener('fullscreenchange', function () {
-            autonixFullscreen.textContent = document.fullscreenElement ? '✕' : '⛶';
-          });
-          document.addEventListener('webkitfullscreenchange', function () {
-            autonixFullscreen.textContent = document.webkitFullscreenElement ? '✕' : '⛶';
-          });
+          function onFsChange() {
+            var isFs = document.fullscreenElement || document.webkitFullscreenElement;
+            autonixFullscreen.textContent = isFs ? '✕' : '⛶';
+          }
+          document.addEventListener('fullscreenchange', onFsChange);
+          document.addEventListener('webkitfullscreenchange', onFsChange);
         }
       }
 
