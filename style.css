@@ -666,8 +666,8 @@ h1, h2, h3, h4, p { margin: 0; }
 .featured__video video {
   display: block;
   width: 100%;
-  max-height: 420px;
-  object-fit: contain;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
   background: #000;
 }
 .video__replay {
