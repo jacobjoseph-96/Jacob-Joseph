@@ -295,16 +295,16 @@ h1, h2, h3, h4, p { margin: 0; }
 .card__title { flex: 1; text-align: center; }
 .card__lines { color: var(--fg-mute); }
 
+
 .card__photo {
   position: relative;
-  aspect-ratio: 525 / 675;        /* match the source portrait — no cropping */
-  background:
-    linear-gradient(180deg, #0d1310 0%, #0a0e0c 100%);
+  aspect-ratio: 525 / 675;
+  background: linear-gradient(180deg, #0d1310 0%, #0a0e0c 100%);
   overflow: hidden;
 }
 .card__photo img {
   width: 100%; height: 100%;
-  object-fit: contain;             /* show the entire photo */
+  object-fit: contain;
   object-position: 50% 50%;
   filter: grayscale(.4) contrast(1.05) brightness(.95);
   transition: filter .4s ease, transform .6s ease;
@@ -627,6 +627,76 @@ h1, h2, h3, h4, p { margin: 0; }
   letter-spacing: .04em;
   text-transform: uppercase;
 }
+
+.featured__video {
+  margin-top: 20px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+.featured__video-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  background: var(--bg-3);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-mute);
+}
+.featured__video-label { color: var(--fg-dim); flex: 1; }
+.video__fullscreen {
+  background: none;
+  border: 1px solid var(--line-2);
+  border-radius: 3px;
+  color: var(--fg-mute);
+  font-size: 14px;
+  line-height: 1;
+  padding: 2px 6px;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease;
+  margin-left: auto;
+}
+.video__fullscreen:hover { color: var(--acc); border-color: var(--acc-dim); }
+.featured__video-wrap {
+  position: relative;
+}
+.featured__video video {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  background: #000;
+}
+.video__replay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(10, 13, 12, 0.72);
+  backdrop-filter: blur(4px);
+  border: none;
+  cursor: pointer;
+  color: var(--acc);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: background .18s ease;
+}
+.video__replay:hover { background: rgba(10, 13, 12, 0.55); }
+.video__replay-icon {
+  font-size: 42px;
+  line-height: 1;
+  display: block;
+  transition: transform .25s ease;
+}
+.video__replay:hover .video__replay-icon { transform: rotate(-30deg); }
 
 .codeblock {
   font-family: var(--font-mono);

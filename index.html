@@ -293,6 +293,22 @@
       <span class="t-key">auto</span> latency_ns() <span class="t-key">const</span> -&gt; <span class="t-key">uint64_t</span>;  <span class="t-comment">// ISO 26262 budget</span>
   };
 } <span class="t-comment">// satisfies MISRA C++ Rule 5-2-2</span></pre>
+
+        <div class="featured__video">
+          <div class="featured__video-bar">
+            <span class="card__lights"><i></i><i></i><i></i></span>
+            <span class="featured__video-label">autonix_demo.mp4</span>
+            <span class="t-comment">// live simulation</span>
+            <button class="video__fullscreen" id="autonix-fullscreen" aria-label="Fullscreen">⛶</button>
+          </div>
+          <div class="featured__video-wrap">
+            <video id="autonix-video" src="assets/autonix.mp4" autoplay muted playsinline></video>
+            <button class="video__replay" id="autonix-replay" aria-label="Replay" style="display:none">
+              <span class="video__replay-icon">↺</span>
+              <span>replay</span>
+            </button>
+          </div>
+        </div>
       </article>
 
       <ol class="commits" role="list">
@@ -616,6 +632,42 @@ linkedin  = "linkedin.com/in/jacob-joseph-dev"
       }
       window.addEventListener('scroll', syncNav, { passive: true });
       syncNav();
+
+      /* ── autonix video: show replay button on end ── */
+      var autonixVideo = document.getElementById('autonix-video');
+      var autonixReplay = document.getElementById('autonix-replay');
+      if (autonixVideo && autonixReplay) {
+        autonixVideo.addEventListener('ended', function () {
+          autonixReplay.style.display = 'flex';
+        });
+        autonixReplay.addEventListener('click', function () {
+          autonixReplay.style.display = 'none';
+          autonixVideo.currentTime = 0;
+          autonixVideo.play();
+        });
+        /* if autoplay was blocked, show controls so user can still play */
+        autonixVideo.addEventListener('error', function () {
+          autonixVideo.controls = true;
+        });
+
+        /* ── fullscreen ── */
+        var autonixFullscreen = document.getElementById('autonix-fullscreen');
+        if (autonixFullscreen) {
+          autonixFullscreen.addEventListener('click', function () {
+            var req = autonixVideo.requestFullscreen
+              || autonixVideo.webkitRequestFullscreen
+              || autonixVideo.mozRequestFullScreen
+              || autonixVideo.msRequestFullscreen;
+            if (req) req.call(autonixVideo);
+          });
+          document.addEventListener('fullscreenchange', function () {
+            autonixFullscreen.textContent = document.fullscreenElement ? '✕' : '⛶';
+          });
+          document.addEventListener('webkitfullscreenchange', function () {
+            autonixFullscreen.textContent = document.webkitFullscreenElement ? '✕' : '⛶';
+          });
+        }
+      }
 
       /* ── smooth scroll for in-page anchors ── */
       document.querySelectorAll('a[href^="#"]').forEach(function (a) {
