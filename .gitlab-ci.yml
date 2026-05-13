@@ -1,9 +1,9 @@
 # ─────────────────────────────────────────────────────────────────
 # GitLab Pages — Jacob Joseph · Portfolio
-# Static site (HTML / CSS / vanilla JS) — no build step required.
+# Builds Tailwind CSS then deploys the static site.
 # ─────────────────────────────────────────────────────────────────
 
-image: alpine:3.20
+image: node:20-alpine
 
 stages:
   - deploy
@@ -11,6 +11,10 @@ stages:
 pages:
   stage: deploy
   script:
+    - echo "// installing dependencies…"
+    - npm ci
+    - echo "// building Tailwind CSS…"
+    - npm run build:css
     - echo "// publishing portfolio to GitLab Pages…"
     - mkdir -p public
     - cp -r index.html style.css assets public/

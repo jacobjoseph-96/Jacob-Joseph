@@ -1,688 +1,1086 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jacob Joseph — ADAS &amp; Embedded Systems Specialist</title>
+  <title>Jacob Joseph — ADAS &amp; Embedded Systems</title>
   <meta name="description"
     content="Jacob Joseph — ADAS &amp; Embedded Systems Specialist. C++20, AUTOSAR, ISO 26262, Sensor Fusion, Qt6." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
+<body class="bg-slate-950 text-slate-300 font-sans antialiased selection:bg-blue-500/30 selection:text-blue-200">
 
-  <!-- ─── top status bar ─── -->
-  <header class="topbar" aria-label="status bar">
-    <div class="topbar__inner">
-      <div class="topbar__left">
-        <span class="dot dot--ok" aria-hidden="true"></span>
-        <span class="topbar__path">jj@portfolio</span>
-        <span class="topbar__sep">:</span>
-        <span class="topbar__branch">~/main</span>
-      </div>
-      <nav class="topbar__nav" aria-label="primary">
-        <a href="#experience">01_experience</a>
-        <a href="#projects">02_projects</a>
-        <a href="#stack">03_stack</a>
-        <a href="#devops">04_devops</a>
-        <a href="#contact">05_contact</a>
-      </nav>
-      <div class="topbar__right">
-        <span class="topbar__build">BUILD&nbsp;05.2026</span>
-        <span class="topbar__status">SYS://OK</span>
-      </div>
-    </div>
+  <!-- ═══════════════════════════════════════════════════════════════
+       SYSTEM STATUS LED — fixed corner indicator
+  ════════════════════════════════════════════════════════════════ -->
+  <div id="status-led"
+    class="fixed bottom-5 right-5 z-50 flex items-center gap-2 bg-slate-900/80 backdrop-blur border border-slate-800 rounded-full px-3 py-1.5 text-xs font-mono">
+    <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse_led flex-shrink-0"></span>
+    <span class="text-slate-400">SYS_READY</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       MOBILE TOPBAR
+  ════════════════════════════════════════════════════════════════ -->
+  <header
+    class="lg:hidden fixed top-0 left-0 right-0 z-40 h-12 bg-slate-950/90 backdrop-blur border-b border-slate-800 flex items-center px-4 justify-between">
+    <span class="font-mono text-sm text-blue-400 font-medium">jj@portfolio</span>
+    <button id="mob-menu-btn" aria-label="Open menu" class="text-slate-400 hover:text-slate-200 transition-colors">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <line x1="3" y1="5" x2="17" y2="5" />
+        <line x1="3" y1="10" x2="17" y2="10" />
+        <line x1="3" y1="15" x2="17" y2="15" />
+      </svg>
+    </button>
   </header>
 
-  <main class="page">
+  <!-- ═══════════════════════════════════════════════════════════════
+       LAYOUT ROOT
+  ════════════════════════════════════════════════════════════════ -->
+  <div class="lg:flex min-h-screen">
 
-    <!-- ─────────────────────── HERO ─────────────────────── -->
-    <section class="hero" aria-label="intro">
-      <div class="hero__grid">
+    <!-- ── LEFT SIDEBAR ─────────────────────────────────────────── -->
+    <aside id="sidebar" class="
+      fixed inset-y-0 left-0 z-30
+      w-64 bg-slate-950/95 backdrop-blur
+      border-r border-slate-800/60
+      flex flex-col
+      -translate-x-full lg:translate-x-0
+      transition-transform duration-200
+    " aria-label="Primary navigation">
 
-        <div class="hero__copy">
-          <div class="hero__cmd"><span class="prompt">$</span> whoami<span class="cursor"></span></div>
+      <!-- Sidebar header -->
+      <div class="px-6 pt-8 pb-6 border-b border-slate-800/60">
+        <div class="font-mono text-xs text-slate-500 mb-1 uppercase tracking-widest">v4.2026 · EN</div>
+        <div class="font-sans font-semibold text-slate-100 text-lg leading-tight">Jacob Joseph</div>
+        <div class="font-mono text-xs text-blue-400 mt-1">ADAS &amp; Embedded Systems</div>
 
-          <p class="hero__kicker">// SOFTWARE_DEVELOPER &nbsp;//&nbsp; ID·JJ-2026 &nbsp;//&nbsp; V4 / EN</p>
-
-          <h1 class="hero__name">
-            <span class="hero__name-line">Jacob</span>
-            <span class="hero__name-line hero__name-line--accent">Joseph<span class="hero__caret">_</span></span>
-          </h1>
-
-          <p class="hero__role">
-            ADAS &amp; Embedded Systems Specialist
-          </p>
-          <p class="hero__role-sub">
-            C++ &nbsp;/&nbsp; Safety-Critical Systems &nbsp;/&nbsp; Sensor Fusion
-          </p>
-
-          <ul class="hero__meta">
-            <li><span class="k">loc</span><span class="v">Leipzig, DE</span></li>
-            <li><span class="k">exp</span><span class="v">3 roles · 6 yrs</span></li>
-            <li><span class="k">lang</span><span class="v">AR · EN · DE</span></li>
-            <li><span class="k">status</span><span class="v"><span class="dot dot--ok"></span>open to work</span></li>
-          </ul>
-
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="#projects">
-              <span>view projects</span>
-              <span class="btn__arrow">→</span>
-            </a>
-            <a class="btn btn--ghost" href="mailto:eng.jacob.joseph@gmail.com">
-              <span>./contact.sh</span>
-            </a>
-          </div>
-        </div>
-
-        <aside class="hero__card" aria-label="profile card">
-          <div class="card__bar">
-            <span class="card__lights"><i></i><i></i><i></i></span>
-            <span class="card__title">~/about/jacob_joseph.md</span>
-            <span class="card__lines">42L</span>
-          </div>
-          <div class="card__photo">
-            <img src="assets/jacob.jpg" alt="Jacob Joseph" />
-            <div class="card__scan" aria-hidden="true"></div>
-          </div>
-          <div class="card__body">
-            <p class="card__line"><span class="t-comment">// summary</span></p>
-            <p class="card__line">Builds <span class="t-acc">safety-critical C++</span> for production ADAS stacks.</p>
-            <p class="card__line"><span class="t-dim">prev:</span> VW PPE E³ 1.2 · sensor fusion (Cam · Radar · Map)</p>
-            <p class="card__line"><span class="t-dim">now:</span> AI code-review tooling @ MDO</p>
-            <div class="card__stats">
-              <div><b>90–95%</b><span>GTest coverage</span></div>
-              <div><b>8+</b><span>languages</span></div>
-              <div><b>0</b><span>Axivion criticals</span></div>
-            </div>
-          </div>
-        </aside>
-
-      </div>
-
-      <div class="hero__strip" aria-hidden="true">
-        <span>C++20</span><span>·</span>
-        <span>AUTOSAR</span><span>·</span>
-        <span>ISO&nbsp;26262</span><span>·</span>
-        <span>MISRA&nbsp;C</span><span>·</span>
-        <span>ADTF</span><span>·</span>
-        <span>Qt&nbsp;6</span><span>·</span>
-        <span>GTest</span><span>·</span>
-        <span>NixOS</span><span>·</span>
-        <span>Embedded&nbsp;Linux</span><span>·</span>
-        <span>GitLab&nbsp;CI/CD</span><span>·</span>
-        <span>C++20</span><span>·</span>
-        <span>AUTOSAR</span><span>·</span>
-        <span>ISO&nbsp;26262</span><span>·</span>
-        <span>MISRA&nbsp;C</span><span>·</span>
-        <span>ADTF</span><span>·</span>
-        <span>Qt&nbsp;6</span><span>·</span>
-        <span>GTest</span><span>·</span>
-        <span>NixOS</span><span>·</span>
-      </div>
-    </section>
-
-
-    <!-- ─────────────────── 01 EXPERIENCE ─────────────────── -->
-    <section class="block" id="experience">
-      <div class="block__head">
-        <span class="block__num">01</span>
-        <h2 class="block__title">EXPERIENCE</h2>
-        <span class="block__tag">3 ROLES · 6 YRS</span>
-      </div>
-
-      <p class="block__cmd"><span class="prompt">$</span> git log --oneline --author="jacob.joseph" --graph</p>
-
-      <ol class="timeline" role="list">
-
-        <li class="job">
-          <div class="job__when">
-            <span class="job__date">APR 2026 — PRESENT</span>
-            <span class="job__hash">#7f3a1e2</span>
-          </div>
-          <div class="job__body">
-            <header class="job__head">
-              <h3>Part-time Software Developer</h3>
-              <p class="job__co">MDO Mitteldeutsche Online GmbH<span class="t-dim"> · Bitterfeld-Wolfen, DE</span></p>
-            </header>
-            <ul class="job__list">
-              <li><span class="bullet">&gt;</span><span>Built an <b>AI code-reviewer tool</b> and authored performance
-                  tests for the project.</span></li>
-              <li><span class="bullet">&gt;</span><span>API annotation and documentation for YII2 framework
-                  applications.</span></li>
-            </ul>
-            <p class="job__tags">
-              <span>AI</span><span>YII2</span><span>PHP</span><span>Performance</span>
-            </p>
-          </div>
-        </li>
-
-        <li class="job">
-          <div class="job__when">
-            <span class="job__date">JAN 2022 — MAY 2025</span>
-            <span class="job__hash">#a2c91d4</span>
-          </div>
-          <div class="job__body">
-            <header class="job__head">
-              <h3>ADAS Developer <span class="t-dim">— External for INTENTA GmbH</span></h3>
-              <p class="job__co">LIT — Lebanese Information Technology<span class="t-dim"> · Akkar, LB</span></p>
-            </header>
-            <ul class="job__list">
-              <li><span class="bullet">&gt;</span><span>Built core features for <b>object tracking and multi-sensor
-                    fusion</b> (Camera · Radar · Map) for the <b>VW&nbsp;PPE&nbsp;E³&nbsp;1.2</b> platform.</span></li>
-              <li><span class="bullet">&gt;</span><span>Used <b>ADTF</b> to analyse vehicle behaviour, replay .dat
-                  files, and fix behavioural anomalies.</span></li>
-              <li><span class="bullet">&gt;</span><span>Wrote Google Test unit tests achieving <b>90–95%</b> coverage on
-                  safety-critical paths.</span></li>
-              <li><span class="bullet">&gt;</span><span>Resolved AUTOSAR, MISRA C and <b>ISO 26262</b> violations using
-                  <b>Axivion</b> static analysis.</span></li>
-              <li><span class="bullet">&gt;</span><span>Profiled and optimised execution paths, reducing latency in
-                  safety-critical modules.</span></li>
-              <li><span class="bullet">&gt;</span><span>Delivered features on time within an international Scrum team
-                  with minimal supervision.</span></li>
-            </ul>
-            <p class="job__tags">
-              <span>C++</span><span>ADTF</span><span>AUTOSAR</span><span>ISO
-                26262</span><span>Axivion</span><span>GTest</span><span>VW PPE</span>
-            </p>
-          </div>
-        </li>
-
-        <li class="job">
-          <div class="job__when">
-            <span class="job__date">JAN 2020 — DEC 2021</span>
-            <span class="job__hash">#3b80f51</span>
-          </div>
-          <div class="job__body">
-            <header class="job__head">
-              <h3>Lecturer <span class="t-dim">— Computer Vision &amp; Robotics</span></h3>
-              <p class="job__co">Tishreen University<span class="t-dim"> · Lattakia, SY</span></p>
-            </header>
-            <ul class="job__list">
-              <li><span class="bullet">&gt;</span><span>Taught advanced robotics: kinematics and Degrees of Freedom on
-                  Raspberry Pi hardware.</span></li>
-              <li><span class="bullet">&gt;</span><span>Taught Computer Vision: OpenCV in Python for image processing
-                  and noise reduction.</span></li>
-              <li><span class="bullet">&gt;</span><span>Delivered technical coursework to mixed-level student groups in
-                  a university setting.</span></li>
-            </ul>
-            <p class="job__tags">
-              <span>OpenCV</span><span>Python</span><span>Robotics</span><span>Raspberry Pi</span>
-            </p>
-          </div>
-        </li>
-
-      </ol>
-    </section>
-
-
-    <!-- ─────────────────── 02 PROJECTS ─────────────────── -->
-    <section class="block" id="projects">
-      <div class="block__head">
-        <span class="block__num">02</span>
-        <h2 class="block__title">PROJECTS</h2>
-        <span class="block__tag">git log --oneline</span>
-      </div>
-
-      <article class="featured">
-        <header class="featured__head">
-          <div class="featured__title">
-            <span class="t-comment">// case study</span>
-            <h3>Autonix <span class="t-dim">— ADAS simulation environment</span></h3>
-          </div>
-          <a class="featured__link" href="https://gitlab.com/jacob.joseph.9966-group/autonix" target="_blank"
-            rel="noopener">
-            <span>gitlab.com/.../autonix</span>
-            <span class="featured__arrow">↗</span>
-          </a>
-        </header>
-
-        <div class="featured__grid">
-
-          <div class="featured__copy">
-            <p class="featured__lede">
-              Safety-critical ADAS simulation built in <b>C++20 / Qt&nbsp;6</b> as a
-              test bed for <b>AI-assisted development workflows</b> (Claude · Gemini)
-              using a spec-kit structure.
-            </p>
-            <ul class="featured__points">
-              <li>
-                <span class="bullet">$</span>
-                <span>Physics-based ego-vehicle control with <b>Adaptive Cruise Control</b>
-                  (Eco / Comfort / Sport), NPC traffic AI with rule compliance, and a
-                  perception filtering pipeline.</span>
-              </li>
-              <li>
-                <span class="bullet">$</span>
-                <span>Layered architecture (<i>Core / Perception / UI</i> as static libs);
-                  state machines for lane change &amp; traffic light; Strategy pattern
-                  for ACC mode switching.</span>
-              </li>
-              <li>
-                <span class="bullet">$</span>
-                <span>Hermetic <b>Nix</b> builds, full <b>GitLab CI/CD</b> matrix
-                  (build · test · coverage · static-analysis).</span>
-              </li>
-            </ul>
-            <p class="featured__tags">
-              <span>C++20</span><span>Qt 6</span><span>CMake</span><span>Nix
-                Flakes</span><span>GTest</span><span>Doxygen</span>
-            </p>
-          </div>
-
-          <ul class="metrics" aria-label="project metrics">
-            <li><b>88%+</b><span>test coverage</span></li>
-            <li><b>15</b><span>GTest suites</span></li>
-            <li><b>3</b><span>static libs</span></li>
-            <li><b>Nix</b><span>hermetic builds</span></li>
-          </ul>
-
-        </div>
-
-        <pre class="codeblock" aria-hidden="true"><span class="t-comment">// autonix/perception/tracker.hpp</span>
-<span class="t-key">namespace</span> autonix::perception {
-  <span class="t-key">template</span>&lt;<span class="t-key">class</span> Sensor&gt;
-  <span class="t-key">class</span> <span class="t-fn">Tracker</span> {
-    <span class="t-key">public</span>:
-      <span class="t-key">auto</span> fuse(<span class="t-key">const</span> Frame&amp; f) <span class="t-key">noexcept</span> -&gt; std::span&lt;Track&gt;;
-      <span class="t-key">auto</span> latency_ns() <span class="t-key">const</span> -&gt; <span class="t-key">uint64_t</span>;  <span class="t-comment">// ISO 26262 budget</span>
-  };
-} <span class="t-comment">// satisfies MISRA C++ Rule 5-2-2</span></pre>
-
-        <div class="featured__video" id="autonix-container">
-          <div class="featured__video-bar">
-            <span class="card__lights"><i></i><i></i><i></i></span>
-            <span class="featured__video-label">autonix_demo.mp4</span>
-            <span class="t-comment">// live simulation</span>
-            <button class="video__fullscreen" id="autonix-fullscreen" aria-label="Fullscreen">⛶</button>
-          </div>
-          <div class="featured__video-wrap">
-            <video id="autonix-video" src="assets/autonix.mp4" autoplay muted playsinline></video>
-            <button class="video__replay" id="autonix-replay" aria-label="Replay" style="display:none">
-              <span class="video__replay-icon">↺</span>
-              <span>replay</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <ol class="commits" role="list">
-        <li>
-          <span class="commit__hash">b41e09c</span>
-          <span class="commit__msg">feat(adas): adaptive cruise control — Eco / Comfort / Sport modes</span>
-          <span class="commit__tag">autonix</span>
-        </li>
-        <li>
-          <span class="commit__hash">9f2a3d8</span>
-          <span class="commit__msg">feat(perception): camera · radar · map fusion pipeline</span>
-          <span class="commit__tag">intenta</span>
-        </li>
-        <li>
-          <span class="commit__hash">2c7b1f0</span>
-          <span class="commit__msg">test(safety): raise GTest coverage on critical paths to 95%</span>
-          <span class="commit__tag">intenta</span>
-        </li>
-        <li>
-          <span class="commit__hash">5e8d6a2</span>
-          <span class="commit__msg">build(nix): hermetic flake for cross-arch reproducible builds</span>
-          <span class="commit__tag">autonix</span>
-        </li>
-        <li>
-          <span class="commit__hash">17a4cce</span>
-          <span class="commit__msg">research(thesis): stereo-vision robotic arm — autonomous olive harvester</span>
-          <span class="commit__tag">tishreen</span>
-        </li>
-      </ol>
-    </section>
-
-
-    <!-- ─────────────────── 03 TECH STACK ─────────────────── -->
-    <section class="block" id="stack">
-      <div class="block__head">
-        <span class="block__num">03</span>
-        <h2 class="block__title">TECH&nbsp;STACK</h2>
-        <span class="block__tag">/usr/local/bin</span>
-      </div>
-
-      <pre class="tree" aria-hidden="true">~/stack
-├── languages/
-├── automotive/
-├── frameworks/
-├── cloud-infra/
-└── tools-ide/</pre>
-
-      <div class="stack">
-        <div class="stack__col">
-          <header><span class="stack__cat">languages</span><span class="stack__count">10</span></header>
-          <ul>
-            <li><span>C++</span><i class="lvl lvl-5"></i></li>
-            <li><span>C</span><i class="lvl lvl-5"></i></li>
-            <li><span>Python</span><i class="lvl lvl-4"></i></li>
-            <li><span>C#</span><i class="lvl lvl-3"></i></li>
-            <li><span>Go</span><i class="lvl lvl-3"></i></li>
-            <li><span>Bash</span><i class="lvl lvl-3"></i></li>
-            <li><span>Nix</span><i class="lvl lvl-3"></i></li>
-            <li><span>SQL</span><i class="lvl lvl-3"></i></li>
-          </ul>
-        </div>
-
-        <div class="stack__col stack__col--accent">
-          <header><span class="stack__cat">automotive</span><span class="stack__count">06</span></header>
-          <ul>
-            <li><span>AUTOSAR</span><i class="lvl lvl-5"></i></li>
-            <li><span>ISO 26262</span><i class="lvl lvl-5"></i></li>
-            <li><span>MISRA C</span><i class="lvl lvl-5"></i></li>
-            <li><span>ADTF</span><i class="lvl lvl-4"></i></li>
-            <li><span>UML</span><i class="lvl lvl-3"></i></li>
-          </ul>
-        </div>
-
-        <div class="stack__col">
-          <header><span class="stack__cat">frameworks</span><span class="stack__count">05</span></header>
-          <ul>
-            <li><span>Agile / Scrum</span><i class="lvl lvl-5"></i></li>
-            <li><span>HIL Testing</span><i class="lvl lvl-4"></i></li>
-            <li><span>Automated Testing</span><i class="lvl lvl-4"></i></li>
-            <li><span>YII2</span><i class="lvl lvl-3"></i></li>
-          </ul>
-        </div>
-
-        <div class="stack__col">
-          <header><span class="stack__cat">cloud · infra</span><span class="stack__count">06</span></header>
-          <ul>
-            <li><span>Docker</span><i class="lvl lvl-3"></i></li>
-            <li><span>NixOS</span><i class="lvl lvl-3"></i></li>
-            <li><span>Nix Flakes</span><i class="lvl lvl-3"></i></li>
-            <li><span>CMake</span><i class="lvl lvl-4"></i></li>
-          </ul>
-        </div>
-
-        <div class="stack__col stack__col--wide">
-          <header><span class="stack__cat">tools · IDE</span><span class="stack__count">10</span></header>
-          <ul>
-            <li><span>Qt</span><i class="lvl lvl-4"></i></li>
-            <li><span>Git</span><i class="lvl lvl-5"></i></li>
-            <li><span>GitLab CI/CD</span><i class="lvl lvl-4"></i></li>
-            <li><span>Visual Studio</span><i class="lvl lvl-5"></i></li>
-            <li><span>GDB</span><i class="lvl lvl-4"></i></li>
-            <li><span>Google Test</span><i class="lvl lvl-5"></i></li>
-            <li><span>Doxygen</span><i class="lvl lvl-4"></i></li>
-            <li><span>Axivion</span><i class="lvl lvl-4"></i></li>
-            <li><span>JIRA</span><i class="lvl lvl-5"></i></li>
-            <li><span>Antigravity</span><i class="lvl lvl-5"></i></li>
-            <li><span>Embedded Linux</span><i class="lvl lvl-4"></i></li>
-
-          </ul>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ─────────────────── 04 DEVOPS ─────────────────── -->
-    <section class="block" id="devops">
-      <div class="block__head">
-        <span class="block__num">04</span>
-        <h2 class="block__title">DEVOPS</h2>
-        <span class="block__tag">.gitlab-ci.yml</span>
-      </div>
-
-      <p class="block__lede">
-        I treat <b>GitLab CI/CD</b> as a first-class deliverable. Every project I own
-        ships with a hermetic build, a test matrix, static-analysis gates, and a
-        Pages preview — wired to merge-request rules so reviewers see green before
-        the diff.
-      </p>
-
-      <div class="pipeline" role="img" aria-label="example GitLab pipeline">
-        <ol class="pipeline__stages">
-          <li class="stage stage--ok"><span class="stage__dot"></span><span class="stage__name">build</span><span
-              class="stage__time">2m 31s</span></li>
-          <li class="stage stage--ok"><span class="stage__dot"></span><span class="stage__name">test</span><span
-              class="stage__time">1m 22s</span></li>
-          <li class="stage stage--ok"><span class="stage__dot"></span><span class="stage__name">coverage</span><span
-              class="stage__time">2m 48s</span></li>
-          <li class="stage stage--ok"><span class="stage__dot"></span><span class="stage__name">deploy</span><span
-              class="stage__time"> 39s</span></li>
-        </ol>
-        <div class="pipeline__meta">
-          <span><b>pipeline</b> #2315392554</span>
-          <span><b>passed</b> on <code>master</code></span>
-          <span><b>duration</b> 4m 34s</span>
-          <span class="pipeline__sha">@210cb502</span>
+        <!-- Status -->
+        <div class="mt-4 flex items-center gap-2 bg-slate-900 rounded-lg px-3 py-2 border border-slate-800">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse_led flex-shrink-0"></span>
+          <span class="font-mono text-xs text-slate-400">open_to_work</span>
         </div>
       </div>
 
-      <div class="devops__grid">
-        <article class="capsule">
-          <h4><span class="t-comment">// pipeline</span> hermetic builds</h4>
-          <p>Reproducible builds via <b>Nix Flakes</b> — same artefact on a developer laptop and the runner. No “works
-            on my machine”.</p>
-        </article>
-        <article class="capsule">
-          <h4><span class="t-comment">// quality</span> static-analysis gates</h4>
-          <p><b>Axivion</b> for AUTOSAR / MISRA / ISO&nbsp;26262, <b>clang-tidy</b> for general hygiene. Fails the MR if
-            a critical violation appears.</p>
-        </article>
-        <article class="capsule">
-          <h4><span class="t-comment">// tests</span> coverage matrix</h4>
-          <p><b>Google Test</b> suites with <b>gcov</b> reports surfaced on the MR widget. Floor at 85% on
-            safety-critical paths.</p>
-        </article>
-        <article class="capsule">
-          <h4><span class="t-comment">// deploy</span> pages preview</h4>
-          <p>Branch-scoped <b>GitLab Pages</b> environments for docs and dashboards —
-            <code>review/$CI_COMMIT_REF_SLUG</code>.
-          </p>
-        </article>
-      </div>
-    </section>
-
-
-    <!-- ─────────────────── 05 CONTACT ─────────────────── -->
-    <section class="block block--contact" id="contact">
-      <div class="block__head">
-        <span class="block__num">05</span>
-        <h2 class="block__title">CONTACT</h2>
-        <span class="block__tag">EOF</span>
-      </div>
-
-      <div class="contact">
-        <pre class="contact__term" aria-hidden="true"><span class="prompt">$</span> cat ~/.contact
-<span class="t-comment"># reach out — replies within 24h on weekdays</span>
-email   = "eng.jacob.joseph@gmail.com"
-phone   = "+49 163 219 6473"
-gitlab  = "gitlab.com/jacob.joseph.9966"
-linkedin  = "linkedin.com/in/jacob-joseph-dev"
-<span class="prompt">$</span> _<span class="cursor"></span></pre>
-
-        <ul class="contact__links">
+      <!-- Navigation -->
+      <nav class="flex-1 overflow-y-auto px-4 py-6" aria-label="Sections">
+        <div class="font-mono text-xs text-slate-600 uppercase tracking-widest mb-3 px-2">Navigation</div>
+        <ul class="space-y-0.5" role="list">
           <li>
-            <a href="mailto:eng.jacob.joseph@gmail.com">
-              <span class="contact__k">email</span>
-              <span class="contact__v">eng.jacob.joseph@gmail.com</span>
-              <span class="contact__arr">↗</span>
+            <a href="#profile"
+              class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-800/60">
+              <span class="font-mono text-xs text-slate-600 group-hover:text-blue-500 transition-colors w-5">00</span>
+              <span class="text-slate-400 group-hover:text-slate-200 transition-colors">Profile</span>
             </a>
           </li>
           <li>
-            <a href="https://gitlab.com/jacob.joseph.9966" target="_blank" rel="noopener">
-              <span class="contact__k">gitlab</span>
-              <span class="contact__v">/jacob.joseph.9966</span>
-              <span class="contact__arr">↗</span>
+            <a href="#stack"
+              class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-800/60">
+              <span class="font-mono text-xs text-slate-600 group-hover:text-blue-500 transition-colors w-5">01</span>
+              <span class="text-slate-400 group-hover:text-slate-200 transition-colors">Core Stack</span>
             </a>
           </li>
           <li>
-            <a href="https://www.linkedin.com/in/jacob-joseph-dev" target="_blank" rel="noopener">
-              <span class="contact__k">linkedin</span>
-              <span class="contact__v">/in/jacob-joseph-dev</span>
-              <span class="contact__arr">↗</span>
+            <a href="#projects"
+              class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-800/60">
+              <span class="font-mono text-xs text-slate-600 group-hover:text-blue-500 transition-colors w-5">02</span>
+              <span class="text-slate-400 group-hover:text-slate-200 transition-colors">Projects</span>
             </a>
           </li>
           <li>
-            <a href="tel:+491632196473">
-              <span class="contact__k">phone</span>
-              <span class="contact__v">+49&nbsp;163&nbsp;219&nbsp;6473</span>
-              <span class="contact__arr">↗</span>
+            <a href="#experience"
+              class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-800/60">
+              <span class="font-mono text-xs text-slate-600 group-hover:text-blue-500 transition-colors w-5">03</span>
+              <span class="text-slate-400 group-hover:text-slate-200 transition-colors">Experience</span>
+            </a>
+          </li>
+          <li>
+            <a href="#devops"
+              class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-800/60">
+              <span class="font-mono text-xs text-slate-600 group-hover:text-blue-500 transition-colors w-5">04</span>
+              <span class="text-slate-400 group-hover:text-slate-200 transition-colors">DevOps</span>
+            </a>
+          </li>
+          <li>
+            <a href="#contact"
+              class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-800/60">
+              <span class="font-mono text-xs text-slate-600 group-hover:text-blue-500 transition-colors w-5">05</span>
+              <span class="text-slate-400 group-hover:text-slate-200 transition-colors">Contact</span>
             </a>
           </li>
         </ul>
+      </nav>
+
+      <!-- Sidebar footer -->
+      <div class="px-6 py-5 border-t border-slate-800/60">
+        <div class="font-mono text-xs text-slate-600 mb-3">// quick links</div>
+        <div class="flex gap-3">
+          <a href="https://gitlab.com/jacob.joseph.9966" target="_blank" rel="noopener"
+            class="text-slate-500 hover:text-slate-300 transition-colors text-xs font-mono">GitLab ↗</a>
+          <a href="https://www.linkedin.com/in/jacob-joseph-dev" target="_blank" rel="noopener"
+            class="text-slate-500 hover:text-slate-300 transition-colors text-xs font-mono">LinkedIn ↗</a>
+        </div>
+        <div class="mt-3 font-mono text-xs text-slate-700">Leipzig, DE</div>
       </div>
-    </section>
+    </aside>
 
-  </main>
+    <!-- Sidebar overlay (mobile) -->
+    <div id="sidebar-overlay" class="fixed inset-0 z-20 bg-slate-950/70 lg:hidden hidden" aria-hidden="true"></div>
 
-  <!-- ─── footer ─── -->
-  <footer class="foot">
-    <div class="foot__inner">
-      <span>// jacob.joseph — page 01 / 01</span>
-      <span class="foot__mid">built with HTML · CSS · vanilla JS · deployed via GitLab Pages</span>
-      <span>EOF</span>
-    </div>
-  </footer>
+    <!-- ── MAIN CONTENT ──────────────────────────────────────────── -->
+    <main class="flex-1 lg:ml-64 pt-12 lg:pt-0 min-w-0">
+      <div class="max-w-4xl mx-auto px-6 lg:px-12 py-12 lg:py-16 space-y-28">
+
+
+        <!-- ══════════════════════════════════════════════════════
+             00 · PROFILE / HERO
+        ══════════════════════════════════════════════════════ -->
+        <section id="profile" class="reveal">
+
+          <!-- Section label -->
+          <div class="flex items-center gap-4 mb-10">
+            <span class="font-mono text-xs text-blue-500 tracking-widest uppercase">00 · Profile</span>
+            <div class="flex-1 h-px bg-slate-800"></div>
+          </div>
+
+          <!-- Hero: text left, photo right — Paul Bakaus style -->
+          <div class="relative min-h-[460px] flex items-center">
+
+            <!-- Copy — sits on top of / beside the photo -->
+            <div class="relative z-10 flex flex-col justify-center lg:max-w-[55%]">
+              <p class="font-mono text-xs text-slate-500 mb-3 uppercase tracking-widest">ADAS &amp; Embedded Systems Specialist</p>
+              <h1 class="font-sans font-semibold text-5xl lg:text-6xl text-slate-100 leading-none tracking-tight mb-6">
+                Jacob<br>
+                <span class="text-blue-400">Joseph</span>
+              </h1>
+
+              <p class="text-slate-400 text-lg leading-relaxed mb-8">
+                Builds <span class="text-slate-200 font-medium">safety-critical C++</span> for production ADAS stacks.
+                Previous: VW&nbsp;PPE&nbsp;E³&nbsp;1.2 — sensor fusion (Cam · Radar · Map).
+                Now: AI code-review tooling.
+              </p>
+
+              <!-- Meta grid -->
+              <dl class="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-800/40 rounded-xl overflow-hidden border border-slate-800/60 mb-8">
+                <div class="bg-slate-925 px-4 py-3">
+                  <dt class="font-mono text-xs text-slate-600 mb-1">location</dt>
+                  <dd class="text-sm text-slate-300 font-medium">Leipzig, DE</dd>
+                </div>
+                <div class="bg-slate-925 px-4 py-3">
+                  <dt class="font-mono text-xs text-slate-600 mb-1">experience</dt>
+                  <dd class="text-sm text-slate-300 font-medium">3 roles · 6 yrs</dd>
+                </div>
+                <div class="bg-slate-925 px-4 py-3">
+                  <dt class="font-mono text-xs text-slate-600 mb-1">languages</dt>
+                  <dd class="text-sm text-slate-300 font-medium">AR · EN · DE</dd>
+                </div>
+                <div class="bg-slate-925 px-4 py-3">
+                  <dt class="font-mono text-xs text-slate-600 mb-1">status</dt>
+                  <dd class="text-sm text-blue-400 font-mono flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse_led flex-shrink-0"></span>
+                    available
+                  </dd>
+                </div>
+              </dl>
+
+              <div class="flex flex-wrap gap-3">
+                <a href="#projects"
+                  class="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors">
+                  View Projects
+                  <span class="font-mono">→</span>
+                </a>
+                <a href="mailto:eng.jacob.joseph@gmail.com"
+                  class="inline-flex items-center gap-2 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-slate-100 text-sm font-medium px-5 py-2.5 rounded-lg transition-colors">
+                  Get in Touch
+                </a>
+              </div>
+            </div>
+
+            <!-- Photo — absolutely positioned right, no box, fades left + bottom -->
+            <div class="hidden lg:block absolute right-0 top-0 bottom-0 w-[420px] pointer-events-none select-none">
+              <img src="assets/Jacob-Joseph-2.png" alt="Jacob Joseph"
+                class="absolute bottom-0 right-0 h-full w-auto object-contain object-bottom" />
+              <!-- left fade so photo blends into page -->
+              <div class="absolute inset-y-0 left-0 w-48 pointer-events-none"
+                style="background: linear-gradient(to right, #020617 0%, transparent 100%);"></div>
+              <!-- bottom fade -->
+              <div class="absolute inset-x-0 bottom-0 h-24 pointer-events-none"
+                style="background: linear-gradient(to top, #020617 0%, transparent 100%);"></div>
+            </div>
+
+          </div>
+
+          <!-- Ticker strip -->
+          <div class="mt-10 overflow-hidden border-y border-slate-800/60 py-3" aria-hidden="true">
+            <div class="flex animate-marquee whitespace-nowrap gap-6 font-mono text-xs text-slate-600">
+              <span>C++</span><span class="text-slate-700">·</span>
+              <span>AUTOSAR</span><span class="text-slate-700">·</span>
+              <span>ISO&nbsp;26262</span><span class="text-slate-700">·</span>
+              <span>MISRA&nbsp;C</span><span class="text-slate-700">·</span>
+              <span>ADTF</span><span class="text-slate-700">·</span>
+              <span>Qt&nbsp;6</span><span class="text-slate-700">·</span>
+              <span>GTest</span><span class="text-slate-700">·</span>
+              <span>NixOS</span><span class="text-slate-700">·</span>
+              <span>Embedded&nbsp;Linux</span><span class="text-slate-700">·</span>
+              <span>GitLab&nbsp;CI/CD</span><span class="text-slate-700">·</span>
+              <span>Sensor&nbsp;Fusion</span><span class="text-slate-700">·</span>
+              <span>CAN&nbsp;Bus</span><span class="text-slate-700">·</span>
+              <span>ARM&nbsp;Cortex</span><span class="text-slate-700">·</span>
+              <!-- duplicate for seamless loop -->
+              <span>C++</span><span class="text-slate-700">·</span>
+              <span>AUTOSAR</span><span class="text-slate-700">·</span>
+              <span>ISO&nbsp;26262</span><span class="text-slate-700">·</span>
+              <span>MISRA&nbsp;C</span><span class="text-slate-700">·</span>
+              <span>ADTF</span><span class="text-slate-700">·</span>
+              <span>Qt&nbsp;6</span><span class="text-slate-700">·</span>
+              <span>GTest</span><span class="text-slate-700">·</span>
+              <span>NixOS</span><span class="text-slate-700">·</span>
+              <span>Embedded&nbsp;Linux</span><span class="text-slate-700">·</span>
+              <span>GitLab&nbsp;CI/CD</span><span class="text-slate-700">·</span>
+              <span>Sensor&nbsp;Fusion</span><span class="text-slate-700">·</span>
+              <span>CAN&nbsp;Bus</span><span class="text-slate-700">·</span>
+              <span>ARM&nbsp;Cortex</span><span class="text-slate-700">·</span>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════════════════
+             01 · CORE STACK — Bento-box layout
+        ══════════════════════════════════════════════════════ -->
+        <section id="stack" class="reveal">
+
+          <div class="flex items-center gap-4 mb-10">
+            <span class="font-mono text-xs text-blue-500 tracking-widest uppercase">01 · Core Stack</span>
+            <div class="flex-1 h-px bg-slate-800"></div>
+          </div>
+
+          <!-- Bento grid -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+
+            <!-- Large cell: Languages -->
+            <div
+              class="col-span-2 row-span-1 bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider">Languages</span>
+                <span class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">09</span>
+              </div>
+              <div class="grid grid-cols-2 gap-y-2 gap-x-4">
+                <div class="space-y-2">
+                  <div class="flex justify-between items-center">
+                    <span class="font-mono text-xs text-slate-300">C++</span>
+                    <div class="flex gap-0.5">
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="font-mono text-xs text-slate-300">C</span>
+                    <div class="flex gap-0.5">
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="font-mono text-xs text-slate-300">Python</span>
+                    <div class="flex gap-0.5">
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-slate-700"></span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="font-mono text-xs text-slate-300">Bash</span>
+                    <div class="flex gap-0.5">
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-slate-700"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-slate-700"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <div class="flex justify-between items-center">
+                    <span class="font-mono text-xs text-slate-300">Nix</span>
+                    <div class="flex gap-0.5">
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-slate-700"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-slate-700"></span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="font-mono text-xs text-slate-300">C#</span>
+                    <div class="flex gap-0.5">
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-slate-700"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-slate-700"></span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="font-mono text-xs text-slate-300">Go</span>
+                    <div class="flex gap-0.5">
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-slate-700"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-slate-700"></span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="font-mono text-xs text-slate-300">SQL</span>
+                    <div class="flex gap-0.5">
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-slate-700"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-slate-700"></span>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="font-mono text-xs text-slate-300">PHP</span>
+                    <div class="flex gap-0.5">
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-slate-700"></span>
+                      <span class="w-2 h-1.5 rounded-sm bg-slate-700"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Automotive / Safety Standards -->
+            <div
+              class="col-span-2 bg-slate-900/60 border border-blue-500/20 rounded-2xl p-5 hover:border-blue-500/40 transition-colors">
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider">Automotive / Safety</span>
+                <span class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">06</span>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg">AUTOSAR</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg">ISO
+                  26262</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg">MISRA
+                  C</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg">ADTF</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg">Axivion</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg">UML</span>
+              </div>
+            </div>
+
+            <!-- Frameworks / Testing -->
+            <div
+              class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider">Testing / Process</span>
+                <span class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">05</span>
+              </div>
+              <ul class="space-y-1.5">
+                <li class="font-mono text-xs text-slate-400">Google Test</li>
+                <li class="font-mono text-xs text-slate-400">HIL Testing</li>
+                <li class="font-mono text-xs text-slate-400">gcov</li>
+                <li class="font-mono text-xs text-slate-400">clang-tidy</li>
+                <li class="font-mono text-xs text-slate-400">Agile / Scrum</li>
+              </ul>
+            </div>
+
+            <!-- Build / Infra -->
+            <div
+              class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider">Build / Infra</span>
+                <span class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">04</span>
+              </div>
+              <ul class="space-y-1.5">
+                <li class="font-mono text-xs text-slate-400">CMake</li>
+                <li class="font-mono text-xs text-slate-400">Nix Flakes</li>
+                <li class="font-mono text-xs text-slate-400">GitLab CI/CD</li>
+                <li class="font-mono text-xs text-slate-400">Docker</li>
+              </ul>
+            </div>
+
+            <!-- Tools wide -->
+            <div
+              class="col-span-2 bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider">Tools &amp; IDE</span>
+                <span class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">10</span>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">Qt 6</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">Git</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">Visual Studio</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">GDB</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">Doxygen</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">JIRA</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">Embedded Linux</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">OpenCV</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">YII2</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">Antigravity</span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════════════════
+             02 · PROJECTS
+        ══════════════════════════════════════════════════════ -->
+        <section id="projects" class="reveal">
+
+          <div class="flex items-center gap-4 mb-10">
+            <span class="font-mono text-xs text-blue-500 tracking-widest uppercase">02 · Projects</span>
+            <div class="flex-1 h-px bg-slate-800"></div>
+          </div>
+
+          <!-- Featured project card: Autonix -->
+          <article
+            class="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden hover:border-slate-700 transition-colors mb-6">
+
+            <!-- Card header -->
+            <div class="px-6 pt-6 pb-5 border-b border-slate-800/60">
+              <div class="flex items-start justify-between gap-4 flex-wrap">
+                <div>
+                  <div class="font-mono text-xs text-blue-500 mb-1.5">// case_study · embedded/cv</div>
+                  <h3 class="font-sans font-semibold text-xl text-slate-100 leading-snug">
+                    Autonix
+                    <span class="text-slate-500 font-normal text-base ml-1">— ADAS simulation environment</span>
+                  </h3>
+                </div>
+                <a href="https://gitlab.com/jacob.joseph.9966-group/autonix" target="_blank" rel="noopener"
+                  class="flex-shrink-0 flex items-center gap-1.5 font-mono text-xs text-slate-500 hover:text-blue-400 border border-slate-800 hover:border-blue-500/40 px-3 py-1.5 rounded-lg transition-colors">
+                  gitlab ↗
+                </a>
+              </div>
+            </div>
+
+            <div class="p-6 grid lg:grid-cols-[1fr_200px] gap-6">
+
+              <!-- Description + stack -->
+              <div>
+                <p class="text-slate-400 text-sm leading-relaxed mb-5">
+                  Safety-critical ADAS simulation in <span class="text-slate-200 font-medium">C++20 / Qt&nbsp;6</span>
+                  — built as a test bed for <span class="text-slate-200 font-medium">AI-assisted development</span>
+                  (Claude · Gemini) with a spec-kit structure. Physics-based ego-vehicle, ACC modes,
+                  NPC AI, and a full perception filtering pipeline.
+                </p>
+
+                <!-- Feature bullets -->
+                <ul class="space-y-2 mb-5">
+                  <li class="flex gap-3 text-sm text-slate-400">
+                    <span class="font-mono text-blue-500 flex-shrink-0 mt-0.5">›</span>
+                    Layered architecture (Core / Perception / UI as static libs); state machines for lane change &amp;
+                    traffic light
+                  </li>
+                  <li class="flex gap-3 text-sm text-slate-400">
+                    <span class="font-mono text-blue-500 flex-shrink-0 mt-0.5">›</span>
+                    Hermetic Nix builds, full GitLab CI/CD matrix (build · test · coverage · static-analysis)
+                  </li>
+                  <li class="flex gap-3 text-sm text-slate-400">
+                    <span class="font-mono text-blue-500 flex-shrink-0 mt-0.5">›</span>
+                    Strategy pattern for ACC mode switching (Eco / Comfort / Sport)
+                  </li>
+                </ul>
+
+                <!-- Tech stack badges -->
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2 py-0.5 rounded">C++20</span>
+                  <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2 py-0.5 rounded">Qt 6</span>
+                  <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2 py-0.5 rounded">CMake</span>
+                  <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2 py-0.5 rounded">Nix Flakes</span>
+                  <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2 py-0.5 rounded">GTest</span>
+                  <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2 py-0.5 rounded">Doxygen</span>
+                </div>
+              </div>
+
+              <!-- Performance Metrics -->
+              <div class="bg-slate-950/60 border border-slate-800/60 rounded-xl p-4">
+                <div class="font-mono text-xs text-slate-600 mb-3 uppercase tracking-wider">// perf_metrics</div>
+                <ul class="space-y-3">
+                  <li>
+                    <div class="font-mono text-xl font-semibold text-slate-100">88%+</div>
+                    <div class="font-mono text-xs text-slate-600">test coverage</div>
+                  </li>
+                  <li class="border-t border-slate-800/60 pt-3">
+                    <div class="font-mono text-xl font-semibold text-slate-100">15</div>
+                    <div class="font-mono text-xs text-slate-600">GTest suites</div>
+                  </li>
+                  <li class="border-t border-slate-800/60 pt-3">
+                    <div class="font-mono text-xl font-semibold text-slate-100">3</div>
+                    <div class="font-mono text-xs text-slate-600">static libs</div>
+                  </li>
+                  <li class="border-t border-slate-800/60 pt-3">
+                    <div class="font-mono text-xl font-semibold text-blue-400">Nix</div>
+                    <div class="font-mono text-xs text-slate-600">hermetic builds</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Code snippet -->
+            <div class="border-t border-slate-800/60 px-6 py-4 bg-slate-950/40">
+              <pre class="font-mono text-xs leading-relaxed overflow-x-auto"><span class="text-slate-600">// autonix/perception/tracker.hpp</span>
+<span class="text-blue-400">namespace</span> <span class="text-slate-300">autonix::perception</span> {
+  <span class="text-blue-400">template</span>&lt;<span class="text-blue-400">class</span> <span class="text-slate-200">Sensor</span>&gt;
+  <span class="text-blue-400">class</span> <span class="text-slate-200">Tracker</span> {
+    <span class="text-blue-400">public</span>:
+      <span class="text-blue-400">auto</span> <span class="text-slate-200">fuse</span>(<span class="text-blue-400">const</span> <span class="text-slate-200">Frame</span>&amp; f) <span class="text-blue-400">noexcept</span> -&gt; std::span&lt;<span class="text-slate-200">Track</span>&gt;;
+      <span class="text-blue-400">auto</span> <span class="text-slate-200">latency_ns</span>() <span class="text-blue-400">const</span> -&gt; <span class="text-blue-400">uint64_t</span>; <span class="text-slate-600">// ISO 26262 budget</span>
+  };
+} <span class="text-slate-600">// satisfies MISRA C++ Rule 5-2-2</span></pre>
+            </div>
+
+            <!-- Video -->
+            <div class="border-t border-slate-800/60" id="autonix-container">
+              <div class="flex items-center justify-between px-4 py-2 bg-slate-950/60">
+                <div class="flex items-center gap-2">
+                  <div class="flex gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500/40"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/40"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-500/40"></span>
+                  </div>
+                  <span class="font-mono text-xs text-slate-600">autonix_demo.mp4</span>
+                </div>
+                <button id="autonix-fullscreen"
+                  class="font-mono text-xs text-slate-600 hover:text-slate-300 transition-colors"
+                  aria-label="Fullscreen">⛶</button>
+              </div>
+              <div class="relative">
+                <video id="autonix-video" src="assets/autonix.mp4" autoplay muted playsinline
+                  class="w-full block"></video>
+                <button id="autonix-replay" aria-label="Replay"
+                  class="hidden absolute inset-0 flex flex-col items-center justify-center gap-2 bg-slate-950/70 font-mono text-sm text-slate-300 hover:text-white transition-colors">
+                  <span class="text-2xl">↺</span>
+                  <span>replay</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Commit log (other contributions) -->
+          <div class="bg-slate-900/40 border border-slate-800 rounded-2xl overflow-hidden">
+            <div class="px-5 py-3 border-b border-slate-800 font-mono text-xs text-slate-600">
+              $ git log --oneline --graph
+            </div>
+            <ol class="divide-y divide-slate-800/60">
+              <li class="flex items-start gap-4 px-5 py-3.5 hover:bg-slate-800/20 transition-colors">
+                <span class="font-mono text-xs text-blue-500 flex-shrink-0 mt-0.5 w-16">b41e09c</span>
+                <span class="text-sm text-slate-400 flex-1">feat(adas): adaptive cruise control — Eco / Comfort / Sport
+                  modes</span>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded flex-shrink-0">autonix</span>
+              </li>
+              <li class="flex items-start gap-4 px-5 py-3.5 hover:bg-slate-800/20 transition-colors">
+                <span class="font-mono text-xs text-blue-500 flex-shrink-0 mt-0.5 w-16">9f2a3d8</span>
+                <span class="text-sm text-slate-400 flex-1">feat(perception): camera · radar · map fusion
+                  pipeline</span>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded flex-shrink-0">intenta</span>
+              </li>
+              <li class="flex items-start gap-4 px-5 py-3.5 hover:bg-slate-800/20 transition-colors">
+                <span class="font-mono text-xs text-blue-500 flex-shrink-0 mt-0.5 w-16">2c7b1f0</span>
+                <span class="text-sm text-slate-400 flex-1">test(safety): raise GTest coverage on critical paths to
+                  95%</span>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded flex-shrink-0">intenta</span>
+              </li>
+              <li class="flex items-start gap-4 px-5 py-3.5 hover:bg-slate-800/20 transition-colors">
+                <span class="font-mono text-xs text-blue-500 flex-shrink-0 mt-0.5 w-16">5e8d6a2</span>
+                <span class="text-sm text-slate-400 flex-1">build(nix): hermetic flake for cross-arch reproducible
+                  builds</span>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded flex-shrink-0">autonix</span>
+              </li>
+              <li class="flex items-start gap-4 px-5 py-3.5 hover:bg-slate-800/20 transition-colors">
+                <span class="font-mono text-xs text-blue-500 flex-shrink-0 mt-0.5 w-16">17a4cce</span>
+                <span class="text-sm text-slate-400 flex-1">research(thesis): stereo-vision robotic arm — autonomous
+                  olive harvester</span>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded flex-shrink-0">tishreen</span>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════════════════
+             03 · EXPERIENCE
+        ══════════════════════════════════════════════════════ -->
+        <section id="experience" class="reveal">
+
+          <div class="flex items-center gap-4 mb-10">
+            <span class="font-mono text-xs text-blue-500 tracking-widest uppercase">03 · Experience</span>
+            <div class="flex-1 h-px bg-slate-800"></div>
+            <span class="font-mono text-xs text-slate-700">3 roles · 6 yrs</span>
+          </div>
+
+          <ol class="space-y-4" role="list">
+
+            <!-- Role 1 -->
+            <li
+              class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+              <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
+                <div>
+                  <div class="font-mono text-xs text-blue-500 mb-1">APR 2026 — PRESENT</div>
+                  <h3 class="font-sans font-medium text-slate-100 text-base">Part-time Software Developer</h3>
+                  <p class="text-sm text-slate-500 mt-0.5">MDO Mitteldeutsche Online GmbH <span class="text-slate-700">·
+                      Bitterfeld-Wolfen, DE</span></p>
+                </div>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded self-start">#7f3a1e2</span>
+              </div>
+              <ul class="space-y-1.5 mb-4">
+                <li class="flex gap-3 text-sm text-slate-400">
+                  <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
+                  Built an AI code-reviewer tool and authored performance tests.
+                </li>
+                <li class="flex gap-3 text-sm text-slate-400">
+                  <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
+                  Annotated and documented APIs for YII2 framework applications.
+                </li>
+              </ul>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">AI</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">YII2</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">PHP</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">Performance</span>
+              </div>
+            </li>
+
+            <!-- Role 2 (featured) -->
+            <li
+              class="bg-slate-900/60 border border-blue-500/20 rounded-2xl p-6 hover:border-blue-500/40 transition-colors">
+              <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
+                <div>
+                  <div class="font-mono text-xs text-blue-500 mb-1">JAN 2022 — MAY 2025</div>
+                  <h3 class="font-sans font-medium text-slate-100 text-base">
+                    ADAS Developer
+                    <span class="text-slate-500 font-normal text-sm ml-1">— External for INTENTA GmbH</span>
+                  </h3>
+                  <p class="text-sm text-slate-500 mt-0.5">LIT — Lebanese Information Technology <span
+                      class="text-slate-700">· Akkar, LB</span></p>
+                </div>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded self-start">#a2c91d4</span>
+              </div>
+              <ul class="space-y-1.5 mb-4">
+                <li class="flex gap-3 text-sm text-slate-400">
+                  <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
+                  Built core features for object tracking and multi-sensor fusion (Camera · Radar · Map) for the VW PPE E³ 1.2 platform.
+                </li>
+                <li class="flex gap-3 text-sm text-slate-400">
+                  <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
+                  Used ADTF to analyse vehicle behaviour, replay .dat files, and fix behavioural anomalies.
+                </li>
+                <li class="flex gap-3 text-sm text-slate-400">
+                  <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
+                  Wrote Google Test unit tests achieving 90–95% coverage on safety-critical paths.
+                </li>
+                <li class="flex gap-3 text-sm text-slate-400">
+                  <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
+                  Resolved AUTOSAR, MISRA C, and ISO 26262 violations using Axivion static analysis.
+                </li>
+                <li class="flex gap-3 text-sm text-slate-400">
+                  <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
+                  Profiled and optimised execution paths, reducing latency in safety-critical modules.
+                </li>
+              </ul>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">C++</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">ADTF</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">AUTOSAR</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">ISO
+                  26262</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">Axivion</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">GTest</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">VW
+                  PPE</span>
+              </div>
+            </li>
+
+            <!-- Role 3 -->
+            <li
+              class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+              <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
+                <div>
+                  <div class="font-mono text-xs text-blue-500 mb-1">JAN 2020 — DEC 2021</div>
+                  <h3 class="font-sans font-medium text-slate-100 text-base">
+                    Lecturer
+                    <span class="text-slate-500 font-normal text-sm ml-1">— Computer Vision &amp; Robotics</span>
+                  </h3>
+                  <p class="text-sm text-slate-500 mt-0.5">Tishreen University <span class="text-slate-700">· Lattakia,
+                      SY</span></p>
+                </div>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded self-start">#3b80f51</span>
+              </div>
+              <ul class="space-y-1.5 mb-4">
+                <li class="flex gap-3 text-sm text-slate-400">
+                  <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
+                  Taught advanced robotics: kinematics and Degrees of Freedom on Raspberry Pi hardware.
+                </li>
+                <li class="flex gap-3 text-sm text-slate-400">
+                  <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
+                  Taught Computer Vision: OpenCV in Python for image processing and noise reduction.
+                </li>
+              </ul>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">OpenCV</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">Python</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">Robotics</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">Raspberry Pi</span>
+              </div>
+            </li>
+
+          </ol>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════════════════
+             04 · DEVOPS
+        ══════════════════════════════════════════════════════ -->
+        <section id="devops" class="reveal">
+
+          <div class="flex items-center gap-4 mb-10">
+            <span class="font-mono text-xs text-blue-500 tracking-widest uppercase">04 · DevOps</span>
+            <div class="flex-1 h-px bg-slate-800"></div>
+            <span class="font-mono text-xs text-slate-700">.gitlab-ci.yml</span>
+          </div>
+
+          <p class="text-slate-400 text-sm leading-relaxed max-w-2xl mb-8">
+            I treat <span class="text-slate-200 font-medium">GitLab CI/CD</span> as a first-class deliverable.
+            Every project ships with a hermetic build, a test matrix, static-analysis gates, and a
+            Pages preview — wired to merge-request rules so reviewers see green before the diff.
+          </p>
+
+          <!-- Pipeline visual -->
+          <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 mb-4">
+            <div class="font-mono text-xs text-slate-500 mb-5">
+              $ gitlab-ci pipeline #2315392554
+              <span class="text-blue-400 ml-2">passed</span>
+              <span class="text-slate-700 ml-2">· master · @210cb502 · 4m 34s</span>
+            </div>
+            <div class="flex items-center flex-wrap gap-y-3 mb-6">
+              <div class="flex items-center">
+                <div class="flex items-center gap-2 bg-slate-950/60 border border-slate-800 rounded-lg px-3 py-2">
+                  <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                  <span class="font-mono text-xs text-slate-300">build</span>
+                  <span class="font-mono text-xs text-slate-500">2m 31s</span>
+                </div>
+                <span class="font-mono text-xs text-slate-600 px-2">→</span>
+              </div>
+              <div class="flex items-center">
+                <div class="flex items-center gap-2 bg-slate-950/60 border border-slate-800 rounded-lg px-3 py-2">
+                  <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                  <span class="font-mono text-xs text-slate-300">test</span>
+                  <span class="font-mono text-xs text-slate-500">1m 22s</span>
+                </div>
+                <span class="font-mono text-xs text-slate-600 px-2">→</span>
+              </div>
+              <div class="flex items-center">
+                <div class="flex items-center gap-2 bg-slate-950/60 border border-slate-800 rounded-lg px-3 py-2">
+                  <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                  <span class="font-mono text-xs text-slate-300">coverage</span>
+                  <span class="font-mono text-xs text-slate-500">2m 48s</span>
+                </div>
+                <span class="font-mono text-xs text-slate-600 px-2">→</span>
+              </div>
+              <div class="flex items-center">
+                <div class="flex items-center gap-2 bg-slate-950/60 border border-slate-800 rounded-lg px-3 py-2">
+                  <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                  <span class="font-mono text-xs text-slate-300">deploy</span>
+                  <span class="font-mono text-xs text-slate-500">39s</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Capsule cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-4">
+                <div class="font-mono text-xs text-blue-500 mb-2">// pipeline</div>
+                <div class="text-sm text-slate-300 font-medium mb-1">Hermetic Builds</div>
+                <div class="text-xs text-slate-500">Reproducible via <span class="text-slate-400">Nix Flakes</span> —
+                  same artefact on a developer laptop and the runner. No "works on my machine".</div>
+              </div>
+              <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-4">
+                <div class="font-mono text-xs text-blue-500 mb-2">// quality</div>
+                <div class="text-sm text-slate-300 font-medium mb-1">Static-Analysis Gates</div>
+                <div class="text-xs text-slate-500"><span class="text-slate-400">Axivion</span> for AUTOSAR / MISRA /
+                  ISO 26262, <span class="text-slate-400">clang-tidy</span> for general hygiene. Fails the MR on any
+                  critical violation.</div>
+              </div>
+              <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-4">
+                <div class="font-mono text-xs text-blue-500 mb-2">// tests</div>
+                <div class="text-sm text-slate-300 font-medium mb-1">Coverage Matrix</div>
+                <div class="text-xs text-slate-500"><span class="text-slate-400">Google Test</span> suites with <span
+                    class="text-slate-400">gcov</span> reports surfaced on the MR widget. Floor at 85% on
+                  safety-critical paths.</div>
+              </div>
+              <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-4">
+                <div class="font-mono text-xs text-blue-500 mb-2">// deploy</div>
+                <div class="text-sm text-slate-300 font-medium mb-1">Pages Preview</div>
+                <div class="text-xs text-slate-500">Branch-scoped <span class="text-slate-400">GitLab Pages</span>
+                  environments for docs and dashboards per MR.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════════════════
+             05 · CONTACT
+        ══════════════════════════════════════════════════════ -->
+        <section id="contact" class="reveal">
+
+          <div class="flex items-center gap-4 mb-10">
+            <span class="font-mono text-xs text-blue-500 tracking-widest uppercase">05 · Contact</span>
+            <div class="flex-1 h-px bg-slate-800"></div>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-6">
+
+            <!-- Terminal block -->
+            <div class="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden">
+              <div class="flex items-center gap-2 px-4 py-2.5 border-b border-slate-800 bg-slate-950/40">
+                <div class="flex gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-red-500/40"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/40"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-green-500/40"></span>
+                </div>
+                <span class="font-mono text-xs text-slate-600">~/.contact</span>
+              </div>
+              <pre class="font-mono text-xs leading-relaxed p-5 text-slate-400"><span class="text-blue-500">$</span> cat ~/.contact
+<span class="text-slate-600"># reach out — replies within 24h on weekdays</span>
+email    = <span class="text-slate-300">"eng.jacob.joseph@gmail.com"</span>
+phone    = <span class="text-slate-300">"+49 163 219 6473"</span>
+gitlab   = <span class="text-slate-300">"gitlab.com/jacob.joseph.9966"</span>
+linkedin = <span class="text-slate-300">"linkedin.com/in/jacob-joseph-dev"</span>
+<span class="text-blue-500">$</span> <span class="animate-pulse">_</span></pre>
+            </div>
+
+            <!-- Link cards -->
+            <ul class="space-y-3">
+              <li>
+                <a href="mailto:eng.jacob.joseph@gmail.com"
+                  class="flex items-center justify-between gap-4 bg-slate-900/60 border border-slate-800 rounded-xl px-5 py-4 hover:border-slate-600 hover:bg-slate-800/40 transition-colors group">
+                  <div>
+                    <div class="font-mono text-xs text-blue-500 mb-0.5">email</div>
+                    <div class="text-sm text-slate-300 group-hover:text-slate-100 transition-colors">
+                      eng.jacob.joseph@gmail.com</div>
+                  </div>
+                  <span class="text-slate-600 group-hover:text-slate-400 transition-colors font-mono">↗</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gitlab.com/jacob.joseph.9966" target="_blank" rel="noopener"
+                  class="flex items-center justify-between gap-4 bg-slate-900/60 border border-slate-800 rounded-xl px-5 py-4 hover:border-slate-600 hover:bg-slate-800/40 transition-colors group">
+                  <div>
+                    <div class="font-mono text-xs text-blue-500 mb-0.5">gitlab</div>
+                    <div class="text-sm text-slate-300 group-hover:text-slate-100 transition-colors">/jacob.joseph.9966
+                    </div>
+                  </div>
+                  <span class="text-slate-600 group-hover:text-slate-400 transition-colors font-mono">↗</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/jacob-joseph-dev" target="_blank" rel="noopener"
+                  class="flex items-center justify-between gap-4 bg-slate-900/60 border border-slate-800 rounded-xl px-5 py-4 hover:border-slate-600 hover:bg-slate-800/40 transition-colors group">
+                  <div>
+                    <div class="font-mono text-xs text-blue-500 mb-0.5">linkedin</div>
+                    <div class="text-sm text-slate-300 group-hover:text-slate-100 transition-colors">
+                      /in/jacob-joseph-dev</div>
+                  </div>
+                  <span class="text-slate-600 group-hover:text-slate-400 transition-colors font-mono">↗</span>
+                </a>
+              </li>
+              <li>
+                <a href="tel:+491632196473"
+                  class="flex items-center justify-between gap-4 bg-slate-900/60 border border-slate-800 rounded-xl px-5 py-4 hover:border-slate-600 hover:bg-slate-800/40 transition-colors group">
+                  <div>
+                    <div class="font-mono text-xs text-blue-500 mb-0.5">phone</div>
+                    <div class="text-sm text-slate-300 group-hover:text-slate-100 transition-colors">+49 163 219 6473
+                    </div>
+                  </div>
+                  <span class="text-slate-600 group-hover:text-slate-400 transition-colors font-mono">↗</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </div><!-- /max-w-4xl -->
+
+      <!-- Footer -->
+      <footer class="border-t border-slate-800/60 mt-16">
+        <div class="max-w-4xl mx-auto px-6 lg:px-12 py-6 flex flex-wrap items-center justify-between gap-4">
+          <span class="font-mono text-xs text-slate-700">// jacob.joseph — ADAS &amp; Embedded Systems · 2026</span>
+          <span class="font-mono text-xs text-slate-700">HTML · Tailwind CSS · Vanilla JS · GitLab Pages</span>
+        </div>
+      </footer>
+
+    </main><!-- /main -->
+  </div><!-- /layout root -->
 
 
   <script>
-    // ─── tiny vanilla js: typing prompt + section reveal + active nav ───
-    (function () {
-      'use strict';
+      (function () {
+        'use strict';
 
-      /* ── typed whoami in hero ── */
-      var prompt = document.querySelector('.hero__cmd');
-      if (prompt) {
-        var phrases = [
-          'whoami',
-          'cat ~/about.md',
-          'git log --author="jacob"',
-          'nix build .#portfolio'
-        ];
-        var phraseIdx = 0;
-        var charIdx = 0;
-        var deleting = false;
-        var target = prompt.querySelector('.cursor');
-        var holder = document.createElement('span');
-        holder.className = 'typed';
-        prompt.insertBefore(holder, target);
+        /* ── Mobile sidebar toggle ── */
+        var btn = document.getElementById('mob-menu-btn');
+        var sidebar = document.getElementById('sidebar');
+        var overlay = document.getElementById('sidebar-overlay');
 
-        function tick() {
-          var word = phrases[phraseIdx];
-          if (!deleting) {
-            holder.textContent = word.slice(0, ++charIdx);
-            if (charIdx === word.length) {
-              deleting = true;
-              return setTimeout(tick, 1800);
-            }
-          } else {
-            holder.textContent = word.slice(0, --charIdx);
-            if (charIdx === 0) {
-              deleting = false;
-              phraseIdx = (phraseIdx + 1) % phrases.length;
-            }
+        function openSidebar() {
+          sidebar.classList.remove('-translate-x-full');
+          overlay.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+        function closeSidebar() {
+          sidebar.classList.add('-translate-x-full');
+          overlay.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+
+        if (btn) btn.addEventListener('click', openSidebar);
+        if (overlay) overlay.addEventListener('click', closeSidebar);
+
+        /* Close sidebar when a nav link is clicked on mobile */
+        sidebar.querySelectorAll('a[href^="#"]').forEach(function (a) {
+          a.addEventListener('click', function () {
+            if (window.innerWidth < 1024) closeSidebar();
+          });
+        });
+
+        /* ── Scroll reveal ── */
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+
+          document.querySelectorAll('.reveal').forEach(function (el) {
+            io.observe(el);
+          });
+        } else {
+          document.querySelectorAll('.reveal').forEach(function (el) {
+            el.classList.add('is-visible');
+          });
+        }
+
+        /* ── Active nav link on scroll ── */
+        var navLinks = document.querySelectorAll('.nav-link');
+        var sectionIds = ['profile', 'stack', 'projects', 'experience', 'devops', 'contact'];
+
+        function syncNav() {
+          /* If within 2px of the page bottom, always activate the last section */
+          var atBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 2;
+          if (atBottom) {
+            var lastId = sectionIds[sectionIds.length - 1];
+            navLinks.forEach(function (a) {
+              a.classList.toggle('nav-link--active', a.getAttribute('href') === '#' + lastId);
+            });
+            return;
           }
-          setTimeout(tick, deleting ? 32 : 70);
+          var y = window.scrollY + 120;
+          var activeId = sectionIds[0];
+          sectionIds.forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el && el.offsetTop <= y) activeId = id;
+          });
+          navLinks.forEach(function (a) {
+            var href = a.getAttribute('href');
+            a.classList.toggle('nav-link--active', href === '#' + activeId);
+          });
         }
-        // remove the static 'whoami' before starting
-        var staticText = prompt.childNodes;
-        for (var i = staticText.length - 1; i >= 0; i--) {
-          var n = staticText[i];
-          if (n.nodeType === 3) n.remove();
+        window.addEventListener('scroll', syncNav, { passive: true });
+        syncNav();
+
+        /* ── Smooth scroll ── */
+        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+          a.addEventListener('click', function (e) {
+            var id = a.getAttribute('href');
+            if (id.length < 2) return;
+            var t = document.querySelector(id);
+            if (!t) return;
+            e.preventDefault();
+            var offset = window.innerWidth >= 1024 ? 48 : 60;
+            window.scrollTo({ top: t.offsetTop - offset, behavior: 'smooth' });
+          });
+        });
+
+        /* ── Autonix video ── */
+        var vid = document.getElementById('autonix-video');
+        var replay = document.getElementById('autonix-replay');
+        var fsBtn = document.getElementById('autonix-fullscreen');
+
+        if (vid && replay) {
+          vid.addEventListener('ended', function () { replay.style.display = 'flex'; });
+          replay.addEventListener('click', function () {
+            replay.style.display = 'none';
+            vid.currentTime = 0;
+            vid.play();
+          });
+          vid.addEventListener('error', function () { vid.controls = true; });
         }
-        tick();
-      }
 
-      /* ── intersection-based reveal ── */
-      var io = ('IntersectionObserver' in window) && new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-in');
-            io.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-
-      if (io) {
-        document.querySelectorAll('.block, .hero__card, .featured, .job, .capsule').forEach(function (el) {
-          el.classList.add('reveal');
-          io.observe(el);
-        });
-      }
-
-      /* ── active nav link based on scroll ── */
-      var navLinks = document.querySelectorAll('.topbar__nav a');
-      var sections = Array.prototype.map.call(navLinks, function (a) {
-        return document.querySelector(a.getAttribute('href'));
-      });
-      function syncNav() {
-        var y = window.scrollY + 140;
-        var activeIdx = 0;
-        for (var i = 0; i < sections.length; i++) {
-          if (sections[i] && sections[i].offsetTop <= y) activeIdx = i;
-        }
-        navLinks.forEach(function (a, i) {
-          a.classList.toggle('is-active', i === activeIdx);
-        });
-      }
-      window.addEventListener('scroll', syncNav, { passive: true });
-      syncNav();
-
-      /* ── autonix video: show replay button on end ── */
-      var autonixVideo = document.getElementById('autonix-video');
-      var autonixReplay = document.getElementById('autonix-replay');
-      if (autonixVideo && autonixReplay) {
-        autonixVideo.addEventListener('ended', function () {
-          autonixReplay.style.display = 'flex';
-        });
-        autonixReplay.addEventListener('click', function () {
-          autonixReplay.style.display = 'none';
-          autonixVideo.currentTime = 0;
-          autonixVideo.play();
-        });
-        /* if autoplay was blocked, show controls so user can still play */
-        autonixVideo.addEventListener('error', function () {
-          autonixVideo.controls = true;
-        });
-
-        /* ── fullscreen ── */
-        var autonixFullscreen = document.getElementById('autonix-fullscreen');
-        if (autonixFullscreen) {
-          autonixFullscreen.addEventListener('click', function () {
+        if (fsBtn && vid) {
+          fsBtn.addEventListener('click', function () {
             var isFs = document.fullscreenElement || document.webkitFullscreenElement;
             if (isFs) {
-              var exit = document.exitFullscreen || document.webkitExitFullscreen;
-              if (exit) exit.call(document);
+              (document.exitFullscreen || document.webkitExitFullscreen).call(document);
             } else {
-              var req = autonixVideo.requestFullscreen
-                || autonixVideo.webkitRequestFullscreen
-                || autonixVideo.mozRequestFullScreen
-                || autonixVideo.msRequestFullscreen;
-              if (req) req.call(autonixVideo);
+              var req = vid.requestFullscreen || vid.webkitRequestFullscreen || vid.mozRequestFullScreen;
+              if (req) req.call(vid);
             }
           });
           function onFsChange() {
             var isFs = document.fullscreenElement || document.webkitFullscreenElement;
-            autonixFullscreen.textContent = isFs ? '✕' : '⛶';
+            fsBtn.textContent = isFs ? '✕' : '⛶';
           }
           document.addEventListener('fullscreenchange', onFsChange);
           document.addEventListener('webkitfullscreenchange', onFsChange);
         }
-      }
-
-      /* ── smooth scroll for in-page anchors ── */
-      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-        a.addEventListener('click', function (e) {
-          var id = a.getAttribute('href');
-          if (id.length < 2) return;
-          var t = document.querySelector(id);
-          if (!t) return;
-          e.preventDefault();
-          window.scrollTo({ top: t.offsetTop - 72, behavior: 'smooth' });
-        });
-      });
-    })();
+      })();
   </script>
 
 </body>

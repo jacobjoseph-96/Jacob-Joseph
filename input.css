@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Custom bg token ── */
+.bg-slate-925 { background-color: #070e1f; }
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Active nav link ── */
+.nav-link--active {
+  background-color: rgba(30, 41, 59, 0.6);
+}
+.nav-link--active span:first-child {
+  color: #3b82f6;
+}
+.nav-link--active span:last-child {
+  color: #e2e8f0;
+}
+
+/* ── Thin scrollbar (Webkit) ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: #020617; }
+::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+/* ── Replay button (display toggled by JS) ── */
+#autonix-replay[style*="flex"] { display: flex !important; }
+
+/* ── Lock sidebar on desktop ── */
+@media (min-width: 1024px) {
+  #sidebar { transform: translateX(0) !important; }
+}
+
+/* ── Focus ring ── */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
