@@ -19,29 +19,48 @@
       left: auto;
       right: 0;
       border-right: none;
-      border-left: 1px solid rgba(30,41,59,0.6);
+      border-left: 1px solid rgba(30, 41, 59, 0.6);
       transform: translateX(100%);
     }
+
     @media (min-width: 1024px) {
-      [dir="rtl"] #sidebar { transform: translateX(0) !important; }
-      [dir="rtl"] main { margin-left: 0 !important; margin-right: 16rem; }
+      [dir="rtl"] #sidebar {
+        transform: translateX(0) !important;
+      }
+
+      [dir="rtl"] main {
+        margin-left: 0 !important;
+        margin-right: 16rem;
+      }
     }
-    [dir="rtl"] body { font-family: 'Noto Sans Arabic', 'Inter', sans-serif; }
+
+    [dir="rtl"] body {
+      font-family: 'Noto Sans Arabic', 'Inter', sans-serif;
+    }
 
     /* Hero RTL: photo on the left, copy on the right */
-    [dir="rtl"] #hero-copy { max-width: 55%; margin-left: auto; }
+    [dir="rtl"] #hero-copy {
+      max-width: 55%;
+      margin-left: auto;
+    }
+
     [dir="rtl"] #hero-photo {
       right: auto !important;
       left: 0 !important;
     }
+
     /* Mirror only the image, not the overlays */
-    [dir="rtl"] #hero-photo img { transform: scaleX(-1); }
+    [dir="rtl"] #hero-photo img {
+      transform: scaleX(-1);
+    }
+
     /* Flip left-fade → right-fade */
     [dir="rtl"] #hero-photo #hero-fade-side {
       left: auto !important;
       right: 0 !important;
       background: linear-gradient(to left, #020617 0%, transparent 100%) !important;
     }
+
     /* Fix img anchor: was right-0, needs left-0 in RTL */
     [dir="rtl"] #hero-photo img {
       right: auto !important;
@@ -50,18 +69,35 @@
     }
 
     /* Ticker: reverse scroll direction in RTL */
-    [dir="rtl"] .animate-marquee { animation-direction: reverse; }
+    [dir="rtl"] .animate-marquee {
+      animation-direction: reverse;
+    }
 
     /* Keep code snippets and contact block strictly LTR */
-    [dir="rtl"] pre { direction: ltr; unicode-bidi: embed; text-align: left; }
+    [dir="rtl"] pre {
+      direction: ltr;
+      unicode-bidi: embed;
+      text-align: left;
+    }
+
     [dir="rtl"] #contact-terminal,
-    [dir="rtl"] #contact-links { direction: ltr; unicode-bidi: embed; text-align: left; }
+    [dir="rtl"] #contact-links {
+      direction: ltr;
+      unicode-bidi: embed;
+      text-align: left;
+    }
 
     /* Footer: center-aligned, natural direction */
-    [dir="rtl"] footer { direction: rtl; text-align: center; }
+    [dir="rtl"] footer {
+      direction: rtl;
+      text-align: center;
+    }
 
     /* SYS_READY LED: flip to bottom-left in RTL */
-    [dir="rtl"] #status-led { right: auto; left: 1.25rem; }
+    [dir="rtl"] #status-led {
+      right: auto;
+      left: 1.25rem;
+    }
 
     /* ── Language switcher pills ── */
     .lang-pills {
@@ -72,6 +108,7 @@
       font-size: 11px;
       flex-wrap: nowrap;
     }
+
     .lang-pill {
       background: none;
       border: none;
@@ -86,17 +123,21 @@
       line-height: 1.4;
       white-space: nowrap;
     }
+
     .lang-pill.is-active {
       color: #3b82f6;
-      background: rgba(59,130,246,0.1);
+      background: rgba(59, 130, 246, 0.1);
     }
+
     .lang-pill.is-inactive {
       color: #475569;
     }
+
     .lang-pill.is-inactive:hover {
       color: #94a3b8;
-      background: rgba(255,255,255,0.04);
+      background: rgba(255, 255, 255, 0.04);
     }
+
     .lang-pill-sep {
       color: #1e293b;
       font-size: 10px;
@@ -159,7 +200,8 @@
 
       <!-- Sidebar header -->
       <div class="px-6 pt-8 pb-6 border-b border-slate-800/60">
-        <div class="font-sans font-semibold text-slate-100 text-lg leading-tight" data-i18n="sidebar_name">Jacob Joseph</div>
+        <div class="font-sans font-semibold text-slate-100 text-lg leading-tight" data-i18n="sidebar_name">Jacob Joseph
+        </div>
         <div class="font-mono text-xs text-blue-400 mt-1" data-i18n="sidebar_role">ADAS &amp; Embedded Systems</div>
 
         <!-- Status -->
@@ -171,48 +213,55 @@
 
       <!-- Navigation -->
       <nav class="flex-1 overflow-y-auto px-4 py-6" aria-label="Sections">
-        <div class="font-mono text-xs text-slate-600 uppercase tracking-widest mb-3 px-2" data-i18n="nav_heading">Navigation</div>
+        <div class="font-mono text-xs text-slate-600 uppercase tracking-widest mb-3 px-2" data-i18n="nav_heading">
+          Navigation</div>
         <ul class="space-y-0.5" role="list">
           <li>
             <a href="#profile"
               class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-800/60">
               <span class="font-mono text-xs text-slate-600 group-hover:text-blue-500 transition-colors w-5">00</span>
-              <span class="text-slate-400 group-hover:text-slate-200 transition-colors" data-i18n="nav_profile">Profile</span>
+              <span class="text-slate-400 group-hover:text-slate-200 transition-colors"
+                data-i18n="nav_profile">Profile</span>
             </a>
           </li>
           <li>
             <a href="#stack"
               class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-800/60">
               <span class="font-mono text-xs text-slate-600 group-hover:text-blue-500 transition-colors w-5">01</span>
-              <span class="text-slate-400 group-hover:text-slate-200 transition-colors" data-i18n="nav_stack">Core Stack</span>
+              <span class="text-slate-400 group-hover:text-slate-200 transition-colors" data-i18n="nav_stack">Core
+                Stack</span>
             </a>
           </li>
           <li>
             <a href="#projects"
               class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-800/60">
               <span class="font-mono text-xs text-slate-600 group-hover:text-blue-500 transition-colors w-5">02</span>
-              <span class="text-slate-400 group-hover:text-slate-200 transition-colors" data-i18n="nav_projects">Projects</span>
+              <span class="text-slate-400 group-hover:text-slate-200 transition-colors"
+                data-i18n="nav_projects">Projects</span>
             </a>
           </li>
           <li>
             <a href="#experience"
               class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-800/60">
               <span class="font-mono text-xs text-slate-600 group-hover:text-blue-500 transition-colors w-5">03</span>
-              <span class="text-slate-400 group-hover:text-slate-200 transition-colors" data-i18n="nav_experience">Experience</span>
+              <span class="text-slate-400 group-hover:text-slate-200 transition-colors"
+                data-i18n="nav_experience">Experience</span>
             </a>
           </li>
           <li>
             <a href="#devops"
               class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-800/60">
               <span class="font-mono text-xs text-slate-600 group-hover:text-blue-500 transition-colors w-5">04</span>
-              <span class="text-slate-400 group-hover:text-slate-200 transition-colors" data-i18n="nav_devops">DevOps</span>
+              <span class="text-slate-400 group-hover:text-slate-200 transition-colors"
+                data-i18n="nav_devops">DevOps</span>
             </a>
           </li>
           <li>
             <a href="#contact"
               class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-slate-800/60">
               <span class="font-mono text-xs text-slate-600 group-hover:text-blue-500 transition-colors w-5">05</span>
-              <span class="text-slate-400 group-hover:text-slate-200 transition-colors" data-i18n="nav_contact">Contact</span>
+              <span class="text-slate-400 group-hover:text-slate-200 transition-colors"
+                data-i18n="nav_contact">Contact</span>
             </a>
           </li>
         </ul>
@@ -223,9 +272,11 @@
         <div class="font-mono text-xs text-slate-600 mb-3" data-i18n="quick_links">// quick links</div>
         <div class="flex gap-3 mb-4">
           <a href="https://gitlab.com/jacob.joseph.9966" target="_blank" rel="noopener"
-            class="text-slate-500 hover:text-slate-300 transition-colors text-xs font-mono"><span data-i18n="link_gitlab">GitLab</span> ↗</a>
+            class="text-slate-500 hover:text-slate-300 transition-colors text-xs font-mono"><span
+              data-i18n="link_gitlab">GitLab</span> ↗</a>
           <a href="https://www.linkedin.com/in/jacob-joseph-dev" target="_blank" rel="noopener"
-            class="text-slate-500 hover:text-slate-300 transition-colors text-xs font-mono"><span data-i18n="link_linkedin">LinkedIn</span> ↗</a>
+            class="text-slate-500 hover:text-slate-300 transition-colors text-xs font-mono"><span
+              data-i18n="link_linkedin">LinkedIn</span> ↗</a>
         </div>
         <div class="font-mono text-xs text-slate-700">Leipzig, DE</div>
       </div>
@@ -246,7 +297,8 @@
 
           <!-- Section label -->
           <div class="flex items-center gap-4 mb-10">
-            <span class="font-mono text-base text-blue-500 tracking-widest uppercase" data-i18n="section_profile">00 · Profile</span>
+            <span class="font-mono text-base text-blue-500 tracking-widest uppercase" data-i18n="section_profile">00 ·
+              Profile</span>
             <div class="flex-1 h-px bg-slate-800"></div>
           </div>
 
@@ -255,7 +307,8 @@
 
             <!-- Copy — sits on top of / beside the photo -->
             <div id="hero-copy" class="relative z-10 flex flex-col justify-center md:max-w-[55%]">
-              <p class="font-mono text-xs text-slate-500 mb-3 uppercase tracking-widest" data-i18n="hero_role">ADAS &amp; Embedded Systems Specialist</p>
+              <p class="font-mono text-xs text-slate-500 mb-3 uppercase tracking-widest" data-i18n="hero_role">ADAS
+                &amp; Embedded Systems Specialist</p>
               <h1 class="font-sans font-semibold text-5xl lg:text-6xl text-slate-100 leading-none tracking-tight mb-6">
                 <span data-i18n="hero_name_line1">Jacob</span><br>
                 <span class="text-blue-400" data-i18n="hero_name_line2">Joseph</span>
@@ -268,7 +321,8 @@
               </p>
 
               <!-- Meta grid -->
-              <dl class="grid grid-cols-2 sm:grid-cols-[1fr_1fr_auto_1fr] gap-px bg-slate-800/40 rounded-xl overflow-hidden border border-slate-800/60 mb-8">
+              <dl
+                class="grid grid-cols-2 sm:grid-cols-[1fr_1fr_auto_1fr] gap-px bg-slate-800/40 rounded-xl overflow-hidden border border-slate-800/60 mb-8">
                 <div class="bg-slate-925 px-4 py-3">
                   <dt class="font-mono text-xs text-slate-600 mb-1" data-i18n="meta_location_label">location</dt>
                   <dd class="text-sm text-slate-300 font-medium">Leipzig, DE</dd>
@@ -311,7 +365,8 @@
             </div>
 
             <!-- Photo — absolutely positioned right, no box, fades left + bottom -->
-            <div id="hero-photo" class="hidden md:block absolute right-0 top-0 bottom-0 w-[420px] pointer-events-none select-none">
+            <div id="hero-photo"
+              class="hidden md:block absolute right-0 top-0 bottom-0 w-[420px] pointer-events-none select-none">
               <img src="assets/Jacob-Joseph-2.png" alt="Jacob Joseph"
                 class="absolute bottom-0 right-0 h-full w-auto object-contain object-bottom" />
               <!-- left fade so photo blends into page -->
@@ -365,7 +420,8 @@
         <section id="stack" class="reveal">
 
           <div class="flex items-center gap-4 mb-10">
-            <span class="font-mono text-base text-blue-500 tracking-widest uppercase" data-i18n="section_stack">01 · Core Stack</span>
+            <span class="font-mono text-base text-blue-500 tracking-widest uppercase" data-i18n="section_stack">01 ·
+              Core Stack</span>
             <div class="flex-1 h-px bg-slate-800"></div>
           </div>
 
@@ -376,8 +432,10 @@
             <div
               class="col-span-2 row-span-1 bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
               <div class="flex items-center justify-between mb-4">
-                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider" data-i18n="stack_languages">Languages</span>
-                <span class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">09</span>
+                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider"
+                  data-i18n="stack_languages">Languages</span>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">09</span>
               </div>
               <div class="grid grid-cols-2 gap-y-2 gap-x-4">
                 <div class="space-y-2">
@@ -481,8 +539,10 @@
             <div
               class="col-span-2 bg-slate-900/60 border border-blue-500/20 rounded-2xl p-5 hover:border-blue-500/40 transition-colors">
               <div class="flex items-center justify-between mb-4">
-                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider" data-i18n="stack_automotive">Automotive / Safety</span>
-                <span class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">06</span>
+                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider"
+                  data-i18n="stack_automotive">Automotive / Safety</span>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">06</span>
               </div>
               <div class="flex flex-wrap gap-2">
                 <span
@@ -506,8 +566,10 @@
             <div
               class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
               <div class="flex items-center justify-between mb-4">
-                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider" data-i18n="stack_testing">Testing / Process</span>
-                <span class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">05</span>
+                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider" data-i18n="stack_testing">Testing
+                  / Process</span>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">05</span>
               </div>
               <ul class="space-y-1.5">
                 <li class="font-mono text-xs text-slate-400">Google Test</li>
@@ -522,8 +584,10 @@
             <div
               class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
               <div class="flex items-center justify-between mb-4">
-                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider" data-i18n="stack_build">Build / Infra</span>
-                <span class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">04</span>
+                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider" data-i18n="stack_build">Build /
+                  Infra</span>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">04</span>
               </div>
               <ul class="space-y-1.5">
                 <li class="font-mono text-xs text-slate-400">CMake</li>
@@ -537,8 +601,10 @@
             <div
               class="col-span-2 bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
               <div class="flex items-center justify-between mb-4">
-                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider" data-i18n="stack_tools">Tools &amp; IDE</span>
-                <span class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">10</span>
+                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider" data-i18n="stack_tools">Tools
+                  &amp; IDE</span>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">10</span>
               </div>
               <div class="flex flex-wrap gap-2">
                 <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">Qt 6</span>
@@ -564,7 +630,8 @@
         <section id="projects" class="reveal">
 
           <div class="flex items-center gap-4 mb-10">
-            <span class="font-mono text-base text-blue-500 tracking-widest uppercase" data-i18n="section_projects">02 · Projects</span>
+            <span class="font-mono text-base text-blue-500 tracking-widest uppercase" data-i18n="section_projects">02 ·
+              Projects</span>
             <div class="flex-1 h-px bg-slate-800"></div>
           </div>
 
@@ -576,10 +643,12 @@
             <div class="px-6 pt-6 pb-5 border-b border-slate-800/60">
               <div class="flex items-start justify-between gap-4 flex-wrap">
                 <div>
-                  <div class="font-mono text-xs text-blue-500 mb-1.5" data-i18n="autonix_tag">// case_study · embedded/cv</div>
+                  <div class="font-mono text-xs text-blue-500 mb-1.5" data-i18n="autonix_tag">// case_study ·
+                    embedded/cv</div>
                   <h3 class="font-sans font-semibold text-xl text-slate-100 leading-snug">
                     Autonix
-                    <span class="text-slate-500 font-normal text-base ms-1" data-i18n="autonix_subtitle">— ADAS simulation environment</span>
+                    <span class="text-slate-500 font-normal text-base ms-1" data-i18n="autonix_subtitle">— ADAS
+                      simulation environment</span>
                   </h3>
                 </div>
                 <a href="https://gitlab.com/jacob.joseph.9966-group/autonix" target="_blank" rel="noopener"
@@ -604,12 +673,14 @@
                 <ul class="space-y-2 mb-5">
                   <li class="flex gap-3 text-sm text-slate-400">
                     <span class="font-mono text-blue-500 flex-shrink-0 mt-0.5">›</span>
-                    <span data-i18n="autonix_b1">Layered architecture (Core / Perception / UI as static libs); state machines for lane change &amp;
-                    traffic light</span>
+                    <span data-i18n="autonix_b1">Layered architecture (Core / Perception / UI as static libs); state
+                      machines for lane change &amp;
+                      traffic light</span>
                   </li>
                   <li class="flex gap-3 text-sm text-slate-400">
                     <span class="font-mono text-blue-500 flex-shrink-0 mt-0.5">›</span>
-                    <span data-i18n="autonix_b2">Hermetic Nix builds, full GitLab CI/CD matrix (build · test · coverage · static-analysis)</span>
+                    <span data-i18n="autonix_b2">Hermetic Nix builds, full GitLab CI/CD matrix (build · test · coverage
+                      · static-analysis)</span>
                   </li>
                   <li class="flex gap-3 text-sm text-slate-400">
                     <span class="font-mono text-blue-500 flex-shrink-0 mt-0.5">›</span>
@@ -700,35 +771,40 @@
             <ol class="divide-y divide-slate-800/60">
               <li class="flex items-start gap-4 px-5 py-3.5 hover:bg-slate-800/20 transition-colors">
                 <span class="font-mono text-xs text-blue-500 flex-shrink-0 mt-0.5 w-16">b41e09c</span>
-                <span class="text-sm text-slate-400 flex-1" data-i18n="commit1">feat(adas): adaptive cruise control — Eco / Comfort / Sport
+                <span class="text-sm text-slate-400 flex-1" data-i18n="commit1">feat(adas): adaptive cruise control —
+                  Eco / Comfort / Sport
                   modes</span>
                 <span
                   class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded flex-shrink-0">autonix</span>
               </li>
               <li class="flex items-start gap-4 px-5 py-3.5 hover:bg-slate-800/20 transition-colors">
                 <span class="font-mono text-xs text-blue-500 flex-shrink-0 mt-0.5 w-16">9f2a3d8</span>
-                <span class="text-sm text-slate-400 flex-1" data-i18n="commit2">feat(perception): camera · radar · map fusion
+                <span class="text-sm text-slate-400 flex-1" data-i18n="commit2">feat(perception): camera · radar · map
+                  fusion
                   pipeline</span>
                 <span
                   class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded flex-shrink-0">intenta</span>
               </li>
               <li class="flex items-start gap-4 px-5 py-3.5 hover:bg-slate-800/20 transition-colors">
                 <span class="font-mono text-xs text-blue-500 flex-shrink-0 mt-0.5 w-16">2c7b1f0</span>
-                <span class="text-sm text-slate-400 flex-1" data-i18n="commit3">test(safety): raise GTest coverage on critical paths to
+                <span class="text-sm text-slate-400 flex-1" data-i18n="commit3">test(safety): raise GTest coverage on
+                  critical paths to
                   95%</span>
                 <span
                   class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded flex-shrink-0">intenta</span>
               </li>
               <li class="flex items-start gap-4 px-5 py-3.5 hover:bg-slate-800/20 transition-colors">
                 <span class="font-mono text-xs text-blue-500 flex-shrink-0 mt-0.5 w-16">5e8d6a2</span>
-                <span class="text-sm text-slate-400 flex-1" data-i18n="commit4">build(nix): hermetic flake for cross-arch reproducible
+                <span class="text-sm text-slate-400 flex-1" data-i18n="commit4">build(nix): hermetic flake for
+                  cross-arch reproducible
                   builds</span>
                 <span
                   class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded flex-shrink-0">autonix</span>
               </li>
               <li class="flex items-start gap-4 px-5 py-3.5 hover:bg-slate-800/20 transition-colors">
                 <span class="font-mono text-xs text-blue-500 flex-shrink-0 mt-0.5 w-16">17a4cce</span>
-                <span class="text-sm text-slate-400 flex-1" data-i18n="commit5">research(thesis): stereo-vision robotic arm — autonomous
+                <span class="text-sm text-slate-400 flex-1" data-i18n="commit5">research(thesis): stereo-vision robotic
+                  arm — autonomous
                   olive harvester</span>
                 <span
                   class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded flex-shrink-0">tishreen</span>
@@ -744,7 +820,8 @@
         <section id="experience" class="reveal">
 
           <div class="flex items-center gap-4 mb-10">
-            <span class="font-mono text-base text-blue-500 tracking-widest uppercase" data-i18n="section_experience">03 · Experience</span>
+            <span class="font-mono text-base text-blue-500 tracking-widest uppercase" data-i18n="section_experience">03
+              · Experience</span>
             <div class="flex-1 h-px bg-slate-800"></div>
             <span class="font-mono text-xs text-slate-700" data-i18n="exp_meta">3 roles · 6 yrs</span>
           </div>
@@ -757,7 +834,8 @@
               <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
                 <div>
                   <div class="font-mono text-xs text-blue-500 mb-1" data-i18n="role1_date">APR 2026 — PRESENT</div>
-                  <h3 class="font-sans font-medium text-slate-100 text-base" data-i18n="role1_title">Part-time Software Developer</h3>
+                  <h3 class="font-sans font-medium text-slate-100 text-base" data-i18n="role1_title">Part-time Software
+                    Developer</h3>
                   <p class="text-sm text-slate-500 mt-0.5">MDO Mitteldeutsche Online GmbH <span class="text-slate-700">·
                       Bitterfeld-Wolfen, DE</span></p>
                 </div>
@@ -790,7 +868,8 @@
                   <div class="font-mono text-xs text-blue-500 mb-1" data-i18n="role2_date">JAN 2022 — MAY 2025</div>
                   <h3 class="font-sans font-medium text-slate-100 text-base">
                     <span data-i18n="role2_title">ADAS Developer</span>
-                    <span class="text-slate-500 font-normal text-sm ml-1" data-i18n="role2_subtitle">— External for INTENTA GmbH</span>
+                    <span class="text-slate-500 font-normal text-sm ml-1" data-i18n="role2_subtitle">— External for
+                      INTENTA GmbH</span>
                   </h3>
                   <p class="text-sm text-slate-500 mt-0.5">LIT — Lebanese Information Technology <span
                       class="text-slate-700">· Akkar, LB</span></p>
@@ -801,23 +880,28 @@
               <ul class="space-y-1.5 mb-4">
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role2_b1">Built core features for object tracking and multi-sensor fusion (Camera · Radar · Map) for the VW PPE E³ 1.2 platform.</span>
+                  <span data-i18n="role2_b1">Built core features for object tracking and multi-sensor fusion (Camera ·
+                    Radar · Map) for the VW PPE E³ 1.2 platform.</span>
                 </li>
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role2_b2">Used ADTF to analyse vehicle behaviour, replay .dat files, and fix behavioural anomalies.</span>
+                  <span data-i18n="role2_b2">Used ADTF to analyse vehicle behaviour, replay .dat files, and fix
+                    behavioural anomalies.</span>
                 </li>
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role2_b3">Wrote Google Test unit tests achieving 90–95% coverage on safety-critical paths.</span>
+                  <span data-i18n="role2_b3">Wrote Google Test unit tests achieving 90–95% coverage on safety-critical
+                    paths.</span>
                 </li>
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role2_b4">Resolved AUTOSAR, MISRA C, and ISO 26262 violations using Axivion static analysis.</span>
+                  <span data-i18n="role2_b4">Resolved AUTOSAR, MISRA C, and ISO 26262 violations using Axivion static
+                    analysis.</span>
                 </li>
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role2_b5">Profiled and optimised execution paths, reducing latency in safety-critical modules.</span>
+                  <span data-i18n="role2_b5">Profiled and optimised execution paths, reducing latency in safety-critical
+                    modules.</span>
                 </li>
               </ul>
               <div class="flex flex-wrap gap-1.5">
@@ -848,7 +932,8 @@
                   <div class="font-mono text-xs text-blue-500 mb-1" data-i18n="role3_date">JAN 2020 — DEC 2021</div>
                   <h3 class="font-sans font-medium text-slate-100 text-base">
                     <span data-i18n="role3_title">Lecturer</span>
-                    <span class="text-slate-500 font-normal text-sm ml-1" data-i18n="role3_subtitle">— Computer Vision &amp; Robotics</span>
+                    <span class="text-slate-500 font-normal text-sm ml-1" data-i18n="role3_subtitle">— Computer Vision
+                      &amp; Robotics</span>
                   </h3>
                   <p class="text-sm text-slate-500 mt-0.5">Tishreen University <span class="text-slate-700">· Lattakia,
                       SY</span></p>
@@ -859,11 +944,13 @@
               <ul class="space-y-1.5 mb-4">
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role3_b1">Taught advanced robotics: kinematics and Degrees of Freedom on Raspberry Pi hardware.</span>
+                  <span data-i18n="role3_b1">Taught advanced robotics: kinematics and Degrees of Freedom on Raspberry Pi
+                    hardware.</span>
                 </li>
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role3_b2">Taught Computer Vision: OpenCV in Python for image processing and noise reduction.</span>
+                  <span data-i18n="role3_b2">Taught Computer Vision: OpenCV in Python for image processing and noise
+                    reduction.</span>
                 </li>
               </ul>
               <div class="flex flex-wrap gap-1.5">
@@ -884,7 +971,8 @@
         <section id="devops" class="reveal">
 
           <div class="flex items-center gap-4 mb-10">
-            <span class="font-mono text-base text-blue-500 tracking-widest uppercase" data-i18n="section_devops">04 · DevOps</span>
+            <span class="font-mono text-base text-blue-500 tracking-widest uppercase" data-i18n="section_devops">04 ·
+              DevOps</span>
             <div class="flex-1 h-px bg-slate-800"></div>
             <span class="font-mono text-xs text-slate-700">.gitlab-ci.yml</span>
           </div>
@@ -941,27 +1029,32 @@
               <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-4">
                 <div class="font-mono text-xs text-blue-500 mb-2">// pipeline</div>
                 <div class="text-sm text-slate-300 font-medium mb-1" data-i18n="devops_c1_title">Hermetic Builds</div>
-                <div class="text-xs text-slate-500" data-i18n="devops_c1_body">Reproducible via <span class="text-slate-400">Nix Flakes</span> —
+                <div class="text-xs text-slate-500" data-i18n="devops_c1_body">Reproducible via <span
+                    class="text-slate-400">Nix Flakes</span> —
                   same artefact on a developer laptop and the runner. No "works on my machine".</div>
               </div>
               <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-4">
                 <div class="font-mono text-xs text-blue-500 mb-2">// quality</div>
-                <div class="text-sm text-slate-300 font-medium mb-1" data-i18n="devops_c2_title">Static-Analysis Gates</div>
-                <div class="text-xs text-slate-500" data-i18n="devops_c2_body"><span class="text-slate-400">Axivion</span> for AUTOSAR / MISRA /
+                <div class="text-sm text-slate-300 font-medium mb-1" data-i18n="devops_c2_title">Static-Analysis Gates
+                </div>
+                <div class="text-xs text-slate-500" data-i18n="devops_c2_body"><span
+                    class="text-slate-400">Axivion</span> for AUTOSAR / MISRA /
                   ISO 26262, <span class="text-slate-400">clang-tidy</span> for general hygiene. Fails the MR on any
                   critical violation.</div>
               </div>
               <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-4">
                 <div class="font-mono text-xs text-blue-500 mb-2">// tests</div>
                 <div class="text-sm text-slate-300 font-medium mb-1" data-i18n="devops_c3_title">Coverage Matrix</div>
-                <div class="text-xs text-slate-500" data-i18n="devops_c3_body"><span class="text-slate-400">Google Test</span> suites with <span
-                    class="text-slate-400">gcov</span> reports surfaced on the MR widget. Floor at 85% on
+                <div class="text-xs text-slate-500" data-i18n="devops_c3_body"><span class="text-slate-400">Google
+                    Test</span> suites with <span class="text-slate-400">gcov</span> reports surfaced on the MR widget.
+                  Floor at 85% on
                   safety-critical paths.</div>
               </div>
               <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-4">
                 <div class="font-mono text-xs text-blue-500 mb-2">// deploy</div>
                 <div class="text-sm text-slate-300 font-medium mb-1" data-i18n="devops_c4_title">Pages Preview</div>
-                <div class="text-xs text-slate-500" data-i18n="devops_c4_body">Branch-scoped <span class="text-slate-400">GitLab Pages</span>
+                <div class="text-xs text-slate-500" data-i18n="devops_c4_body">Branch-scoped <span
+                    class="text-slate-400">GitLab Pages</span>
                   environments for docs and dashboards per MR.</div>
               </div>
             </div>
@@ -975,7 +1068,8 @@
         <section id="contact" class="reveal">
 
           <div class="flex items-center gap-4 mb-10">
-            <span class="font-mono text-base text-blue-500 tracking-widest uppercase" data-i18n="section_contact">05 · Contact</span>
+            <span class="font-mono text-base text-blue-500 tracking-widest uppercase" data-i18n="section_contact">05 ·
+              Contact</span>
             <div class="flex-1 h-px bg-slate-800"></div>
           </div>
 
@@ -1028,7 +1122,8 @@ linkedin = <span class="text-slate-300">"linkedin.com/in/jacob-joseph-dev"</span
                 <a href="https://www.linkedin.com/in/jacob-joseph-dev" target="_blank" rel="noopener"
                   class="flex items-center justify-between gap-4 bg-slate-900/60 border border-slate-800 rounded-xl px-5 py-4 hover:border-slate-600 hover:bg-slate-800/40 transition-colors group">
                   <div>
-                    <div class="font-mono text-xs text-blue-500 mb-0.5" data-i18n="contact_linkedin_label">linkedin</div>
+                    <div class="font-mono text-xs text-blue-500 mb-0.5" data-i18n="contact_linkedin_label">linkedin
+                    </div>
                     <div class="text-sm text-slate-300 group-hover:text-slate-100 transition-colors">
                       /in/jacob-joseph-dev</div>
                   </div>
@@ -1054,9 +1149,12 @@ linkedin = <span class="text-slate-300">"linkedin.com/in/jacob-joseph-dev"</span
 
       <!-- Footer -->
       <footer class="border-t border-slate-800/60 mt-16">
-        <div class="max-w-4xl mx-auto px-6 lg:px-12 py-6 flex flex-wrap items-center justify-between gap-4" style="direction:ltr">
-          <span class="font-mono text-xs text-slate-700" data-i18n="footer_left" style="unicode-bidi:plaintext">// jacob.joseph — ADAS &amp; Embedded Systems · 2026</span>
-          <span class="font-mono text-xs text-slate-700" data-i18n="footer_right" style="unicode-bidi:plaintext">HTML · Tailwind CSS · Vanilla JS · GitLab Pages</span>
+        <div class="max-w-4xl mx-auto px-6 lg:px-12 py-6 flex flex-wrap items-center justify-between gap-4"
+          style="direction:ltr">
+          <span class="font-mono text-xs text-slate-700" data-i18n="footer_left" style="unicode-bidi:plaintext">//
+            jacob.joseph — ADAS &amp; Embedded Systems · 2026</span>
+          <span class="font-mono text-xs text-slate-700" data-i18n="footer_right" style="unicode-bidi:plaintext">HTML ·
+            Tailwind CSS · Vanilla JS · GitLab Pages</span>
         </div>
       </footer>
 
@@ -1065,457 +1163,457 @@ linkedin = <span class="text-slate-300">"linkedin.com/in/jacob-joseph-dev"</span
 
 
   <script>
-      (function () {
-        'use strict';
+    (function () {
+      'use strict';
 
-        /* ── Translations ── */
-        var T = {
-          ar: {
-            sidebar_name: 'يعقوب يوسف',
-            sidebar_role: 'مطوّر أنظمة مساعدة السائق المتقدمة',
-            hero_name_line1: 'يعقوب',
-            hero_name_line2: 'يوسف',
-            quick_links: '// روابط سريعة',
-            link_gitlab: 'غيت لاب',
-            link_linkedin: 'لينكد إن',
-            footer_left: '// يعقوب يوسف — أنظمة مساعدة السائق والأنظمة المدمجة · ٢٠٢٦',
-            footer_right: 'HTML · Tailwind CSS · JavaScript · صفحات غيت لاب',
-            status_badge: 'متاح_للعمل',
-            nav_heading: 'التنقل',
-            nav_profile: 'الملف الشخصي',
-            nav_stack: 'التقنيات',
-            nav_projects: 'المشاريع',
-            nav_experience: 'الخبرة',
-            nav_devops: 'تطوير وعمليات',
-            nav_contact: 'التواصل',
-            section_profile: '٠٠ · الملف الشخصي',
-            section_stack: '٠١ · التقنيات',
-            section_projects: '٠٢ · المشاريع',
-            section_experience: '٠٣ · الخبرة',
-            section_devops: '٠٤ · تطوير وعمليات',
-            section_contact: '٠٥ · التواصل',
-            contact_email_label: 'بريد إلكتروني',
-            contact_gitlab_label: 'غيت لاب',
-            contact_linkedin_label: 'لينكد إن',
-            contact_phone_label: 'رقم الهاتف',
-            hero_role: 'متخصص في أنظمة مساعدة السائق المتقدمة والأنظمة المدمجة',
-            hero_bio: 'يطوّر <span class="text-slate-200 font-medium">C++ للأنظمة الحرجة</span> لمنصات أنظمة مساعدة السائق الإنتاجية. سابقاً: VW&nbsp;PPE&nbsp;E³&nbsp;1.2 — دمج المستشعرات (كاميرا · رادار · خريطة). حالياً: أداة مراجعة الكود بالذكاء الاصطناعي.',
-            meta_location_label: 'الموقع',
-            meta_exp_label: 'الخبرة',
-            meta_exp_value: '٣ وظائف · ٦ سنوات',
-            meta_lang_label: 'اللغات',
-            meta_status_label: 'الحالة',
-            meta_status_value: 'متاح',
-            btn_projects: 'عرض المشاريع',
-            btn_contact: 'تواصل معي',
-            stack_languages: 'لغات البرمجة',
-            stack_automotive: 'السيارات / السلامة',
-            stack_testing: 'الاختبار / العمليات',
-            stack_build: 'البناء / البنية التحتية',
-            stack_tools: 'الأدوات والبيئة',
-            autonix_tag: '// دراسة حالة · embedded/cv',
-            autonix_subtitle: '— بيئة محاكاة لأنظمة مساعدة السائق',
-            autonix_desc: 'محاكاة للأنظمة الحرجة في مجال مساعدة السائق بـ <span class="text-slate-200 font-medium">C++20 / Qt&nbsp;6</span> — بُنيت كبيئة اختبار للتطوير <span class="text-slate-200 font-medium">بمساعدة الذكاء الاصطناعي</span> (Claude · Gemini). مركبة افتراضية قائمة على الفيزياء، أوضاع مثبت السرعة التكيفي، ذكاء اصطناعي للمركبات، وخط أنابيب كامل لتصفية الإدراك.',
-            autonix_b1: 'معمارية متعددة الطبقات (Core / Perception / UI كمكتبات ثابتة)؛ آلات حالة لتغيير المسار وإشارات المرور',
-            autonix_b2: 'بناءات Nix محكمة، مصفوفة GitLab CI/CD كاملة (بناء · اختبار · تغطية · تحليل ثابت)',
-            autonix_b3: 'نمط التصميم "الاستراتيجية" لتبديل أوضاع نظام مثبت السرعة التكيفي (اقتصادي / مريح / رياضي)',
-            metric_coverage: 'تغطية الاختبارات',
-            metric_suites: 'مجموعات GTest',
-            metric_libs: 'مكتبات ثابتة',
-            metric_builds: 'بناءات محكمة',
-            btn_replay: 'إعادة التشغيل',
-            commit1: 'feat(adas): مثبت السرعة التكيّفي — أوضاع اقتصادي / مريح / رياضي',
-            commit2: 'feat(perception): خط أنابيب دمج الكاميرا · الرادار · الخريطة',
-            commit3: 'test(safety): رفع تغطية GTest على المسارات الحرجة إلى 95%',
-            commit4: 'build(nix): Flake محكم لبناءات قابلة للتكرار متعددة المعماريات',
-            commit5: 'research(thesis): ذراع روبوتية بالرؤية المجسمة — حصاد الزيتون الآلي',
-            exp_meta: '٣ وظائف · ٦ سنوات',
-            role1_date: 'أبريل ٢٠٢٦ — حتى الآن',
-            role1_title: 'مطوّر برمجيات (دوام جزئي)',
-            role1_b1: 'بناء أداة مراجعة الكود بالذكاء الاصطناعي وكتابة اختبارات الأداء.',
-            role1_b2: 'توثيق وتعليق واجهات برمجة التطبيقات لتطبيقات إطار عمل YII2.',
-            role2_date: 'يناير ٢٠٢٢ — مايو ٢٠٢٥',
-            role2_title: 'مطوّر أنظمة مساعدة السائق',
-            role2_subtitle: '— خارجي لدى INTENTA GmbH',
-            role2_b1: 'تطوير وظائف أساسية لتتبع الكائنات ودمج المستشعرات المتعددة (كاميرا · رادار · خريطة) لمنصة VW PPE E³ 1.2.',
-            role2_b2: 'استخدام ADTF لتحليل سلوك المركبة، واستعادة ملفات .dat، وإصلاح الشذوذات السلوكية.',
-            role2_b3: 'كتابة اختبارات وحدة Google Test بتغطية 90–95% على المسارات الحرجة للسلامة.',
-            role2_b4: 'معالجة انتهاكات AUTOSAR وMISRA C وISO 26262 باستخدام التحليل الثابت عبر Axivion.',
-            role2_b5: 'تحليل وتحسين مسارات التنفيذ لتقليل زمن الاستجابة في الوحدات الحرجة.',
-            role3_date: 'يناير ٢٠٢٠ — ديسمبر ٢٠٢١',
-            role3_title: 'محاضر',
-            role3_subtitle: '— رؤية حاسوبية وروبوتيات',
-            role3_b1: 'تدريس الروبوتيات المتقدمة: علم الحركة ودرجات الحرية على عتاد Raspberry Pi.',
-            role3_b2: 'تدريس الرؤية الحاسوبية: OpenCV بلغة Python لمعالجة الصور وتقليل الضوضاء.',
-            devops_intro: '<span class="text-slate-200 font-medium">GitLab CI/CD</span> بالنسبة لي ليس مجرد أداة — بل معيار جودة أساسي. كل مشروع يُسلَّم مع بناء محكم، ومصفوفة اختبارات، وبوابات تحليل ثابت، ومعاينة Pages — مرتبطة بقواعد Merge Request حتى يرى المراجعون نتيجة خضراء قبل مراجعة الفروق.',
-            devops_c1_title: 'بناءات محكمة',
-            devops_c1_body: 'قابلة للتكرار عبر <span class="text-slate-400">Nix Flakes</span> — نفس المنتج على حاسوب المطوّر والـ Runner. لا مجال لـ "يعمل عندي".',
-            devops_c2_title: 'بوابات التحليل الثابت',
-            devops_c2_body: '<span class="text-slate-400">Axivion</span> لـ AUTOSAR / MISRA / ISO 26262، و<span class="text-slate-400">clang-tidy</span> لنظافة الكود العامة. يُوقف Merge Request عند أي انتهاك حرج.',
-            devops_c3_title: 'مصفوفة التغطية',
-            devops_c3_body: 'مجموعات <span class="text-slate-400">Google Test</span> مع تقارير <span class="text-slate-400">gcov</span> في واجهة MR. حد أدنى 85% على المسارات الحرجة.',
-            devops_c4_title: 'معاينة Pages',
-            devops_c4_body: 'بيئات <span class="text-slate-400">GitLab Pages</span> مخصصة لكل فرع — للوثائق ولوحات البيانات لكل Merge Request.',
-          },
-          en: {
-            sidebar_name: 'Jacob Joseph',
-            sidebar_role: 'ADAS &amp; Embedded Systems',
-            hero_name_line1: 'Jacob',
-            hero_name_line2: 'Joseph',
-            quick_links: '// quick links',
-            link_gitlab: 'GitLab',
-            link_linkedin: 'LinkedIn',
-            footer_left: '// jacob.joseph — ADAS &amp; Embedded Systems · 2026',
-            footer_right: 'HTML · Tailwind CSS · Vanilla JS · GitLab Pages',
-            status_badge: 'open_to_work',
-            nav_heading: 'Navigation',
-            nav_profile: 'Profile',
-            nav_stack: 'Core Stack',
-            nav_projects: 'Projects',
-            nav_experience: 'Experience',
-            nav_devops: 'DevOps',
-            nav_contact: 'Contact',
-            section_profile: '00 · Profile',
-            section_stack: '01 · Core Stack',
-            section_projects: '02 · Projects',
-            section_experience: '03 · Experience',
-            section_devops: '04 · DevOps',
-            section_contact: '05 · Contact',
-            contact_email_label: 'email',
-            contact_gitlab_label: 'gitlab',
-            contact_linkedin_label: 'linkedin',
-            contact_phone_label: 'phone',
-            hero_role: 'ADAS & Embedded Systems Specialist',
-            hero_bio: 'Builds <span class="text-slate-200 font-medium">safety-critical C++</span> for production ADAS stacks. Previous: VW&nbsp;PPE&nbsp;E³&nbsp;1.2 — sensor fusion (Cam · Radar · Map). Now: AI code-review tooling.',
-            meta_location_label: 'location',
-            meta_exp_label: 'experience',
-            meta_exp_value: '3 roles · 6 yrs',
-            meta_lang_label: 'languages',
-            meta_status_label: 'status',
-            meta_status_value: 'available',
-            btn_projects: 'View Projects',
-            btn_contact: 'Get in Touch',
-            stack_languages: 'Languages',
-            stack_automotive: 'Automotive / Safety',
-            stack_testing: 'Testing / Process',
-            stack_build: 'Build / Infra',
-            stack_tools: 'Tools & IDE',
-            autonix_tag: '// case_study · embedded/cv',
-            autonix_subtitle: '— ADAS simulation environment',
-            autonix_desc: 'Safety-critical ADAS simulation in <span class="text-slate-200 font-medium">C++20 / Qt&nbsp;6</span> — built as a test bed for <span class="text-slate-200 font-medium">AI-assisted development</span> (Claude · Gemini) with a spec-kit structure. Physics-based ego-vehicle, ACC modes, NPC AI, and a full perception filtering pipeline.',
-            autonix_b1: 'Layered architecture (Core / Perception / UI as static libs); state machines for lane change & traffic light',
-            autonix_b2: 'Hermetic Nix builds, full GitLab CI/CD matrix (build · test · coverage · static-analysis)',
-            autonix_b3: 'Strategy pattern for ACC mode switching (Eco / Comfort / Sport)',
-            metric_coverage: 'test coverage',
-            metric_suites: 'GTest suites',
-            metric_libs: 'static libs',
-            metric_builds: 'hermetic builds',
-            btn_replay: 'replay',
-            commit1: 'feat(adas): adaptive cruise control — Eco / Comfort / Sport modes',
-            commit2: 'feat(perception): camera · radar · map fusion pipeline',
-            commit3: 'test(safety): raise GTest coverage on critical paths to 95%',
-            commit4: 'build(nix): hermetic flake for cross-arch reproducible builds',
-            commit5: 'research(thesis): stereo-vision robotic arm — autonomous olive harvester',
-            exp_meta: '3 roles · 6 yrs',
-            role1_date: 'APR 2026 — PRESENT',
-            role1_title: 'Part-time Software Developer',
-            role1_b1: 'Built an AI code-reviewer tool and authored performance tests.',
-            role1_b2: 'Annotated and documented APIs for YII2 framework applications.',
-            role2_date: 'JAN 2022 — MAY 2025',
-            role2_title: 'ADAS Developer',
-            role2_subtitle: '— External for INTENTA GmbH',
-            role2_b1: 'Built core features for object tracking and multi-sensor fusion (Camera · Radar · Map) for the VW PPE E³ 1.2 platform.',
-            role2_b2: 'Used ADTF to analyse vehicle behaviour, replay .dat files, and fix behavioural anomalies.',
-            role2_b3: 'Wrote Google Test unit tests achieving 90–95% coverage on safety-critical paths.',
-            role2_b4: 'Resolved AUTOSAR, MISRA C, and ISO 26262 violations using Axivion static analysis.',
-            role2_b5: 'Profiled and optimised execution paths, reducing latency in safety-critical modules.',
-            role3_date: 'JAN 2020 — DEC 2021',
-            role3_title: 'Lecturer',
-            role3_subtitle: '— Computer Vision & Robotics',
-            role3_b1: 'Taught advanced robotics: kinematics and Degrees of Freedom on Raspberry Pi hardware.',
-            role3_b2: 'Taught Computer Vision: OpenCV in Python for image processing and noise reduction.',
-            devops_intro: 'I treat <span class="text-slate-200 font-medium">GitLab CI/CD</span> as a first-class deliverable. Every project ships with a hermetic build, a test matrix, static-analysis gates, and a Pages preview — wired to merge-request rules so reviewers see green before the diff.',
-            devops_c1_title: 'Hermetic Builds',
-            devops_c1_body: 'Reproducible via <span class="text-slate-400">Nix Flakes</span> — same artefact on a developer laptop and the runner. No "works on my machine".',
-            devops_c2_title: 'Static-Analysis Gates',
-            devops_c2_body: '<span class="text-slate-400">Axivion</span> for AUTOSAR / MISRA / ISO 26262, <span class="text-slate-400">clang-tidy</span> for general hygiene. Fails the MR on any critical violation.',
-            devops_c3_title: 'Coverage Matrix',
-            devops_c3_body: '<span class="text-slate-400">Google Test</span> suites with <span class="text-slate-400">gcov</span> reports surfaced on the MR widget. Floor at 85% on safety-critical paths.',
-            devops_c4_title: 'Pages Preview',
-            devops_c4_body: 'Branch-scoped <span class="text-slate-400">GitLab Pages</span> environments for docs and dashboards per MR.',
-          },
-          de: {
-            sidebar_name: 'Jacob Joseph',
-            sidebar_role: 'ADAS &amp; Eingebettete Systeme',
-            hero_name_line1: 'Jacob',
-            hero_name_line2: 'Joseph',
-            quick_links: '// Schnellzugriff',
-            link_gitlab: 'GitLab',
-            link_linkedin: 'LinkedIn',
-            footer_left: '// jacob.joseph — ADAS &amp; Eingebettete Systeme · 2026',
-            footer_right: 'HTML · Tailwind CSS · Vanilla JS · GitLab Pages',
-            status_badge: 'offen_für_stellen',
-            nav_heading: 'Navigation',
-            nav_profile: 'Profil',
-            nav_stack: 'Technologien',
-            nav_projects: 'Projekte',
-            nav_experience: 'Erfahrung',
-            nav_devops: 'DevOps',
-            nav_contact: 'Kontakt',
-            section_profile: '00 · Profil',
-            section_stack: '01 · Technologien',
-            section_projects: '02 · Projekte',
-            section_experience: '03 · Erfahrung',
-            section_devops: '04 · DevOps',
-            section_contact: '05 · Kontakt',
-            contact_email_label: 'E-Mail',
-            contact_gitlab_label: 'GitLab',
-            contact_linkedin_label: 'LinkedIn',
-            contact_phone_label: 'Telefon',
-            hero_role: 'ADAS- und Embedded-Systems-Spezialist',
-            hero_bio: 'Entwickelt <span class="text-slate-200 font-medium">sicherheitskritisches C++</span> für produktive ADAS-Systeme. Zuvor: VW&nbsp;PPE&nbsp;E³&nbsp;1.2 — Sensorfusion (Kamera · Radar · Karte). Aktuell: KI-gestütztes Code-Review-Tool.',
-            meta_location_label: 'Standort',
-            meta_exp_label: 'Erfahrung',
-            meta_exp_value: '3 Stellen · 6 Jahre',
-            meta_lang_label: 'Sprachen',
-            meta_status_label: 'Status',
-            meta_status_value: 'verfügbar',
-            btn_projects: 'Projekte ansehen',
-            btn_contact: 'Kontakt aufnehmen',
-            stack_languages: 'Sprachen',
-            stack_automotive: 'Automotive / Sicherheit',
-            stack_testing: 'Testing / Prozesse',
-            stack_build: 'Build / Infrastruktur',
-            stack_tools: 'Tools & IDE',
-            autonix_tag: '// Fallstudie · embedded/cv',
-            autonix_subtitle: '— ADAS-Simulationsumgebung',
-            autonix_desc: 'Sicherheitskritische ADAS-Simulation in <span class="text-slate-200 font-medium">C++20 / Qt&nbsp;6</span> — als Testumgebung für <span class="text-slate-200 font-medium">KI-gestützte Entwicklung</span> (Claude · Gemini) mit Spec-Kit-Struktur. Physikbasiertes Ego-Fahrzeug, ACC-Modi, NPC-KI und vollständige Wahrnehmungs-Filterpipeline.',
-            autonix_b1: 'Mehrschichtige Architektur (Core / Perception / UI als statische Libs); Zustandsautomaten für Spurwechsel &amp; Ampelsteuerung',
-            autonix_b2: 'Hermetische Nix-Builds, vollständige GitLab-CI/CD-Matrix (Build · Test · Coverage · Statische Analyse)',
-            autonix_b3: 'Strategy-Pattern für ACC-Moduswechsel (Eco / Comfort / Sport)',
-            metric_coverage: 'Testabdeckung',
-            metric_suites: 'GTest-Suiten',
-            metric_libs: 'statische Libs',
-            metric_builds: 'hermetische Builds',
-            btn_replay: 'Wiederholen',
-            commit1: 'feat(adas): Adaptiver Tempomat — Eco / Comfort / Sport-Modi',
-            commit2: 'feat(perception): Kamera · Radar · Karten-Fusionspipeline',
-            commit3: 'test(safety): GTest-Abdeckung auf kritischen Pfaden auf 95% erhöht',
-            commit4: 'build(nix): Hermetisches Flake für reproduzierbare Cross-Arch-Builds',
-            commit5: 'research(thesis): Stereo-Vision-Roboterarm — autonomer Olivenernteroboter',
-            exp_meta: '3 Stellen · 6 Jahre',
-            role1_date: 'APR 2026 — HEUTE',
-            role1_title: 'Softwareentwickler (Teilzeit)',
-            role1_b1: 'Entwicklung eines KI-gestützten Code-Review-Tools und Erstellung von Performance-Tests.',
-            role1_b2: 'Annotierung und Dokumentation von APIs für YII2-Framework-Anwendungen.',
-            role2_date: 'JAN 2022 — MAI 2025',
-            role2_title: 'ADAS-Entwickler',
-            role2_subtitle: '— Extern für INTENTA GmbH',
-            role2_b1: 'Entwicklung von Kernfunktionen für Objektverfolgung und Multi-Sensor-Fusion (Kamera · Radar · Karte) für die VW PPE E³ 1.2-Plattform.',
-            role2_b2: 'Nutzung von ADTF zur Analyse des Fahrzeugverhaltens, Wiedergabe von .dat-Dateien und Behebung von Verhaltensanomalien.',
-            role2_b3: 'Erstellung von Google-Test-Unit-Tests mit 90–95% Abdeckung auf sicherheitskritischen Pfaden.',
-            role2_b4: 'Behebung von AUTOSAR-, MISRA-C- und ISO-26262-Verstößen mittels statischer Analyse mit Axivion.',
-            role2_b5: 'Profiling und Optimierung von Ausführungspfaden zur Latenzsenkung in sicherheitskritischen Modulen.',
-            role3_date: 'JAN 2020 — DEZ 2021',
-            role3_title: 'Dozent',
-            role3_subtitle: '— Computer Vision & Robotik',
-            role3_b1: 'Lehre fortgeschrittener Robotik: Kinematik und Freiheitsgrade auf Raspberry-Pi-Hardware.',
-            role3_b2: 'Unterricht in Computer Vision: OpenCV in Python für Bildverarbeitung und Rauschreduzierung.',
-            devops_intro: '<span class="text-slate-200 font-medium">GitLab CI/CD</span> ist für mich ein erstrangiges Qualitätsmerkmal. Jedes Projekt wird mit einem hermetischen Build, einer Testmatrix, statischen Analyse-Gates und einer Pages-Vorschau ausgeliefert — verknüpft mit Merge-Request-Regeln, damit Reviewer ein grünes Ergebnis sehen, bevor sie den Diff prüfen.',
-            devops_c1_title: 'Hermetische Builds',
-            devops_c1_body: 'Reproduzierbar mittels <span class="text-slate-400">Nix Flakes</span> — dasselbe Artefakt auf dem Entwickler-Laptop und dem Runner. Kein „läuft bei mir".',
-            devops_c2_title: 'Statische-Analyse-Gates',
-            devops_c2_body: '<span class="text-slate-400">Axivion</span> für AUTOSAR / MISRA / ISO 26262, <span class="text-slate-400">clang-tidy</span> für allgemeine Code-Hygiene. Bricht den MR bei kritischen Verstößen ab.',
-            devops_c3_title: 'Coverage-Matrix',
-            devops_c3_body: '<span class="text-slate-400">Google-Test</span>-Suiten mit <span class="text-slate-400">gcov</span>-Berichten im MR-Widget. Mindestens 85% auf sicherheitskritischen Pfaden.',
-            devops_c4_title: 'Pages-Vorschau',
-            devops_c4_body: 'Branch-spezifische <span class="text-slate-400">GitLab-Pages</span>-Umgebungen für Docs und Dashboards pro MR.',
+      /* ── Translations ── */
+      var T = {
+        ar: {
+          sidebar_name: 'يعقوب يوسف',
+          sidebar_role: 'متخصص في أنظمة مساعدة السائق والأنظمة المدمجة',
+          hero_name_line1: 'يعقوب',
+          hero_name_line2: 'يوسف',
+          quick_links: '// روابط سريعة',
+          link_gitlab: 'GitLab',
+          link_linkedin: 'LinkedIn',
+          footer_left: '// يعقوب يوسف — أنظمة مساعدة السائق والأنظمة المدمجة · ٢٠٢٦',
+          footer_right: 'HTML · Tailwind CSS · JavaScript · GitLab Pages',
+          status_badge: 'متاح_للعمل',
+          nav_heading: 'التنقل',
+          nav_profile: 'الملف الشخصي',
+          nav_stack: 'التقنيات',
+          nav_projects: 'المشاريع',
+          nav_experience: 'الخبرة',
+          nav_devops: 'DevOps',
+          nav_contact: 'التواصل',
+          section_profile: '٠٠ · الملف الشخصي',
+          section_stack: '٠١ · التقنيات الأساسية',
+          section_projects: '٠٢ · المشاريع',
+          section_experience: '٠٣ · الخبرة المهنية',
+          section_devops: '٠٤ · DevOps',
+          section_contact: '٠٥ · التواصل',
+          contact_email_label: 'البريد الإلكتروني',
+          contact_gitlab_label: 'GitLab',
+          contact_linkedin_label: 'LinkedIn',
+          contact_phone_label: 'رقم الهاتف',
+          hero_role: 'متخصص في أنظمة مساعدة السائق المتقدمة والأنظمة المدمجة',
+          hero_bio: 'خبرة واسعة في <span class="text-slate-200 font-medium">C++ للأنظمة الحرجة</span> ضمن منصات أنظمة مساعدة السائق الإنتاجية. سابقاً: VW&nbsp;PPE&nbsp;E³&nbsp;1.2 — دمج المستشعرات (كاميرا · رادار · خريطة). حالياً: أداة مراجعة الكود بالذكاء الاصطناعي.',
+          meta_location_label: 'الموقع',
+          meta_exp_label: 'الخبرة',
+          meta_exp_value: '٣ وظائف · ٦ سنوات',
+          meta_lang_label: 'اللغات',
+          meta_status_label: 'الحالة',
+          meta_status_value: 'متاح',
+          btn_projects: 'استعراض المشاريع',
+          btn_contact: 'التواصل المباشر',
+          stack_languages: 'لغات البرمجة',
+          stack_automotive: 'قطاع السيارات / السلامة',
+          stack_testing: 'الاختبار والجودة',
+          stack_build: 'البناء والبنية التحتية',
+          stack_tools: 'الأدوات وبيئة التطوير',
+          autonix_tag: '// دراسة حالة · embedded/cv',
+          autonix_subtitle: '— بيئة محاكاة لأنظمة مساعدة السائق',
+          autonix_desc: 'بيئة محاكاة للأنظمة الحرجة في مجال مساعدة السائق، مبنية بـ <span class="text-slate-200 font-medium">C++20 / Qt&nbsp;6</span>، وصُمِّمت كمنصة اختبار للتطوير <span class="text-slate-200 font-medium">بمساعدة الذكاء الاصطناعي</span> (Claude · Gemini). تشمل مركبة افتراضية قائمة على الفيزياء، وأوضاعاً لمثبت السرعة التكيفي، وذكاءً اصطناعياً للمركبات المحيطة، وخط أنابيب متكامل لتصفية بيانات الاستشعار.',
+          autonix_b1: 'معمارية متعددة الطبقات (Core / Perception / UI كمكتبات ثابتة)؛ آلات حالة لإدارة تغيير المسار وإشارات المرور',
+          autonix_b2: 'بناءات Nix محكمة، ومصفوفة GitLab CI/CD متكاملة (بناء · اختبار · تغطية · تحليل ثابت)',
+          autonix_b3: 'نمط التصميم "الاستراتيجية" لإدارة أوضاع مثبت السرعة التكيفي (اقتصادي / مريح / رياضي)',
+          metric_coverage: 'تغطية الاختبارات',
+          metric_suites: 'مجموعات GTest',
+          metric_libs: 'مكتبات ثابتة',
+          metric_builds: 'بناءات محكمة',
+          btn_replay: 'إعادة التشغيل',
+          commit1: 'feat(adas): مثبت السرعة التكيّفي — أوضاع اقتصادي / مريح / رياضي',
+          commit2: 'feat(perception): خط أنابيب دمج الكاميرا · الرادار · الخريطة',
+          commit3: 'test(safety): رفع تغطية GTest على المسارات الحرجة إلى 95%',
+          commit4: 'build(nix): Flake محكم لبناءات قابلة للتكرار متعددة المعماريات',
+          commit5: 'research(thesis): ذراع روبوتية بالرؤية المجسمة — حصاد الزيتون الآلي',
+          exp_meta: '٣ وظائف · ٦ سنوات',
+          role1_date: 'أبريل ٢٠٢٦ — حتى الآن',
+          role1_title: 'مطوّر برمجيات (دوام جزئي)',
+          role1_b1: 'إنجاز أداة لمراجعة الكود بالذكاء الاصطناعي، مع صياغة اختبارات الأداء الشاملة.',
+          role1_b2: 'توثيق واجهات برمجة التطبيقات وإضافة التعليقات الوصفية لتطبيقات إطار عمل YII2.',
+          role2_date: 'يناير ٢٠٢٢ — مايو ٢٠٢٥',
+          role2_title: 'مطوّر أنظمة مساعدة السائق',
+          role2_subtitle: '— مستشار خارجي لدى INTENTA GmbH',
+          role2_b1: 'إسهام في تطوير الوظائف الجوهرية لتتبع الكائنات ودمج المستشعرات المتعددة (كاميرا · رادار · خريطة) لمنصة VW PPE E³ 1.2.',
+          role2_b2: 'الاستفادة من ADTF في تحليل سلوك المركبة، واستعادة ملفات .dat، ومعالجة الشذوذات السلوكية.',
+          role2_b3: 'إعداد اختبارات وحدة Google Test بمعدل تغطية 90–95% على مسارات السلامة الحرجة.',
+          role2_b4: 'معالجة انتهاكات AUTOSAR وMISRA C وISO 26262 عبر التحليل الثابت باستخدام Axivion.',
+          role2_b5: 'تحليل مسارات التنفيذ وتحسينها للحدّ من زمن الاستجابة في الوحدات ذات الأولوية العالية.',
+          role3_date: 'يناير ٢٠٢٠ — ديسمبر ٢٠٢١',
+          role3_title: 'محاضر أكاديمي',
+          role3_subtitle: '— الرؤية الحاسوبية والروبوتيات',
+          role3_b1: 'تدريس مادة الروبوتيات المتقدمة: علم الحركة ودرجات الحرية على عتاد Raspberry Pi.',
+          role3_b2: 'تدريس الرؤية الحاسوبية: OpenCV بلغة Python لمعالجة الصور وتقليل الضوضاء.',
+          devops_intro: '<span class="text-slate-200 font-medium">GitLab CI/CD</span> في نظري ليس مجرد أداة، بل معيار جودة لا غنى عنه. كل مشروع يُسلَّم مكتملاً ببناء محكم، ومصفوفة اختبارات، وبوابات تحليل ثابت، ومعاينة عبر Pages — مرتبطةً بقواعد Merge Request لتمكين المراجعين من رؤية النتائج الخضراء قبل الاطلاع على الفروقات.',
+          devops_c1_title: 'البناءات المحكمة',
+          devops_c1_body: 'نتائج قابلة للتكرار عبر <span class="text-slate-400">Nix Flakes</span>، بحيث يكون الناتج متطابقاً على حاسوب المطوّر وخادم التشغيل، دون أي استثناءات بيئية.',
+          devops_c2_title: 'بوابات التحليل الثابت',
+          devops_c2_body: '<span class="text-slate-400">Axivion</span> لمعايير AUTOSAR / MISRA / ISO 26262، و<span class="text-slate-400">clang-tidy</span> لضمان نظافة الكود. أي انتهاك حرج يؤدي تلقائياً إلى وقف طلب الدمج.',
+          devops_c3_title: 'مصفوفة تغطية الاختبارات',
+          devops_c3_body: 'مجموعات <span class="text-slate-400">Google Test</span> مع تقارير <span class="text-slate-400">gcov</span> معروضة في واجهة طلب الدمج، مع حد أدنى 85% على المسارات الحرجة.',
+          devops_c4_title: 'معاينة GitLab Pages',
+          devops_c4_body: 'بيئات <span class="text-slate-400">GitLab Pages</span> مخصصة لكل فرع، لعرض الوثائق ولوحات البيانات لكل طلب دمج على حدة.',
+        },
+        en: {
+          sidebar_name: 'Jacob Joseph',
+          sidebar_role: 'ADAS &amp; Embedded Systems',
+          hero_name_line1: 'Jacob',
+          hero_name_line2: 'Joseph',
+          quick_links: '// quick links',
+          link_gitlab: 'GitLab',
+          link_linkedin: 'LinkedIn',
+          footer_left: '// jacob.joseph — ADAS &amp; Embedded Systems · 2026',
+          footer_right: 'HTML · Tailwind CSS · Vanilla JS · GitLab Pages',
+          status_badge: 'open_to_work',
+          nav_heading: 'Navigation',
+          nav_profile: 'Profile',
+          nav_stack: 'Core Stack',
+          nav_projects: 'Projects',
+          nav_experience: 'Experience',
+          nav_devops: 'DevOps',
+          nav_contact: 'Contact',
+          section_profile: '00 · Profile',
+          section_stack: '01 · Core Stack',
+          section_projects: '02 · Projects',
+          section_experience: '03 · Experience',
+          section_devops: '04 · DevOps',
+          section_contact: '05 · Contact',
+          contact_email_label: 'email',
+          contact_gitlab_label: 'gitlab',
+          contact_linkedin_label: 'linkedin',
+          contact_phone_label: 'phone',
+          hero_role: 'ADAS & Embedded Systems Specialist',
+          hero_bio: 'Builds <span class="text-slate-200 font-medium">safety-critical C++</span> for production ADAS stacks. Previous: VW&nbsp;PPE&nbsp;E³&nbsp;1.2 — sensor fusion (Cam · Radar · Map). Now: AI code-review tooling.',
+          meta_location_label: 'location',
+          meta_exp_label: 'experience',
+          meta_exp_value: '3 roles · 6 yrs',
+          meta_lang_label: 'languages',
+          meta_status_label: 'status',
+          meta_status_value: 'available',
+          btn_projects: 'View Projects',
+          btn_contact: 'Get in Touch',
+          stack_languages: 'Languages',
+          stack_automotive: 'Automotive / Safety',
+          stack_testing: 'Testing / Process',
+          stack_build: 'Build / Infra',
+          stack_tools: 'Tools & IDE',
+          autonix_tag: '// case_study · embedded/cv',
+          autonix_subtitle: '— ADAS simulation environment',
+          autonix_desc: 'Safety-critical ADAS simulation in <span class="text-slate-200 font-medium">C++20 / Qt&nbsp;6</span> — built as a test bed for <span class="text-slate-200 font-medium">AI-assisted development</span> (Claude · Gemini) with a spec-kit structure. Physics-based ego-vehicle, ACC modes, NPC AI, and a full perception filtering pipeline.',
+          autonix_b1: 'Layered architecture (Core / Perception / UI as static libs); state machines for lane change & traffic light',
+          autonix_b2: 'Hermetic Nix builds, full GitLab CI/CD matrix (build · test · coverage · static-analysis)',
+          autonix_b3: 'Strategy pattern for ACC mode switching (Eco / Comfort / Sport)',
+          metric_coverage: 'test coverage',
+          metric_suites: 'GTest suites',
+          metric_libs: 'static libs',
+          metric_builds: 'hermetic builds',
+          btn_replay: 'replay',
+          commit1: 'feat(adas): adaptive cruise control — Eco / Comfort / Sport modes',
+          commit2: 'feat(perception): camera · radar · map fusion pipeline',
+          commit3: 'test(safety): raise GTest coverage on critical paths to 95%',
+          commit4: 'build(nix): hermetic flake for cross-arch reproducible builds',
+          commit5: 'research(thesis): stereo-vision robotic arm — autonomous olive harvester',
+          exp_meta: '3 roles · 6 yrs',
+          role1_date: 'APR 2026 — PRESENT',
+          role1_title: 'Part-time Software Developer',
+          role1_b1: 'Built an AI code-reviewer tool and authored performance tests.',
+          role1_b2: 'Annotated and documented APIs for YII2 framework applications.',
+          role2_date: 'JAN 2022 — MAY 2025',
+          role2_title: 'ADAS Developer',
+          role2_subtitle: '— External for INTENTA GmbH',
+          role2_b1: 'Built core features for object tracking and multi-sensor fusion (Camera · Radar · Map) for the VW PPE E³ 1.2 platform.',
+          role2_b2: 'Used ADTF to analyse vehicle behaviour, replay .dat files, and fix behavioural anomalies.',
+          role2_b3: 'Wrote Google Test unit tests achieving 90–95% coverage on safety-critical paths.',
+          role2_b4: 'Resolved AUTOSAR, MISRA C, and ISO 26262 violations using Axivion static analysis.',
+          role2_b5: 'Profiled and optimised execution paths, reducing latency in safety-critical modules.',
+          role3_date: 'JAN 2020 — DEC 2021',
+          role3_title: 'Lecturer',
+          role3_subtitle: '— Computer Vision & Robotics',
+          role3_b1: 'Taught advanced robotics: kinematics and Degrees of Freedom on Raspberry Pi hardware.',
+          role3_b2: 'Taught Computer Vision: OpenCV in Python for image processing and noise reduction.',
+          devops_intro: 'I treat <span class="text-slate-200 font-medium">GitLab CI/CD</span> as a first-class deliverable. Every project ships with a hermetic build, a test matrix, static-analysis gates, and a Pages preview — wired to merge-request rules so reviewers see green before the diff.',
+          devops_c1_title: 'Hermetic Builds',
+          devops_c1_body: 'Reproducible via <span class="text-slate-400">Nix Flakes</span> — same artefact on a developer laptop and the runner. No "works on my machine".',
+          devops_c2_title: 'Static-Analysis Gates',
+          devops_c2_body: '<span class="text-slate-400">Axivion</span> for AUTOSAR / MISRA / ISO 26262, <span class="text-slate-400">clang-tidy</span> for general hygiene. Fails the MR on any critical violation.',
+          devops_c3_title: 'Coverage Matrix',
+          devops_c3_body: '<span class="text-slate-400">Google Test</span> suites with <span class="text-slate-400">gcov</span> reports surfaced on the MR widget. Floor at 85% on safety-critical paths.',
+          devops_c4_title: 'Pages Preview',
+          devops_c4_body: 'Branch-scoped <span class="text-slate-400">GitLab Pages</span> environments for docs and dashboards per MR.',
+        },
+        de: {
+          sidebar_name: 'Jacob Joseph',
+          sidebar_role: 'ADAS &amp; Eingebettete Systeme',
+          hero_name_line1: 'Jacob',
+          hero_name_line2: 'Joseph',
+          quick_links: '// Schnellzugriff',
+          link_gitlab: 'GitLab',
+          link_linkedin: 'LinkedIn',
+          footer_left: '// jacob.joseph — ADAS &amp; Eingebettete Systeme · 2026',
+          footer_right: 'HTML · Tailwind CSS · Vanilla JS · GitLab Pages',
+          status_badge: 'offen_für_stellen',
+          nav_heading: 'Navigation',
+          nav_profile: 'Profil',
+          nav_stack: 'Technologien',
+          nav_projects: 'Projekte',
+          nav_experience: 'Erfahrung',
+          nav_devops: 'DevOps',
+          nav_contact: 'Kontakt',
+          section_profile: '00 · Profil',
+          section_stack: '01 · Technologien',
+          section_projects: '02 · Projekte',
+          section_experience: '03 · Erfahrung',
+          section_devops: '04 · DevOps',
+          section_contact: '05 · Kontakt',
+          contact_email_label: 'E-Mail',
+          contact_gitlab_label: 'GitLab',
+          contact_linkedin_label: 'LinkedIn',
+          contact_phone_label: 'Telefon',
+          hero_role: 'ADAS- und Embedded-Systems-Spezialist',
+          hero_bio: 'Entwickelt <span class="text-slate-200 font-medium">sicherheitskritisches C++</span> für produktive ADAS-Systeme. Zuvor: VW&nbsp;PPE&nbsp;E³&nbsp;1.2 — Sensorfusion (Kamera · Radar · Karte). Aktuell: KI-gestütztes Code-Review-Tool.',
+          meta_location_label: 'Standort',
+          meta_exp_label: 'Erfahrung',
+          meta_exp_value: '3 Stellen · 6 Jahre',
+          meta_lang_label: 'Sprachen',
+          meta_status_label: 'Status',
+          meta_status_value: 'verfügbar',
+          btn_projects: 'Projekte ansehen',
+          btn_contact: 'Kontakt aufnehmen',
+          stack_languages: 'Sprachen',
+          stack_automotive: 'Automotive / Sicherheit',
+          stack_testing: 'Testing / Prozesse',
+          stack_build: 'Build / Infrastruktur',
+          stack_tools: 'Tools & IDE',
+          autonix_tag: '// Fallstudie · embedded/cv',
+          autonix_subtitle: '— ADAS-Simulationsumgebung',
+          autonix_desc: 'Sicherheitskritische ADAS-Simulation in <span class="text-slate-200 font-medium">C++20 / Qt&nbsp;6</span> — als Testumgebung für <span class="text-slate-200 font-medium">KI-gestützte Entwicklung</span> (Claude · Gemini) mit Spec-Kit-Struktur. Physikbasiertes Ego-Fahrzeug, ACC-Modi, NPC-KI und vollständige Wahrnehmungs-Filterpipeline.',
+          autonix_b1: 'Mehrschichtige Architektur (Core / Perception / UI als statische Libs); Zustandsautomaten für Spurwechsel &amp; Ampelsteuerung',
+          autonix_b2: 'Hermetische Nix-Builds, vollständige GitLab-CI/CD-Matrix (Build · Test · Coverage · Statische Analyse)',
+          autonix_b3: 'Strategy-Pattern für ACC-Moduswechsel (Eco / Comfort / Sport)',
+          metric_coverage: 'Testabdeckung',
+          metric_suites: 'GTest-Suiten',
+          metric_libs: 'statische Libs',
+          metric_builds: 'hermetische Builds',
+          btn_replay: 'Wiederholen',
+          commit1: 'feat(adas): Adaptiver Tempomat — Eco / Comfort / Sport-Modi',
+          commit2: 'feat(perception): Kamera · Radar · Karten-Fusionspipeline',
+          commit3: 'test(safety): GTest-Abdeckung auf kritischen Pfaden auf 95% erhöht',
+          commit4: 'build(nix): Hermetisches Flake für reproduzierbare Cross-Arch-Builds',
+          commit5: 'research(thesis): Stereo-Vision-Roboterarm — autonomer Olivenernteroboter',
+          exp_meta: '3 Stellen · 6 Jahre',
+          role1_date: 'APR 2026 — HEUTE',
+          role1_title: 'Softwareentwickler (Teilzeit)',
+          role1_b1: 'Entwicklung eines KI-gestützten Code-Review-Tools und Erstellung von Performance-Tests.',
+          role1_b2: 'Annotierung und Dokumentation von APIs für YII2-Framework-Anwendungen.',
+          role2_date: 'JAN 2022 — MAI 2025',
+          role2_title: 'ADAS-Entwickler',
+          role2_subtitle: '— Extern für INTENTA GmbH',
+          role2_b1: 'Entwicklung von Kernfunktionen für Objektverfolgung und Multi-Sensor-Fusion (Kamera · Radar · Karte) für die VW PPE E³ 1.2-Plattform.',
+          role2_b2: 'Nutzung von ADTF zur Analyse des Fahrzeugverhaltens, Wiedergabe von .dat-Dateien und Behebung von Verhaltensanomalien.',
+          role2_b3: 'Erstellung von Google-Test-Unit-Tests mit 90–95% Abdeckung auf sicherheitskritischen Pfaden.',
+          role2_b4: 'Behebung von AUTOSAR-, MISRA-C- und ISO-26262-Verstößen mittels statischer Analyse mit Axivion.',
+          role2_b5: 'Profiling und Optimierung von Ausführungspfaden zur Latenzsenkung in sicherheitskritischen Modulen.',
+          role3_date: 'JAN 2020 — DEZ 2021',
+          role3_title: 'Dozent',
+          role3_subtitle: '— Computer Vision & Robotik',
+          role3_b1: 'Lehre fortgeschrittener Robotik: Kinematik und Freiheitsgrade auf Raspberry-Pi-Hardware.',
+          role3_b2: 'Unterricht in Computer Vision: OpenCV in Python für Bildverarbeitung und Rauschreduzierung.',
+          devops_intro: '<span class="text-slate-200 font-medium">GitLab CI/CD</span> ist für mich ein erstrangiges Qualitätsmerkmal. Jedes Projekt wird mit einem hermetischen Build, einer Testmatrix, statischen Analyse-Gates und einer Pages-Vorschau ausgeliefert — verknüpft mit Merge-Request-Regeln, damit Reviewer ein grünes Ergebnis sehen, bevor sie den Diff prüfen.',
+          devops_c1_title: 'Hermetische Builds',
+          devops_c1_body: 'Reproduzierbar mittels <span class="text-slate-400">Nix Flakes</span> — dasselbe Artefakt auf dem Entwickler-Laptop und dem Runner. Kein „läuft bei mir".',
+          devops_c2_title: 'Statische-Analyse-Gates',
+          devops_c2_body: '<span class="text-slate-400">Axivion</span> für AUTOSAR / MISRA / ISO 26262, <span class="text-slate-400">clang-tidy</span> für allgemeine Code-Hygiene. Bricht den MR bei kritischen Verstößen ab.',
+          devops_c3_title: 'Coverage-Matrix',
+          devops_c3_body: '<span class="text-slate-400">Google-Test</span>-Suiten mit <span class="text-slate-400">gcov</span>-Berichten im MR-Widget. Mindestens 85% auf sicherheitskritischen Pfaden.',
+          devops_c4_title: 'Pages-Vorschau',
+          devops_c4_body: 'Branch-spezifische <span class="text-slate-400">GitLab-Pages</span>-Umgebungen für Docs und Dashboards pro MR.',
+        }
+      };
+
+      var currentLang = 'en';
+
+      function applyLang(lang) {
+        currentLang = lang;
+        var dict = T[lang];
+        var isRTL = lang === 'ar';
+
+        /* Direction + lang attribute */
+        document.documentElement.lang = lang;
+        document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+
+        /* Arabic font on body */
+        document.body.style.fontFamily = isRTL
+          ? "'Noto Sans Arabic', 'Inter', sans-serif"
+          : '';
+
+        /* Sidebar: swap side for RTL */
+        var sb = document.getElementById('sidebar');
+        if (sb) {
+          if (isRTL) {
+            sb.style.left = 'auto';
+            sb.style.right = '0';
+            sb.style.borderRight = 'none';
+            sb.style.borderLeft = '1px solid rgba(30,41,59,0.6)';
+          } else {
+            sb.style.left = '';
+            sb.style.right = '';
+            sb.style.borderRight = '';
+            sb.style.borderLeft = '';
           }
-        };
+        }
 
-        var currentLang = 'en';
+        /* Main content: mirror margin for RTL */
+        var mainEl = document.querySelector('main');
+        if (mainEl) {
+          mainEl.style.marginLeft = isRTL ? '0' : '';
+          mainEl.style.marginRight = isRTL ? '16rem' : '';
+        }
 
-        function applyLang(lang) {
-          currentLang = lang;
-          var dict = T[lang];
-          var isRTL = lang === 'ar';
+        /* Update all data-i18n elements */
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n');
+          if (dict[key] !== undefined) el.innerHTML = dict[key];
+        });
 
-          /* Direction + lang attribute */
-          document.documentElement.lang = lang;
-          document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+        /* Sync all pill widgets */
+        document.querySelectorAll('.lang-pills').forEach(function (widget) {
+          widget.querySelectorAll('.lang-pill').forEach(function (btn) {
+            var isActive = btn.getAttribute('data-lang') === lang;
+            btn.classList.toggle('is-active', isActive);
+            btn.classList.toggle('is-inactive', !isActive);
+            btn.setAttribute('aria-pressed', String(isActive));
+          });
+        });
+      }
 
-          /* Arabic font on body */
-          document.body.style.fontFamily = isRTL
-            ? "'Noto Sans Arabic', 'Inter', sans-serif"
-            : '';
+      /* Wire up all pill buttons across all widgets */
+      document.querySelectorAll('.lang-pill').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          applyLang(btn.getAttribute('data-lang'));
+        });
+      });
 
-          /* Sidebar: swap side for RTL */
-          var sb = document.getElementById('sidebar');
-          if (sb) {
-            if (isRTL) {
-              sb.style.left   = 'auto';
-              sb.style.right  = '0';
-              sb.style.borderRight = 'none';
-              sb.style.borderLeft  = '1px solid rgba(30,41,59,0.6)';
-            } else {
-              sb.style.left   = '';
-              sb.style.right  = '';
-              sb.style.borderRight = '';
-              sb.style.borderLeft  = '';
+      /* ── Mobile sidebar toggle ── */
+      var btn = document.getElementById('mob-menu-btn');
+      var sidebar = document.getElementById('sidebar');
+      var overlay = document.getElementById('sidebar-overlay');
+
+      function openSidebar() {
+        sidebar.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeSidebar() {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      if (btn) btn.addEventListener('click', openSidebar);
+      if (overlay) overlay.addEventListener('click', closeSidebar);
+
+      /* Close sidebar when a nav link is clicked on mobile */
+      sidebar.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (window.innerWidth < 1024) closeSidebar();
+        });
+      });
+
+      /* ── Scroll reveal ── */
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
             }
-          }
-
-          /* Main content: mirror margin for RTL */
-          var mainEl = document.querySelector('main');
-          if (mainEl) {
-            mainEl.style.marginLeft  = isRTL ? '0' : '';
-            mainEl.style.marginRight = isRTL ? '16rem' : '';
-          }
-
-          /* Update all data-i18n elements */
-          document.querySelectorAll('[data-i18n]').forEach(function (el) {
-            var key = el.getAttribute('data-i18n');
-            if (dict[key] !== undefined) el.innerHTML = dict[key];
           });
+        }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
 
-          /* Sync all pill widgets */
-          document.querySelectorAll('.lang-pills').forEach(function (widget) {
-            widget.querySelectorAll('.lang-pill').forEach(function (btn) {
-              var isActive = btn.getAttribute('data-lang') === lang;
-              btn.classList.toggle('is-active', isActive);
-              btn.classList.toggle('is-inactive', !isActive);
-              btn.setAttribute('aria-pressed', String(isActive));
-            });
-          });
-        }
-
-        /* Wire up all pill buttons across all widgets */
-        document.querySelectorAll('.lang-pill').forEach(function (btn) {
-          btn.addEventListener('click', function () {
-            applyLang(btn.getAttribute('data-lang'));
-          });
+        document.querySelectorAll('.reveal').forEach(function (el) {
+          io.observe(el);
         });
-
-        /* ── Mobile sidebar toggle ── */
-        var btn = document.getElementById('mob-menu-btn');
-        var sidebar = document.getElementById('sidebar');
-        var overlay = document.getElementById('sidebar-overlay');
-
-        function openSidebar() {
-          sidebar.classList.remove('-translate-x-full');
-          overlay.classList.remove('hidden');
-          document.body.style.overflow = 'hidden';
-        }
-        function closeSidebar() {
-          sidebar.classList.add('-translate-x-full');
-          overlay.classList.add('hidden');
-          document.body.style.overflow = '';
-        }
-
-        if (btn) btn.addEventListener('click', openSidebar);
-        if (overlay) overlay.addEventListener('click', closeSidebar);
-
-        /* Close sidebar when a nav link is clicked on mobile */
-        sidebar.querySelectorAll('a[href^="#"]').forEach(function (a) {
-          a.addEventListener('click', function () {
-            if (window.innerWidth < 1024) closeSidebar();
-          });
+      } else {
+        document.querySelectorAll('.reveal').forEach(function (el) {
+          el.classList.add('is-visible');
         });
+      }
 
-        /* ── Scroll reveal ── */
-        if ('IntersectionObserver' in window) {
-          var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) {
-                e.target.classList.add('is-visible');
-                io.unobserve(e.target);
-              }
-            });
-          }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+      /* ── Active nav link on scroll ── */
+      var navLinks = document.querySelectorAll('.nav-link');
+      var sectionIds = ['profile', 'stack', 'projects', 'experience', 'devops', 'contact'];
 
-          document.querySelectorAll('.reveal').forEach(function (el) {
-            io.observe(el);
-          });
-        } else {
-          document.querySelectorAll('.reveal').forEach(function (el) {
-            el.classList.add('is-visible');
-          });
-        }
-
-        /* ── Active nav link on scroll ── */
-        var navLinks = document.querySelectorAll('.nav-link');
-        var sectionIds = ['profile', 'stack', 'projects', 'experience', 'devops', 'contact'];
-
-        function syncNav() {
-          /* If within 2px of the page bottom, always activate the last section */
-          var atBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 2;
-          if (atBottom) {
-            var lastId = sectionIds[sectionIds.length - 1];
-            navLinks.forEach(function (a) {
-              a.classList.toggle('nav-link--active', a.getAttribute('href') === '#' + lastId);
-            });
-            return;
-          }
-          var y = window.scrollY + 120;
-          var activeId = sectionIds[0];
-          sectionIds.forEach(function (id) {
-            var el = document.getElementById(id);
-            if (el && el.offsetTop <= y) activeId = id;
-          });
+      function syncNav() {
+        /* If within 2px of the page bottom, always activate the last section */
+        var atBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 2;
+        if (atBottom) {
+          var lastId = sectionIds[sectionIds.length - 1];
           navLinks.forEach(function (a) {
-            var href = a.getAttribute('href');
-            a.classList.toggle('nav-link--active', href === '#' + activeId);
+            a.classList.toggle('nav-link--active', a.getAttribute('href') === '#' + lastId);
           });
+          return;
         }
-        window.addEventListener('scroll', syncNav, { passive: true });
-        syncNav();
-
-        /* ── Smooth scroll ── */
-        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-          a.addEventListener('click', function (e) {
-            var id = a.getAttribute('href');
-            if (id.length < 2) return;
-            var t = document.querySelector(id);
-            if (!t) return;
-            e.preventDefault();
-            var offset = window.innerWidth >= 1024 ? 48 : 60;
-            window.scrollTo({ top: t.offsetTop - offset, behavior: 'smooth' });
-          });
+        var y = window.scrollY + 120;
+        var activeId = sectionIds[0];
+        sectionIds.forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el && el.offsetTop <= y) activeId = id;
         });
+        navLinks.forEach(function (a) {
+          var href = a.getAttribute('href');
+          a.classList.toggle('nav-link--active', href === '#' + activeId);
+        });
+      }
+      window.addEventListener('scroll', syncNav, { passive: true });
+      syncNav();
 
-        /* ── Autonix video ── */
-        var vid = document.getElementById('autonix-video');
-        var replay = document.getElementById('autonix-replay');
-        var fsBtn = document.getElementById('autonix-fullscreen');
+      /* ── Smooth scroll ── */
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = a.getAttribute('href');
+          if (id.length < 2) return;
+          var t = document.querySelector(id);
+          if (!t) return;
+          e.preventDefault();
+          var offset = window.innerWidth >= 1024 ? 48 : 60;
+          window.scrollTo({ top: t.offsetTop - offset, behavior: 'smooth' });
+        });
+      });
 
-        if (vid && replay) {
-          vid.addEventListener('ended', function () { replay.style.display = 'flex'; });
-          replay.addEventListener('click', function () {
-            replay.style.display = 'none';
-            vid.currentTime = 0;
-            vid.play();
-          });
-          vid.addEventListener('error', function () { vid.controls = true; });
-        }
+      /* ── Autonix video ── */
+      var vid = document.getElementById('autonix-video');
+      var replay = document.getElementById('autonix-replay');
+      var fsBtn = document.getElementById('autonix-fullscreen');
 
-        if (fsBtn && vid) {
-          fsBtn.addEventListener('click', function () {
-            var isFs = document.fullscreenElement || document.webkitFullscreenElement;
-            if (isFs) {
-              (document.exitFullscreen || document.webkitExitFullscreen).call(document);
-            } else {
-              var req = vid.requestFullscreen || vid.webkitRequestFullscreen || vid.mozRequestFullScreen;
-              if (req) req.call(vid);
-            }
-          });
-          function onFsChange() {
-            var isFs = document.fullscreenElement || document.webkitFullscreenElement;
-            fsBtn.textContent = isFs ? '✕' : '⛶';
+      if (vid && replay) {
+        vid.addEventListener('ended', function () { replay.style.display = 'flex'; });
+        replay.addEventListener('click', function () {
+          replay.style.display = 'none';
+          vid.currentTime = 0;
+          vid.play();
+        });
+        vid.addEventListener('error', function () { vid.controls = true; });
+      }
+
+      if (fsBtn && vid) {
+        fsBtn.addEventListener('click', function () {
+          var isFs = document.fullscreenElement || document.webkitFullscreenElement;
+          if (isFs) {
+            (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+          } else {
+            var req = vid.requestFullscreen || vid.webkitRequestFullscreen || vid.mozRequestFullScreen;
+            if (req) req.call(vid);
           }
-          document.addEventListener('fullscreenchange', onFsChange);
-          document.addEventListener('webkitfullscreenchange', onFsChange);
+        });
+        function onFsChange() {
+          var isFs = document.fullscreenElement || document.webkitFullscreenElement;
+          fsBtn.textContent = isFs ? '✕' : '⛶';
         }
-      })();
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+      }
+    })();
   </script>
 
 </body>
