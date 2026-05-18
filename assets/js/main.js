@@ -87,8 +87,17 @@
 
     var toggleMob = document.getElementById('theme-toggle-mob');
     var toggleDesk = document.getElementById('theme-toggle-desk');
-    if (toggleMob)  toggleMob.addEventListener('click', function () { setTheme(!isDark); });
-    if (toggleDesk) toggleDesk.addEventListener('click', function () { setTheme(!isDark); });
+    function toggle() {
+      var next = !isDark;
+      // View Transitions API gives a true cross-fade of the painted frame.
+      if (document.startViewTransition) {
+        document.startViewTransition(function () { setTheme(next); });
+      } else {
+        setTheme(next);
+      }
+    }
+    if (toggleMob)  toggleMob.addEventListener('click', toggle);
+    if (toggleDesk) toggleDesk.addEventListener('click', toggle);
   }
 
   /* ══════════════════════════════════════════════════════
