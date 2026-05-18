@@ -2,8 +2,165 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Custom bg token ── */
-.bg-slate-925 { background-color: #070e1f; }
+/* ══════════════════════════════════════════════════════
+   THEME TOKENS — single source of truth
+   `html.dark` (default) and `html.light` swap these vars.
+   All component styles reference var(--token), so no
+   class-name overrides or !important rules are needed.
+══════════════════════════════════════════════════════ */
+
+html.dark {
+  --bg:          #020617;  /* slate-950 page */
+  --bg-soft:     #070e1f;  /* slate-925 meta cells */
+  --sidebar:     #020617;  /* sidebar surface */
+  --card:        #0b1424;  /* slate-900-ish card */
+  --card-alt:    #020617;
+  --border:      #1e293b;  /* slate-800 */
+  --border-hi:   #334155;  /* slate-700 */
+  --text-hi:     #f1f5f9;  /* slate-100 */
+  --text:        #cbd5e1;  /* slate-300 */
+  --muted:       #94a3b8;  /* slate-400 */
+  --dim:         #475569;  /* slate-600 */
+  --accent:      #3b82f6;  /* blue-500 */
+  --tag-bg:      #1e293b;
+  --tag-text:    #94a3b8;
+  --scroll-track:#020617;
+  --scroll-thumb:#1e293b;
+  --scroll-hov:  #334155;
+  --hero-fade:   #020617;
+  --led-bg:      rgba(15, 23, 42, 0.8);
+  --topbar-bg:   rgba(2, 6, 23, 0.9);
+  --sidebar-bg:  rgba(2, 6, 23, 0.95);
+  --nav-active:  rgba(30, 41, 59, 0.6);
+  --nav-hover:   rgba(30, 41, 59, 0.6);
+  --selection:   rgba(59, 130, 246, 0.3);
+  --selection-fg:#bfdbfe;
+}
+
+html.light {
+  --bg:          #f5f5f0;  /* warm off-white */
+  --bg-soft:     #fafaf8;
+  --sidebar:     #eeede8;
+  --card:        #ffffff;
+  --card-alt:    #fafaf8;
+  --border:      #d8d5ce;
+  --border-hi:   #b5b0a6;
+  --text-hi:     #1a1814;
+  --text:        #3d3a35;
+  --muted:       #6b6760;
+  --dim:         #9c9890;
+  --accent:      #2563eb;
+  --tag-bg:      #eeede8;
+  --tag-text:    #3d3a35;
+  --scroll-track:#eeede8;
+  --scroll-thumb:#d8d5ce;
+  --scroll-hov:  #b5b0a6;
+  --hero-fade:   #f5f5f0;
+  --led-bg:      rgba(238, 237, 232, 0.95);
+  --topbar-bg:   rgba(238, 237, 232, 0.97);
+  --sidebar-bg:  #eeede8;
+  --nav-active:  rgba(216, 213, 206, 0.55);
+  --nav-hover:   rgba(216, 213, 206, 0.45);
+  --selection:   rgba(37, 99, 235, 0.18);
+  --selection-fg:#1a1814;
+}
+
+/* ══════════════════════════════════════════════════════
+   BASE
+══════════════════════════════════════════════════════ */
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+::selection {
+  background-color: var(--selection);
+  color: var(--selection-fg);
+}
+
+/* ══════════════════════════════════════════════════════
+   THEMED TAILWIND CLASS MAP
+   Map the slate classes used throughout the HTML to
+   theme tokens. One source per class — no !important.
+══════════════════════════════════════════════════════ */
+
+/* Page-level backgrounds */
+.bg-slate-950          { background-color: var(--bg); }
+.bg-slate-950\/95      { background-color: var(--sidebar-bg); }
+.bg-slate-950\/90      { background-color: var(--topbar-bg); }
+.bg-slate-950\/70      { background-color: color-mix(in srgb, var(--bg) 75%, transparent); }
+.bg-slate-950\/60      { background-color: color-mix(in srgb, var(--bg) 65%, transparent); }
+.bg-slate-950\/40      { background-color: color-mix(in srgb, var(--bg) 45%, transparent); }
+
+/* Cards (slate-900 variants) */
+.bg-slate-925          { background-color: var(--bg-soft); }
+.bg-slate-900          { background-color: var(--card); }
+.bg-slate-900\/80      { background-color: color-mix(in srgb, var(--card) 85%, transparent); }
+.bg-slate-900\/60      { background-color: var(--card); }
+.bg-slate-900\/40      { background-color: color-mix(in srgb, var(--card) 60%, transparent); }
+
+/* Subtle fills (slate-800 variants) */
+.bg-slate-800          { background-color: var(--tag-bg); }
+.bg-slate-800\/60      { background-color: color-mix(in srgb, var(--border) 50%, transparent); }
+.bg-slate-800\/40      { background-color: color-mix(in srgb, var(--border) 35%, transparent); }
+.bg-slate-800\/20      { background-color: color-mix(in srgb, var(--border) 20%, transparent); }
+
+/* Text scale */
+.text-slate-100        { color: var(--text-hi); }
+.text-slate-200        { color: var(--text-hi); }
+.text-slate-300        { color: var(--text); }
+.text-slate-400        { color: var(--muted); }
+.text-slate-500        { color: var(--muted); }
+.text-slate-600        { color: var(--dim); }
+.text-slate-700        { color: var(--dim); }
+
+/* Borders */
+.border-slate-800      { border-color: var(--border); }
+.border-slate-800\/60  { border-color: color-mix(in srgb, var(--border) 75%, transparent); }
+.border-slate-700      { border-color: var(--border-hi); }
+.border-slate-600      { border-color: var(--border-hi); }
+
+/* Divider lines (used in section headers) */
+.h-px.bg-slate-800     { background-color: var(--border); }
+
+/* Hover states */
+.hover\:bg-slate-800\/60:hover { background-color: var(--nav-hover); }
+.hover\:border-slate-700:hover { border-color: var(--border-hi); }
+.hover\:border-slate-600:hover { border-color: var(--border-hi); }
+.hover\:border-slate-500:hover { border-color: var(--border-hi); }
+.hover\:bg-slate-800\/40:hover { background-color: color-mix(in srgb, var(--border) 35%, transparent); }
+
+/* Tag badges (combo selectors) */
+span.bg-slate-800,
+.bg-slate-800.text-slate-400,
+.bg-slate-800.text-slate-500 {
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
+}
+
+/* Status LED (fixed corner) */
+#status-led {
+  background-color: var(--led-bg);
+  border-color: var(--border);
+}
+
+/* Sidebar surface */
+#sidebar {
+  background-color: var(--sidebar-bg);
+  border-right-color: var(--border);
+}
+
+/* Mobile topbar */
+header.lg\:hidden {
+  background-color: var(--topbar-bg);
+  border-bottom-color: var(--border);
+}
+
+/* ══════════════════════════════════════════════════════
+   COMPONENTS
+══════════════════════════════════════════════════════ */
 
 /* ── Scroll reveal ── */
 .reveal {
@@ -18,25 +175,25 @@
 
 /* ── Active nav link ── */
 .nav-link--active {
-  background-color: rgba(30, 41, 59, 0.6);
+  background-color: var(--nav-active);
 }
 .nav-link--active span:first-child {
-  color: #3b82f6;
+  color: var(--accent);
 }
 .nav-link--active span:last-child {
-  color: #e2e8f0;
+  color: var(--text-hi);
 }
 
-/* ── Thin scrollbar (Webkit) ── */
+/* ── Custom scrollbar ── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: #020617; }
-::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: #334155; }
+::-webkit-scrollbar-track { background: var(--scroll-track); }
+::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--scroll-hov); }
 
-/* ── Replay button (display toggled by JS) ── */
+/* ── Video replay button toggle ── */
 #autonix-replay[style*="flex"] { display: flex !important; }
 
-/* ── Lock sidebar on desktop ── */
+/* ── Lock sidebar visible on desktop ── */
 @media (min-width: 1024px) {
   #sidebar { transform: translateX(0) !important; }
 }
@@ -44,7 +201,143 @@
 /* ── Focus ring ── */
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* ══════════════════════════════════════════════════════
+   LANGUAGE SWITCHER PILLS
+══════════════════════════════════════════════════════ */
+
+.lang-pills {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  flex-wrap: nowrap;
+}
+
+.lang-pill {
+  background: none;
+  border: none;
+  padding: 2px 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  letter-spacing: 0;
+  transition: color 0.15s ease, background 0.15s ease;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.lang-pill.is-active {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.lang-pill.is-inactive {
+  color: var(--dim);
+}
+
+.lang-pill.is-inactive:hover {
+  color: var(--muted);
+  background: color-mix(in srgb, var(--border) 35%, transparent);
+}
+
+.lang-pill-sep {
+  color: var(--border);
+  font-size: 10px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ══════════════════════════════════════════════════════
+   HERO PHOTO — themed fades via CSS var (no JS needed)
+══════════════════════════════════════════════════════ */
+
+#hero-photo #hero-fade-side {
+  background: linear-gradient(to right, var(--hero-fade) 0%, transparent 100%);
+}
+
+#hero-photo .hero-fade-bottom {
+  background: linear-gradient(to top, var(--hero-fade) 0%, transparent 100%);
+}
+
+/* ══════════════════════════════════════════════════════
+   RTL SUPPORT
+══════════════════════════════════════════════════════ */
+
+[dir="rtl"] #sidebar {
+  left: auto;
+  right: 0;
+  border-right: none;
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+}
+
+@media (min-width: 1024px) {
+  [dir="rtl"] #sidebar {
+    transform: translateX(0) !important;
+  }
+  [dir="rtl"] main {
+    margin-left: 0 !important;
+    margin-right: 16rem;
+  }
+}
+
+[dir="rtl"] body {
+  font-family: 'Noto Sans Arabic', 'Inter', sans-serif;
+}
+
+/* Hero RTL: photo on the left, copy on the right */
+[dir="rtl"] #hero-copy {
+  max-width: 55%;
+  margin-left: auto;
+}
+
+[dir="rtl"] #hero-photo {
+  right: auto !important;
+  left: 0 !important;
+}
+
+[dir="rtl"] #hero-photo img {
+  right: auto !important;
+  left: 0 !important;
+  transform: scaleX(-1);
+}
+
+/* Flip side fade: left-anchored gradient that fades right */
+[dir="rtl"] #hero-photo #hero-fade-side {
+  left: auto !important;
+  right: 0 !important;
+  background: linear-gradient(to left, var(--hero-fade) 0%, transparent 100%);
+}
+
+/* Ticker: reverse scroll in RTL */
+[dir="rtl"] .animate-marquee {
+  animation-direction: reverse;
+}
+
+/* Keep code and contact links strictly LTR */
+[dir="rtl"] pre,
+[dir="rtl"] #contact-terminal,
+[dir="rtl"] #contact-links {
+  direction: ltr;
+  unicode-bidi: embed;
+  text-align: left;
+}
+
+[dir="rtl"] footer {
+  direction: rtl;
+  text-align: center;
+}
+
+/* SYS_READY LED flips to bottom-left in RTL */
+[dir="rtl"] #status-led {
+  right: auto;
+  left: 1.25rem;
 }

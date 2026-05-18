@@ -1,1 +1,33 @@
+# Dependencies
 node_modules/
+
+# Build artifacts
+# (style.css is the compiled Tailwind output — keep tracked so GitLab Pages can serve it
+#  without a build step. If you add CI to build on deploy, uncomment the next line.)
+# style.css
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+
+# Claude local config
+.claude/
