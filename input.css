@@ -256,6 +256,25 @@ button:focus-visible {
 }
 
 /* ══════════════════════════════════════════════════════
+   THEME TOGGLE BUTTON — force readable contrast
+══════════════════════════════════════════════════════ */
+
+#theme-toggle-mob,
+#theme-toggle-desk {
+  color: var(--text-hi);
+}
+#theme-toggle-mob:hover,
+#theme-toggle-desk:hover {
+  color: var(--accent);
+}
+#theme-toggle-desk {
+  border-color: var(--border-hi);
+}
+#theme-label-desk {
+  color: var(--text);
+}
+
+/* ══════════════════════════════════════════════════════
    HERO PHOTO — themed fades via CSS var (no JS needed)
 ══════════════════════════════════════════════════════ */
 
