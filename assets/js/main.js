@@ -19,9 +19,7 @@
     }
 
     function applyDict(lang, dict) {
-      var isRTL = lang === 'ar';
       document.documentElement.lang = lang;
-      document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
 
       document.querySelectorAll('[data-i18n]').forEach(function (el) {
         var key = el.getAttribute('data-i18n');

@@ -6,7 +6,7 @@ Static HTML + Tailwind CSS, no framework, no build server.
 ## Features
 
 - Dark / light theme with a smooth cross-fade powered by the View Transitions API (with a per-property transition fallback for older browsers).
-- Tri-lingual content (EN / DE / AR) with full RTL layout support.
+- Bilingual content (EN / DE).
 - Responsive single-page layout: sidebar nav on desktop, top bar + drawer on mobile.
 - Scroll-spy navigation, scroll-reveal animations, and a marquee ticker strip.
 - Theme tokens centralized as CSS variables in `input.css` — one source of truth for both modes.
@@ -64,5 +64,4 @@ The theme toggle in [assets/js/main.js](assets/js/main.js) wraps the class swap 
 ## Internationalization
 
 Strings are keyed via `data-i18n="..."` attributes in the markup and resolved from
-the language files under `assets/`. Switching to Arabic flips `dir="rtl"` on the
-document; RTL-specific layout overrides live at the bottom of `input.css`.
+the language files under `assets/i18n/` (`en.json`, `de.json`).
