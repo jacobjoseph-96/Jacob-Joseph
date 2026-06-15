@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var SECTION_IDS = ['profile', 'stack', 'projects', 'experience', 'devops', 'contact'];
+  var SECTION_IDS = ['profile', 'stack', 'projects', 'experience', 'education', 'certificates', 'contact'];
 
   /* ══════════════════════════════════════════════════════
      I18N
