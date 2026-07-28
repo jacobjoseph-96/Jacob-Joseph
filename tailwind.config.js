@@ -5,9 +5,37 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Kept so the existing slate-* / blue-* markup still compiles.
+        // Both scales are re-pointed at theme tokens in input.css — the
+        // literal values here are only ever seen if that map is removed.
         slate: {
           950: '#020617',
           925: '#070e1f',
+        },
+        // One Piece palette, mirrored from src/theme.mjs in the profile repo.
+        sea: {
+          deep: '#04121a',
+          900: '#07161f',
+          800: '#0e2634',
+          700: '#17394b',
+          500: '#2a9d8f',
+          400: '#3fc0b0',
+        },
+        parchment: {
+          50: '#fff8e7',
+          100: '#fbf2dc',
+          200: '#f3e4c3',
+          300: '#e8d5b0',
+          400: '#c9ae85',
+          500: '#a98b5f',
+        },
+        gold: {
+          DEFAULT: '#ffb703',
+          dim: '#b8860b',
+        },
+        bounty: {
+          DEFAULT: '#e63946',
+          dim: '#c1121f',
         },
       },
       fontFamily: {
@@ -15,9 +43,11 @@ module.exports = {
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       keyframes: {
+        // Shadow colour reads the live accent token so the glow follows
+        // the theme instead of staying blue.
         pulse_led: {
-          '0%, 100%': { opacity: '1', boxShadow: '0 0 6px 2px rgba(59,130,246,0.7)' },
-          '50%': { opacity: '0.4', boxShadow: '0 0 2px 1px rgba(59,130,246,0.2)' },
+          '0%, 100%': { opacity: '1', boxShadow: '0 0 6px 2px color-mix(in srgb, var(--accent) 70%, transparent)' },
+          '50%': { opacity: '0.4', boxShadow: '0 0 2px 1px color-mix(in srgb, var(--accent) 20%, transparent)' },
         },
         fadeUp: {
           from: { opacity: '0', transform: 'translateY(16px)' },

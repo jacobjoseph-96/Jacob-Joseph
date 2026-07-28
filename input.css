@@ -7,62 +7,101 @@
    `html.dark` (default) and `html.light` swap these vars.
    All component styles reference var(--token), so no
    class-name overrides or !important rules are needed.
+
+   Palette is the One Piece skin, ported verbatim from the
+   `onepiece-dark` / `onepiece-light` token sets in
+   github.com/jacobjoseph-96 → src/theme.mjs, so this site
+   and the GitHub profile render the same world:
+     dark  = the Grand Line at night (sea teal on deep water)
+     light = an aged sea chart / wanted poster (crimson ink
+             on parchment)
+   The accent role flips between modes on purpose — teal is
+   the sea, crimson is the ink on a poster.
 ══════════════════════════════════════════════════════ */
 
 html.dark {
-  --bg:          #020617;  /* slate-950 page */
-  --bg-soft:     #070e1f;  /* slate-925 meta cells */
-  --sidebar:     #020617;  /* sidebar surface */
-  --card:        #0b1424;  /* slate-900-ish card */
-  --card-alt:    #020617;
-  --border:      #1e293b;  /* slate-800 */
-  --border-hi:   #334155;  /* slate-700 */
-  --text-hi:     #f1f5f9;  /* slate-100 */
-  --text:        #cbd5e1;  /* slate-300 */
-  --muted:       #94a3b8;  /* slate-400 */
-  --dim:         #475569;  /* slate-600 */
-  --accent:      #3b82f6;  /* blue-500 */
-  --tag-bg:      #1e293b;
-  --tag-text:    #94a3b8;
-  --scroll-track:#020617;
-  --scroll-thumb:#1e293b;
-  --scroll-hov:  #334155;
-  --hero-fade:   #020617;
-  --led-bg:      rgba(15, 23, 42, 0.8);
-  --topbar-bg:   rgba(2, 6, 23, 0.9);
-  --sidebar-bg:  rgba(2, 6, 23, 0.95);
-  --nav-active:  rgba(30, 41, 59, 0.6);
-  --nav-hover:   rgba(30, 41, 59, 0.6);
-  --selection:   rgba(59, 130, 246, 0.3);
-  --selection-fg:#bfdbfe;
+  --bg:          #07161f;  /* void — deep water */
+  --bg-soft:     #0b1f2b;  /* recessed meta cells */
+  --sidebar:     #04121a;  /* voidDeep */
+  --card:        #0e2634;  /* grave — hull panel */
+  --card-alt:    #04121a;
+  --border:      #17394b;  /* graveEdge */
+  --border-hi:   #2a6076;
+  --text-hi:     #fdf6e3;  /* flash — parchment white */
+  --text:        #bfd6df;
+  --muted:       #7fa3b3;  /* textMuted */
+  --dim:         #6494ad;  /* captions are real text: AA on both --bg and --card */
+  --accent:      #2a9d8f;  /* primary — sea teal */
+  --accent-hi:   #3fc0b0;
+  --gold:        #ffb703;  /* gold — berry / treasure */
+  --danger:      #e63946;  /* monarch — pirate red */
+  --on-accent:   #04121a;  /* ink that sits ON a solid accent fill */
+  --tag-bg:      #12303f;
+  --tag-text:    #9dc0cc;
+  --scroll-track:#04121a;
+  --scroll-thumb:#17394b;
+  --scroll-hov:  #2a6076;
+  --hero-fade:   #07161f;
+  --led-bg:      rgba(14, 38, 52, 0.8);
+  --topbar-bg:   rgba(7, 22, 31, 0.9);
+  --sidebar-bg:  rgba(4, 18, 26, 0.95);
+  --nav-active:  rgba(23, 57, 75, 0.6);
+  --nav-hover:   rgba(23, 57, 75, 0.6);
+  --selection:   rgba(42, 157, 143, 0.32);
+  --selection-fg:#fdf6e3;
+
+  /* Set-piece surfaces */
+  --rope:        #2a6076;
+  --paper-grain: 0;      /* grain is a light-mode conceit */
+  --sea-depth:   0.55;   /* vignette strength */
+
+  /* The bounty poster stays paper even at sea — just aged down
+     a stop so it doesn't glare against the dark water. */
+  --poster-paper:#dcc59b;
+  --poster-ink:  #2a1a0a;
+  --poster-edge: #a98b5f;
 }
 
 html.light {
-  --bg:          #f5f5f0;  /* warm off-white */
-  --bg-soft:     #fafaf8;
-  --sidebar:     #eeede8;
-  --card:        #ffffff;
-  --card-alt:    #fafaf8;
-  --border:      #d8d5ce;
-  --border-hi:   #b5b0a6;
-  --text-hi:     #1a1814;
-  --text:        #3d3a35;
-  --muted:       #6b6760;
-  --dim:         #9c9890;
-  --accent:      #2563eb;
-  --tag-bg:      #eeede8;
-  --tag-text:    #3d3a35;
-  --scroll-track:#eeede8;
-  --scroll-thumb:#d8d5ce;
-  --scroll-hov:  #b5b0a6;
-  --hero-fade:   #f5f5f0;
-  --led-bg:      rgba(238, 237, 232, 0.95);
-  --topbar-bg:   rgba(238, 237, 232, 0.97);
-  --sidebar-bg:  #eeede8;
-  --nav-active:  rgba(216, 213, 206, 0.55);
-  --nav-hover:   rgba(216, 213, 206, 0.45);
-  --selection:   rgba(37, 99, 235, 0.18);
-  --selection-fg:#1a1814;
+  --bg:          #f3e4c3;  /* parchment */
+  --bg-soft:     #eddcb6;
+  --sidebar:     #e8d5b0;  /* grave — aged edge of the chart */
+  --card:        #fbf2dc;  /* lifted panel, lighter than the sheet */
+  --card-alt:    #f7ead0;
+  --border:      #c9ae85;  /* graveEdge */
+  --border-hi:   #a98b5f;
+  --text-hi:     #241608;  /* ink */
+  --text:        #2b1d10;
+  --muted:       #7a6248;  /* textMuted */
+  --dim:         #6f5f47;  /* 4.91:1 on parchment */
+  --accent:      #c1121f;  /* monarch — wanted-poster crimson */
+  --accent-hi:   #8e1b26;
+  --gold:        #7d5a07;  /* antique gold; #b8860b is only 2.6:1 on parchment */
+  --danger:      #8e1b26;
+  --on-accent:   #fff8e7;
+  --tag-bg:      #e8d5b0;
+  --tag-text:    #4a3826;
+  --scroll-track:#e8d5b0;
+  --scroll-thumb:#c9ae85;
+  --scroll-hov:  #a98b5f;
+  --hero-fade:   #f3e4c3;
+  --led-bg:      rgba(232, 213, 176, 0.95);
+  --topbar-bg:   rgba(243, 228, 195, 0.97);
+  --sidebar-bg:  #e8d5b0;
+  --nav-active:  rgba(201, 174, 133, 0.5);
+  --nav-hover:   rgba(201, 174, 133, 0.38);
+  --selection:   rgba(193, 18, 31, 0.2);
+  --selection-fg:#241608;
+
+  /* Set-piece surfaces */
+  --rope:        #a98b5f;
+  --paper-grain: 0.07;
+  --sea-depth:   0;
+
+  /* Fresher sheet on the chart, so the poster still lifts off the page. */
+  --poster-paper:#fdf6e0;
+  --poster-ink:  #241608;
+  --poster-edge: #c9ae85;
 }
 
 /* ══════════════════════════════════════════════════════
@@ -160,12 +199,27 @@ body {
 /* Divider lines (used in section headers) */
 .h-px.bg-slate-800     { background-color: var(--border); }
 
-/* Hover states */
-.hover\:bg-slate-800\/60:hover { background-color: var(--nav-hover); }
-.hover\:border-slate-700:hover { border-color: var(--border-hi); }
-.hover\:border-slate-600:hover { border-color: var(--border-hi); }
-.hover\:border-slate-500:hover { border-color: var(--border-hi); }
-.hover\:bg-slate-800\/40:hover { background-color: color-mix(in srgb, var(--border) 35%, transparent); }
+/* Hover states.
+   These carry an `html` prefix on purpose. Tailwind emits its variant
+   utilities (`hover:`, `group-hover:`) at the very end of the utilities
+   layer — after this plain CSS — so an equal-specificity override here
+   loses on source order and the raw slate colour wins. Bumping to
+   (0,2,1) settles it without reaching for !important. */
+html .hover\:bg-slate-800\/60:hover { background-color: var(--nav-hover); }
+html .hover\:border-slate-700:hover { border-color: var(--border-hi); }
+html .hover\:border-slate-600:hover { border-color: var(--border-hi); }
+html .hover\:border-slate-500:hover { border-color: var(--border-hi); }
+html .hover\:bg-slate-800\/40:hover { background-color: color-mix(in srgb, var(--border) 35%, transparent); }
+html .hover\:bg-slate-800\/20:hover { background-color: color-mix(in srgb, var(--border) 20%, transparent); }
+html .hover\:text-slate-100:hover,
+html .hover\:text-slate-200:hover { color: var(--text-hi); }
+html .hover\:text-slate-300:hover { color: var(--text); }
+html .hover\:text-slate-400:hover { color: var(--muted); }
+
+/* Card / link hover reveals — used on the certificate and contact tiles. */
+html .group:hover .group-hover\:text-slate-100,
+html .group:hover .group-hover\:text-slate-200 { color: var(--text-hi); }
+html .group:hover .group-hover\:text-slate-400 { color: var(--muted); }
 
 /* Tag badges (combo selectors) */
 span.bg-slate-800,
@@ -175,11 +229,39 @@ span.bg-slate-800,
   color: var(--tag-text);
 }
 
-/* Status LED (fixed corner) */
-#status-led {
-  background-color: var(--led-bg);
-  border-color: var(--border);
-}
+/* ── Accent (blue-*) → theme accent ──────────────────────
+   The markup was authored against Tailwind's blue scale.
+   Rather than rewrite 244 class attributes, route the whole
+   scale through the accent token — same source-order trick
+   as the slate map above. Only these 12 classes are used.
+──────────────────────────────────────────────────────── */
+
+.text-blue-500,
+.text-blue-400            { color: var(--accent); }
+.text-blue-300            { color: var(--accent-hi); }
+.text-blue-500\/60        { color: color-mix(in srgb, var(--accent) 60%, transparent); }
+.text-blue-500\/50        { color: color-mix(in srgb, var(--accent) 50%, transparent); }
+
+/* Solid accent fill always carries its own readable ink —
+   `text-white` on sea teal is ~2.6:1 and fails AA. */
+.bg-blue-500              { background-color: var(--accent); color: var(--on-accent); }
+.bg-blue-500\/10          { background-color: color-mix(in srgb, var(--accent) 12%, transparent); }
+
+.border-blue-500\/20      { border-color: color-mix(in srgb, var(--accent) 30%, transparent); }
+
+/* `html` prefix for the same source-order reason as the slate hovers above. */
+html .hover\:text-blue-400:hover        { color: var(--accent-hi); }
+html .hover\:bg-blue-400:hover          { background-color: var(--accent-hi); color: var(--on-accent); }
+html .hover\:border-blue-500\/40:hover  { border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+html .group:hover .group-hover\:text-blue-500 { color: var(--accent); }
+
+/* Gold is the treasure/berry colour — bounty figures, the
+   one "hero" metric per card, the log-pose needle. */
+.text-gold                { color: var(--gold); }
+.border-gold              { border-color: color-mix(in srgb, var(--gold) 45%, transparent); }
+.bg-gold-soft             { background-color: color-mix(in srgb, var(--gold) 12%, transparent); }
+
+/* Log Pose (fixed corner) — see the set-piece block below */
 
 /* Sidebar surface */
 #sidebar {
@@ -239,6 +321,274 @@ button:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* ══════════════════════════════════════════════════════
+   ONE PIECE SET PIECES
+   Everything here is pure CSS or an inline data-URI —
+   no extra fonts, no extra network requests.
+══════════════════════════════════════════════════════ */
+
+/* ── Sheet texture ──────────────────────────────────────
+   One fixed overlay carries both modes: paper grain and
+   rhumb lines on the light chart, water depth on the dark
+   sea. Strength is driven by --paper-grain / --sea-depth,
+   so a mode that doesn't want a layer sets it to 0 and the
+   layer costs nothing visually. Same fractal-noise idea as
+   the `paper: true` filter in the profile repo's hero.mjs. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    /* rhumb lines radiating from a compass rose off the top-right */
+    repeating-conic-gradient(from 11.25deg at 84% 12%,
+      var(--rope) 0deg 0.12deg, transparent 0.12deg 22.5deg),
+    /* paper grain */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 220px 220px;
+  opacity: var(--paper-grain);
+  mix-blend-mode: multiply;
+}
+
+/* Deep water: a vignette that darkens toward the edges of the frame. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 0%,
+    transparent 0%,
+    color-mix(in srgb, var(--sidebar) 40%, transparent) 70%,
+    color-mix(in srgb, var(--sidebar) 85%, transparent) 100%);
+  opacity: var(--sea-depth);
+}
+
+/* Content sits above both texture layers.
+   Only the layout root needs lifting — it is the one static ancestor.
+   The topbar and log pose are already `fixed` with a z-index, and an ID
+   selector here would beat Tailwind's `.fixed` and drop them into flow. */
+.lg\:flex {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Rope dividers ──────────────────────────────────────
+   The section rules were already funnelled through this one
+   selector, so the whole page picks up twisted rope for free. */
+.h-px.bg-slate-800 {
+  height: 3px;
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    115deg,
+    var(--rope) 0 3px,
+    transparent 3px 5px,
+    var(--rope) 5px 8px,
+    transparent 8px 10px
+  );
+  opacity: 0.55;
+  border-radius: 2px;
+}
+
+/* ── Jolly Roger ────────────────────────────────────────
+   Monoline, inherits currentColor, so it themes itself. */
+.jolly-roger {
+  display: block;
+  color: var(--accent);
+}
+.jolly-roger--sm { width: 18px; height: 18px; }
+.jolly-roger--md { width: 28px; height: 28px; }
+
+/* ── Log Pose ───────────────────────────────────────────
+   Replaces the old status LED. The needle points at whichever
+   section you're reading — main.js writes --needle from the
+   same scroll-spy pass that highlights the nav link. */
+#log-pose {
+  background-color: var(--led-bg);
+  border-color: var(--border);
+}
+.log-pose__dial {
+  width: 22px;
+  height: 22px;
+  overflow: visible;
+}
+.log-pose__glass {
+  fill: color-mix(in srgb, var(--accent) 10%, transparent);
+  stroke: var(--border-hi);
+  stroke-width: 1;
+}
+.log-pose__tick {
+  stroke: var(--muted);
+  stroke-width: 1;
+  opacity: 0.5;
+}
+.log-pose__needle {
+  fill: var(--gold);
+  transform-origin: 12px 12px;
+  transform: rotate(var(--needle, 0deg));
+  transition: transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+.log-pose__pivot { fill: var(--accent); }
+
+/* ── Poster frame ───────────────────────────────────────
+   The hero reads as a nailed-up WANTED bill. */
+.poster__nail {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--border-hi);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text-hi) 35%, transparent);
+}
+
+/* ── WANTED poster ──────────────────────────────────────
+   A bounty poster is a physical sheet of paper, so it keeps
+   its own parchment surface in both themes rather than
+   inverting with the page — only the tint follows the mode
+   (--poster-paper), so it never glares on the dark sea. */
+.wanted-poster {
+  position: relative;
+  width: 300px;
+  margin: 0;
+  padding: 14px;
+  background-color: var(--poster-paper);
+  color: var(--poster-ink);
+  border: 1px solid var(--poster-edge);
+  box-shadow:
+    0 18px 40px -18px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 1px color-mix(in srgb, var(--poster-ink) 12%, transparent),
+    inset 0 0 60px color-mix(in srgb, var(--poster-ink) 12%, transparent);
+  /* Lifted off centre so the sheet hangs high on the wall and its torn
+     edge clears the ticker strip below. */
+  transform: rotate(-1.4deg) translateY(-26px);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  text-align: center;
+}
+
+/* Grain, so the sheet reads as paper rather than a coloured box. */
+.wanted-poster::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  opacity: 0.09;
+  mix-blend-mode: multiply;
+}
+
+.wanted-poster__nail {
+  position: absolute;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #9c8a70, #6b563a);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+.wanted-poster__nail--l { left: 12px; }
+.wanted-poster__nail--r { right: 12px; }
+
+.wanted-poster__head {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  margin-bottom: 10px;
+  color: var(--poster-ink);
+}
+
+/* The portrait sits in its own ruled box, sepia-toned and
+   multiplied into the paper so the photo's own background
+   disappears into the sheet instead of floating on it. */
+.wanted-poster__frame {
+  border: 2px solid var(--poster-ink);
+  padding: 3px;
+  background: color-mix(in srgb, var(--poster-ink) 4%, transparent);
+}
+/* 4:5 portrait box. The source is 1080×1483 (0.73), so a landscape
+   frame would crop the face to a strip — this keeps hairline to
+   collar inside the cut with room to spare. */
+.wanted-poster__frame img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 30%;
+  filter: sepia(0.62) contrast(1.06) saturate(0.75) brightness(1.02);
+  mix-blend-mode: multiply;
+}
+
+.wanted-poster__dead {
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  margin-top: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid color-mix(in srgb, var(--poster-ink) 35%, transparent);
+}
+.wanted-poster__name {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  margin-top: 8px;
+}
+.wanted-poster__bounty {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+.wanted-poster__bounty span { font-size: 13px; vertical-align: super; }
+.wanted-poster__foot {
+  font-size: 8.5px;
+  letter-spacing: 0.16em;
+  margin-top: 6px;
+  opacity: 0.7;
+}
+
+/* Deckled bottom edge — paper teeth hanging off the sheet.
+   Positioned below the box rather than inside it, so the
+   poster's own background doesn't fill in behind the cuts. */
+.wanted-poster__torn {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: linear-gradient(-45deg, transparent 7px, var(--poster-paper) 0) 0 0 / 14px 14px repeat-x;
+}
+
+/* ── Bounty figure ──────────────────────────────────────
+   Flavour, deliberately styled apart from the real metrics. */
+.bounty {
+  color: var(--gold);
+  border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+  background-color: color-mix(in srgb, var(--gold) 10%, transparent);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* ── Grand Line banner ──────────────────────────────────
+   One <img>; main.js swaps src with the theme so only the
+   variant actually on screen is ever fetched. */
+#grandline {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+/* ── Reduced motion ─────────────────────────────────────
+   Kill the ambient motion; the needle still moves to the
+   right heading, it just gets there instantly. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+  .animate-pulse_led { animation: none; }
+  .log-pose__needle { transition: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
 }
 
 /* ══════════════════════════════════════════════════════
@@ -309,14 +659,5 @@ button:focus-visible {
   color: var(--text);
 }
 
-/* ══════════════════════════════════════════════════════
-   HERO PHOTO — themed fades via CSS var (no JS needed)
-══════════════════════════════════════════════════════ */
-
-#hero-photo #hero-fade-side {
-  background: linear-gradient(to right, var(--hero-fade) 0%, transparent 100%);
-}
-
-#hero-photo .hero-fade-bottom {
-  background: linear-gradient(to top, var(--hero-fade) 0%, transparent 100%);
-}
+/* The hero photo's edge fades are gone — it now lives inside the
+   WANTED poster, which has its own frame. See .wanted-poster above. */

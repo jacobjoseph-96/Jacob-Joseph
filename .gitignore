@@ -31,3 +31,7 @@ yarn-error.log*
 
 # Claude local config
 .claude/
+
+# Browser-automation scratch (screenshots, page snapshots, console logs)
+.playwright-mcp/
+op-*.png

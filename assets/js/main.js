@@ -34,6 +34,10 @@
           btn.setAttribute('aria-pressed', String(isActive));
         });
       });
+
+      // The log pose label is copied off the active nav link, so it needs
+      // a re-read once the nav labels themselves have been translated.
+      window.dispatchEvent(new Event('langchange'));
     }
 
     function applyLang(lang) {
@@ -57,10 +61,22 @@
     var html = document.documentElement;
     var isDark = true;
 
+    // The Grand Line banner ships as two SVGs, one per mode. The site's
+    // theme is class-toggled rather than OS-driven, so a <picture> with a
+    // prefers-color-scheme source would desync from the toggle button —
+    // swapping src here keeps them in step and fetches only the variant
+    // actually on screen.
+    var GRANDLINE = 'https://raw.githubusercontent.com/jacobjoseph-96/jacobjoseph-96/output/grandline-';
+    function setBanner(dark) {
+      var img = document.getElementById('grandline');
+      if (img) img.src = GRANDLINE + (dark ? 'dark' : 'light') + '.svg';
+    }
+
     function setTheme(dark) {
       isDark = dark;
       html.classList.toggle('dark', dark);
       html.classList.toggle('light', !dark);
+      setBanner(dark);
 
       // Toggle icon visibility (sun shown when dark, moon when light)
       [
@@ -79,9 +95,10 @@
       try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
     }
 
+    // Light (the aged sea chart) is the default; dark is opt-in and sticky.
     var saved;
     try { saved = localStorage.getItem('theme'); } catch (e) {}
-    setTheme(saved !== 'light');
+    setTheme(saved === 'dark');
 
     var toggleMob = document.getElementById('theme-toggle-mob');
     var toggleDesk = document.getElementById('theme-toggle-desk');
@@ -129,6 +146,23 @@
 
     // Scroll-spy: highlight nav link matching current section
     var navLinks = document.querySelectorAll('.nav-link');
+    var logPose = document.getElementById('log-pose');
+    var logPoseTarget = document.getElementById('log-pose-target');
+
+    // The log pose needle divides the compass evenly across the sections,
+    // so each one gets its own heading and the needle swings between them.
+    function syncLogPose(activeId, activeLink) {
+      if (!logPose) return;
+      var i = SECTION_IDS.indexOf(activeId);
+      if (i < 0) i = 0;
+      logPose.style.setProperty('--needle', (i * (360 / SECTION_IDS.length)).toFixed(1) + 'deg');
+      // Read the label off the nav link so it follows the active language.
+      if (logPoseTarget && activeLink) {
+        var label = activeLink.querySelector('span:last-child');
+        if (label) logPoseTarget.textContent = label.textContent.trim();
+      }
+    }
+
     function syncNav() {
       var atBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 2;
       var activeId;
@@ -142,11 +176,16 @@
           if (el && el.offsetTop <= y) activeId = id;
         });
       }
+      var activeLink = null;
       navLinks.forEach(function (a) {
-        a.classList.toggle('nav-link--active', a.getAttribute('href') === '#' + activeId);
+        var isActive = a.getAttribute('href') === '#' + activeId;
+        a.classList.toggle('nav-link--active', isActive);
+        if (isActive) activeLink = a;
       });
+      syncLogPose(activeId, activeLink);
     }
     window.addEventListener('scroll', syncNav, { passive: true });
+    window.addEventListener('langchange', syncNav);
     syncNav();
 
     // Smooth scroll on anchor click
