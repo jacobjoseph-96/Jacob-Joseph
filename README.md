@@ -14,6 +14,7 @@ One Piece themed: light is an aged sea chart, dark is the Grand Line at night.
 - A Log Pose corner indicator whose needle points at the section you're reading.
 - The hero photo sits in a WANTED bounty poster; the contribution graph is embedded as a live sea chart (see Grand Line banner below).
 - Theme tokens centralized as CSS variables in `input.css` — one source of truth for both modes.
+- A ship's song on a Tone Dial, with the page's ambient motion reacting to it (see below).
 
 ## Stack
 
@@ -29,8 +30,10 @@ input.css               # Tailwind source + theme tokens + component CSS
 style.css               # Compiled Tailwind output (do not edit by hand)
 tailwind.config.js      # Tailwind config
 assets/
-  js/main.js            # Theme toggle, nav, scroll-spy, i18n, reveal
-  Jacob-Joseph-2.png    # Hero photo
+  js/main.js            # Theme toggle, nav, scroll-spy, i18n, reveal, song, motion
+  Jacob-Joseph.webp     # Hero photo (900px WebP, 114 KB)
+  Ja-Cob.webm           # The ship's song — Opus, served first (see below)
+  Ja-Cob.mp3            # Same song, MP3 fallback
   ...
 ```
 
@@ -101,7 +104,104 @@ this site's theme is class-toggled rather than OS-driven — `setTheme()` in
 [assets/js/main.js](assets/js/main.js) swaps the `src` instead, which also means only the
 variant actually on screen is ever fetched.
 
+## Ship's song — the Tone Dial
+
+A Tone Dial is the shell that stores a recording in One Piece, so that is what the music
+control looks like: it docks with the Log Pose inside `#instruments`, bottom right, rather
+than claiming a second corner. `assets/Ja-Cob.mp3` (2:44, loops) plays through it.
+
+**Autoplay, honestly.** "Starts when the page opens" means *starts on load where the browser
+permits it, and otherwise on the visitor's first click, key or scroll*. Unmuted autoplay is
+blocked until the visitor has engaged with the origin
+([Chrome's autoplay policy](https://developer.chrome.com/blog/autoplay)), so `initShipSong()`
+in [assets/js/main.js](assets/js/main.js) walks a ladder:
+
+1. `localStorage.shipSong === 'off'` → stay silent. The choice is sticky across visits.
+2. Try `play()` on load. This succeeds on a repeat visit or a high-engagement browser.
+3. On `NotAllowedError`, ring the dial and arm a one-shot listener for `pointerdown`,
+   `keydown`, `touchstart`, `wheel` and `scroll` — the first of them starts the song.
+4. The dial always plays / pauses on click, and `M` toggles from the keyboard.
+
+There is deliberately **no** click-to-enter curtain: the page has to be readable in one
+second by someone who never wanted sound.
+
+Volume ramps 0 → 0.42 over 2.5 s and fades out over 0.4 s. The song pauses when the tab is
+hidden and resumes where it left off, and ducks to 0.08 if the Autonix demo video is ever
+unmuted or taken fullscreen.
+
+**Weight.** The `<audio>` element carries `preload="none"`, so nothing is fetched until
+playback actually starts, and it offers two encodings:
+
+| file | codec | size | who gets it |
+|---|---|---|---|
+| `Ja-Cob.webm` | Opus 96 kbps VBR, 48 kHz stereo | **1.9 MB** | everything current |
+| `Ja-Cob.mp3` | MP3 193 kbps VBR | 3.8 MB | fallback for browsers without WebM audio |
+
+Only the first one a browser accepts is ever requested. Opus also carries a pre-skip value,
+so the loop seam is gapless — MP3's encoder padding always leaves a small gap at the wrap.
+
+The WebM was produced from the MP3 with:
+
+```
+ffmpeg -i assets/Ja-Cob.mp3 -vn -map 0:a:0 -map_metadata -1 \
+  -c:a libopus -b:a 96k -vbr on -compression_level 10 -application audio \
+  -ar 48000 -ac 2 -metadata title="Ja-Cob" -metadata artist="jacob_joseph_9966" \
+  -f webm assets/Ja-Cob.webm
+```
+
+`-map_metadata -1` drops 48 KB of ID3 tag and embedded cover art (the title and artist are
+then set back explicitly). 96 kbps rather than 64 because this is a lossy→lossy transcode and
+the extra headroom keeps the double encode clean; 64k would land near 1.3 MB if the size
+matters more than the margin. Measured before and after: −14.0 LUFS integrated, 7.6 LU range,
+identical either side, with true peak falling from −0.1 to −0.6 dBTP — the encode is faithful
+and nothing needed normalizing.
+
+### The reactive channel
+
+While the song plays, one `requestAnimationFrame` loop reads an `AnalyserNode` and writes
+exactly two custom properties on `:root` — `--swell` (bass) and `--shimmer` (upper mids).
+Both are *pulses above a running average*, not raw levels, so they read as a beat instead of
+a constant offset. CSS does everything else: the sea vignette breathes, the Jolly Roger
+scales a hair and glows, the Log Pose glass brightens, berry figures catch the light, and the
+dial's four bars move.
+
+Both sit at `0` whenever the page is silent, so every consumer collapses to exactly the value
+it had before the song existed. The loop cancels itself on pause, and never starts at all
+under `prefers-reduced-motion` or below 640 px — there the bars fall back to a CSS keyframe
+(`.no-analyser`). The graph is `source → analyser → gain → destination`, built only once the
+`AudioContext` is actually running, because routing a media element through a suspended
+context silences it; the gain node also gives a working fade on iOS, where
+`HTMLMediaElement.volume` is read-only.
+
+## Motion
+
+Beyond the reactive layer, four pieces — all of them off under `prefers-reduced-motion`:
+
+- The WANTED poster is **nailed up** on first paint: nails punch in, the sheet drops and
+  swings to rest on the same `-1.4deg / -26px` it has always sat at.
+- The hero name rises **letter by letter**. `initMotion()` splits the two `.kin` lines into
+  per-character spans; `initI18n()` rewrites those nodes on every language switch, so the
+  split re-runs on `langchange`. The `<h1>` keeps an `aria-label`, so a screen reader still
+  hears one word.
+- Revealed sections **stagger** their direct children (`--i` × 55 ms) instead of fading in
+  as one block.
+- Project cards carry a **lantern**: an accent glow that follows the cursor, painted by a
+  `::before` at `z-index: -1` so it washes the card surface and stays behind the text.
+- The chart itself **drifts** as you scroll — `body::before` rotates 4° on a
+  `scroll()` timeline, so it runs off the main thread with no JS. Browsers without
+  scroll-driven animations (stable Firefox, as of 152) simply keep the static overlay.
+
+Animations use `animation-fill-mode: backwards`, never `both`: a finished `both` animation
+keeps winning the cascade for the properties it touched, which would pin `transform` and
+block hover states like the card lift.
+
 ## Internationalization
 
 Strings are keyed via `data-i18n="..."` attributes in the markup and resolved from
 the language files under `assets/i18n/` (`en.json`, `de.json`).
+
+The Tone Dial's state labels are three separate keys (`tone_dial_muted` / `tone_dial_hint` /
+`tone_dial_playing`), one per state, with CSS showing only the matching one. That keeps the
+wording declarative i18n and leaves `main.js` toggling classes rather than writing strings.
+The `aria-live` status region reads its announcement off whichever label is currently shown,
+so it follows the active language for free.

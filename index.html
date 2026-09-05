@@ -21,23 +21,46 @@
 <body class="bg-slate-950 text-slate-300 font-sans antialiased">
 
   <!-- ═══════════════════════════════════════════════════════════════
-       LOG POSE — fixed corner indicator. The needle points at
-       whichever section you're reading; main.js writes --needle
-       from the same scroll-spy pass that highlights the nav link.
+       INSTRUMENT CLUSTER — the ship's two instruments in one fixed
+       chip: the LOG POSE (needle points at whichever section you're
+       reading; main.js writes --needle from the same scroll-spy pass
+       that highlights the nav link) and the TONE DIAL (the shell that
+       plays the ship's song). One object, so the corner stays quiet.
   ════════════════════════════════════════════════════════════════ -->
-  <div id="log-pose"
-    class="fixed bottom-5 right-5 z-50 flex items-center gap-2.5 bg-slate-900/80 backdrop-blur border border-slate-800 rounded-full px-3 py-1.5 text-xs font-mono">
-    <svg class="log-pose__dial flex-shrink-0" viewBox="0 0 24 24" aria-hidden="true">
-      <circle class="log-pose__glass" cx="12" cy="12" r="10" />
-      <path class="log-pose__tick" d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2" />
-      <path class="log-pose__needle" d="M12 3.5 13.6 12 12 20.5 10.4 12Z" />
-      <circle class="log-pose__pivot" cx="12" cy="12" r="1.6" />
-    </svg>
-    <span class="text-slate-400" data-i18n="logpose_label">LOG POSE</span>
-    <span class="text-slate-600" aria-hidden="true">·</span>
-    <!-- Filled from the active nav link, so it follows the language too -->
-    <span id="log-pose-target" class="text-slate-300">WANTED</span>
+  <div id="instruments"
+    class="fixed bottom-5 right-5 z-50 flex items-center gap-2 bg-slate-900/80 backdrop-blur border border-slate-800 rounded-full pl-3 pr-1.5 py-1.5 text-xs font-mono">
+
+    <div id="log-pose" class="flex items-center gap-2.5">
+      <svg class="log-pose__dial flex-shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+        <circle class="log-pose__glass" cx="12" cy="12" r="10" />
+        <path class="log-pose__tick" d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2" />
+        <path class="log-pose__needle" d="M12 3.5 13.6 12 12 20.5 10.4 12Z" />
+        <circle class="log-pose__pivot" cx="12" cy="12" r="1.6" />
+      </svg>
+      <!-- Labels fold away on a phone so the cluster still fits a 360px screen -->
+      <span class="text-slate-400 hidden sm:inline" data-i18n="logpose_label">LOG POSE</span>
+      <span class="text-slate-600 hidden sm:inline" aria-hidden="true">·</span>
+      <!-- Filled from the active nav link, so it follows the language too -->
+      <span id="log-pose-target" class="text-slate-300">WANTED</span>
+    </div>
+
+    <span class="instruments__rope" aria-hidden="true"></span>
+
+    <!-- TONE DIAL — the shell that remembers a song. Rings until the
+         browser lets it sing, spins while it plays, sleeps when muted. -->
+    <button id="tone-dial" type="button" class="tone-dial" aria-pressed="false"
+      aria-label="Play the ship's song">
+      <svg class="tone-dial__shell flex-shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+        <path class="tone-dial__spiral"
+          d="M13.2 12A1.9 1.9 0 0 1 9.4 12 3.4 3.4 0 0 1 16.2 12 5.1 5.1 0 0 1 6 12 6.5 6.5 0 0 1 19 12" />
+      </svg>
+      <span class="tone-dial__bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="tone-dial__title" data-i18n="tone_dial_track">Ja-Cob</span>
+    </button>
   </div>
+
+  <!-- Playback state, announced rather than shown -->
+  <span id="tone-dial-status" class="sr-only" role="status" aria-live="polite"></span>
 
   <!-- ═══════════════════════════════════════════════════════════════
        MOBILE TOPBAR
@@ -205,6 +228,24 @@
             <span id="theme-label-desk">light</span>
           </button>
         </div>
+
+        <!-- Shanty — the same Tone Dial, docked in the sidebar -->
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-xs text-slate-600" data-i18n="shanty_label">// shanty</span>
+          <button id="tone-dial-mini" type="button" class="tone-dial tone-dial--mini" aria-pressed="false"
+            aria-label="Play the ship's song">
+            <svg class="tone-dial__shell flex-shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+              <path class="tone-dial__spiral"
+                d="M13.2 12A1.9 1.9 0 0 1 9.4 12 3.4 3.4 0 0 1 16.2 12 5.1 5.1 0 0 1 6 12 6.5 6.5 0 0 1 19 12" />
+            </svg>
+            <!-- One label per state, each with its own key, so the wording stays
+                 declarative i18n and main.js only ever toggles a class. -->
+            <span class="tone-dial__label tone-dial__label--idle" data-i18n="tone_dial_muted">silent seas</span>
+            <span class="tone-dial__label tone-dial__label--ring" data-i18n="tone_dial_hint">purupurupuru…</span>
+            <span class="tone-dial__label tone-dial__label--play" data-i18n="tone_dial_playing">now playing</span>
+          </button>
+        </div>
+
         <div class="font-mono text-xs text-slate-600 mb-3" data-i18n="quick_links">// ports of call</div>
         <div class="flex gap-3 mb-4">
           <a href="https://github.com/jacobjoseph-96" target="_blank" rel="noopener"
@@ -254,9 +295,13 @@
               </div>
               <p class="font-mono text-xs text-slate-500 mb-3 uppercase tracking-widest" data-i18n="hero_role">Embedded
                 Software Engineer · C++ / ADAS</p>
-              <h1 class="font-sans font-semibold text-5xl lg:text-6xl text-slate-100 leading-none tracking-tight mb-6">
-                <span data-i18n="hero_name_line1">Jacob</span><br>
-                <span class="text-blue-400" data-i18n="hero_name_line2">Joseph</span>
+              <!-- The two name lines are split into per-character spans by
+                   initMotion() so they rise letter by letter; aria-label keeps
+                   the name a single word for a screen reader. -->
+              <h1 class="font-sans font-semibold text-5xl lg:text-6xl text-slate-100 leading-none tracking-tight mb-6"
+                aria-label="Jacob Joseph">
+                <span class="kin" data-i18n="hero_name_line1">Jacob</span><br>
+                <span class="kin text-blue-400" data-i18n="hero_name_line2">Joseph</span>
               </h1>
 
               <p class="text-slate-400 text-lg leading-relaxed mb-8" data-i18n="hero_bio">
@@ -325,7 +370,7 @@
                 <div class="wanted-poster__head">WANTED</div>
 
                 <div class="wanted-poster__frame">
-                  <img src="assets/Jacob-Joseph-2.png" alt="Jacob Joseph" />
+                  <img src="assets/Jacob-Joseph.webp" width="900" height="878" alt="Jacob Joseph" />
                 </div>
 
                 <div class="wanted-poster__dead">DEAD OR ALIVE</div>
@@ -417,7 +462,8 @@
               <div class="grid grid-cols-2 gap-y-2 gap-x-4">
                 <div class="space-y-2">
                   <div class="flex justify-between items-center">
-                    <span class="font-mono text-xs text-slate-300">C++</span>
+                    <span class="font-mono text-xs text-slate-300">C++ <span
+                        class="text-slate-600">11/14/17/20</span></span>
                     <div class="flex gap-0.5">
                       <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
                       <span class="w-2 h-1.5 rounded-sm bg-blue-500"></span>
@@ -506,6 +552,39 @@
               </div>
             </div>
 
+            <!-- Modern C++ — the headline skill, so it sits beside the languages -->
+            <div
+              class="col-span-2 bg-slate-900/60 border border-blue-500/20 rounded-2xl p-5 hover:border-blue-500/40 transition-colors">
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider" data-i18n="stack_modern">Modern
+                  C++</span>
+                <span
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">07</span>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg"
+                  data-i18n="modern_stl">STL &amp; algorithms</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg"
+                  data-i18n="modern_templates">Templates / generics</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg">RAII</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg"
+                  data-i18n="modern_move">Move semantics</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg"
+                  data-i18n="modern_concurrency">Concurrency &amp; threading</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg"
+                  data-i18n="modern_patterns">Design patterns</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg"
+                  data-i18n="modern_realtime">Real-time constraints</span>
+              </div>
+            </div>
+
             <!-- Automotive / Safety Standards -->
             <div
               class="col-span-2 bg-slate-900/60 border border-blue-500/20 rounded-2xl p-5 hover:border-blue-500/40 transition-colors">
@@ -531,84 +610,103 @@
               </div>
             </div>
 
-            <!-- Computer Vision / 3D -->
+            <!-- Domain — what the C++ was actually pointed at -->
             <div
-              class="col-span-2 bg-slate-900/60 border border-blue-500/20 rounded-2xl p-5 hover:border-blue-500/40 transition-colors">
+              class="col-span-2 bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
               <div class="flex items-center justify-between mb-4">
-                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider" data-i18n="stack_vision">Computer
-                  Vision / 3D</span>
+                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider"
+                  data-i18n="stack_domain">Domain</span>
                 <span
-                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">06</span>
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">04</span>
               </div>
               <div class="flex flex-wrap gap-2">
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg"
+                  data-i18n="domain_fusion">Sensor &amp; map fusion</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg"
+                  data-i18n="domain_tracking">Object tracking &amp; lifetime</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg"
+                  data-i18n="domain_replay">Log / recording replay</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg"
+                  data-i18n="domain_viz">Desktop data visualisation</span>
+              </div>
+            </div>
+
+            <!-- Analysis & Debugging -->
+            <div
+              class="col-span-2 bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-xs text-blue-500 uppercase tracking-wider"
+                  data-i18n="stack_analysis">Analysis / Debugging</span>
                 <span
-                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg">OpenCV</span>
-                <span
-                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg">Ceres
-                  Solver</span>
-                <span
-                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg">Eigen</span>
-                <span
-                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg">OpenMVS</span>
-                <span
-                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg">PROJ</span>
-                <span
-                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-300 px-2.5 py-1 rounded-lg">GDAL</span>
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">04</span>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">gdb</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg"
+                  data-i18n="dbg_adtf">ADTF3 resimulation</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">Easy Profiler</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg"
+                  data-i18n="dbg_hotpath">Hot-path optimisation</span>
               </div>
             </div>
 
             <!-- Frameworks / Testing -->
             <div
-              class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
+              class="lg:col-span-2 bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
               <div class="flex items-center justify-between mb-4">
                 <span class="font-mono text-xs text-blue-500 uppercase tracking-wider" data-i18n="stack_testing">Testing
                   / Process</span>
                 <span
-                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">05</span>
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">07</span>
               </div>
-              <ul class="space-y-1.5">
+              <ul class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-1.5">
                 <li class="font-mono text-xs text-slate-400">Google Test</li>
-                <li class="font-mono text-xs text-slate-400">HIL Testing</li>
                 <li class="font-mono text-xs text-slate-400">gcov</li>
                 <li class="font-mono text-xs text-slate-400">clang-tidy</li>
+                <li class="font-mono text-xs text-slate-400" data-i18n="test_hil">HIL testing</li>
+                <li class="font-mono text-xs text-slate-400" data-i18n="test_reviews">Code reviews</li>
+                <li class="font-mono text-xs text-slate-400" data-i18n="test_design">Software design</li>
                 <li class="font-mono text-xs text-slate-400">Agile / Scrum</li>
               </ul>
             </div>
 
             <!-- Build / Infra -->
             <div
-              class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
+              class="lg:col-span-2 bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
               <div class="flex items-center justify-between mb-4">
                 <span class="font-mono text-xs text-blue-500 uppercase tracking-wider" data-i18n="stack_build">Build /
                   Infra</span>
                 <span
-                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">06</span>
+                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">08</span>
               </div>
-              <ul class="space-y-1.5">
+              <ul class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-1.5">
                 <li class="font-mono text-xs text-slate-400">CMake</li>
+                <li class="font-mono text-xs text-slate-400">Conan</li>
                 <li class="font-mono text-xs text-slate-400">Ninja</li>
                 <li class="font-mono text-xs text-slate-400">vcpkg</li>
                 <li class="font-mono text-xs text-slate-400">Nix Flakes</li>
                 <li class="font-mono text-xs text-slate-400">GitLab CI/CD</li>
+                <li class="font-mono text-xs text-slate-400">Jenkins</li>
                 <li class="font-mono text-xs text-slate-400">Docker</li>
               </ul>
             </div>
 
-            <!-- Tools wide -->
+            <!-- Tools — half width, so the grid still tiles without a gap -->
             <div
-              class="col-span-2 lg:col-span-4 bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
+              class="col-span-2 bg-slate-900/60 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-colors">
               <div class="flex items-center justify-between mb-4">
                 <span class="font-mono text-xs text-blue-500 uppercase tracking-wider" data-i18n="stack_tools">Tools
                   &amp; IDE</span>
                 <span
                   class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">12</span>
               </div>
+              <!-- gdb lives in Analysis / Debugging now, so it is not repeated here -->
               <div class="flex flex-wrap gap-2">
                 <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">Qt</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">OpenCV</span>
                 <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">Git</span>
                 <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">Visual Studio</span>
                 <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">VS Code</span>
-                <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">GDB</span>
                 <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">Doxygen</span>
                 <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">JIRA</span>
                 <span class="font-mono text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-lg">Embedded Linux</span>
@@ -1279,8 +1377,8 @@
               <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
                 <div>
                   <div class="font-mono text-xs text-blue-500 mb-1" data-i18n="role1_date">APR 2026 — JUN 2026</div>
-                  <h3 class="font-sans font-medium text-slate-100 text-base" data-i18n="role1_title">Software Developer
-                    — Dev Tooling &amp; Quality Automation</h3>
+                  <h3 class="font-sans font-medium text-slate-100 text-base" data-i18n="role1_title">Software Engineer
+                    — Developer Tools &amp; Workflow Automation</h3>
                   <p class="text-sm text-slate-500 mt-0.5">MDO Mitteldeutsche Online GmbH <span class="text-slate-700">·
                       Bitterfeld-Wolfen, DE</span></p>
                 </div>
@@ -1305,10 +1403,18 @@
                   <span data-i18n="role1_b2">Published an npm package standardizing Sentry user-feedback across React
                     and Vue apps, and automated OpenAPI documentation for Yii2 services.</span>
                 </li>
+                <li class="flex gap-3 text-sm text-slate-400">
+                  <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
+                  <span data-i18n="role1_b4">Integrated a supplier-bill pipeline against the Zoho Books API, keeping
+                    the LLM out of the write path — it only suggests accounts for the flagged tail, for a human to
+                    accept.</span>
+                </li>
               </ul>
               <div class="flex flex-wrap gap-1.5">
-                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">AI Review</span>
-                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">GitLab CI</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">Python</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">GitLab API</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">Zoho Books</span>
+                <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">Claude Code</span>
                 <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">MCP</span>
                 <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">k6</span>
                 <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">OpenAPI</span>
@@ -1324,10 +1430,11 @@
                   <div class="font-mono text-xs text-blue-500 mb-1" data-i18n="role2_date">JAN 2022 — MAY 2025</div>
                   <h3 class="font-sans font-medium text-slate-100 text-base">
                     <span data-i18n="role2_title">Software Engineer</span>
-                    <span class="text-slate-500 font-normal text-sm ml-1" data-i18n="role2_subtitle">— By LIT</span>
+                    <span class="text-slate-500 font-normal text-sm ml-1" data-i18n="role2_subtitle">— ADAS Road Graph
+                      &amp; Road Attributes (C++)</span>
                   </h3>
-                  <p class="text-sm text-slate-500 mt-0.5">INTENTA GmbH <span class="text-slate-700">· Chemnitz,
-                      DE</span></p>
+                  <p class="text-sm text-slate-500 mt-0.5">Intenta Automotive <span class="text-slate-700">· Germany ·
+                      Remote (via SCASE / LIT)</span></p>
                 </div>
                 <span
                   class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded self-start">#a2c91d4</span>
@@ -1335,53 +1442,63 @@
               <ul class="space-y-1.5 mb-4">
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role2_b0">Developed ADAS (Advanced Driver Assistance Systems) software components
-                    for series automotive platforms.</span>
+                  <span data-i18n="role2_b0">Worked across the Road Attributes pipeline on VW's PPE E³ 1.2 ADAS
+                    platform: ingesting camera, sensor and map data, normalising it to the internal type, and tracking
+                    objects with lifetime management.</span>
                 </li>
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role2_b1">Built core features for object tracking and multi-sensor fusion (Camera ·
-                    Radar · Map) for the VW PPE E³ 1.2 platform.</span>
+                  <span data-i18n="role2_b1">Associated tracked objects to the correct road-network link, fused the
+                    per-source results, and serialised the output to the external MFK5 and HCP2 interfaces used by other
+                    teams and the vehicle.</span>
                 </li>
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role2_b2">Used ADTF to analyse vehicle behaviour, replay .dat files, and fix
-                    behavioural anomalies.</span>
+                  <span data-i18n="role2_b2">Extended the ADTF Qt widgets used to visualise the exported attributes in
+                    resimulation.</span>
                 </li>
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role2_b3">Wrote Google Test unit tests achieving 90–95% coverage on safety-critical
-                    paths.</span>
+                  <span data-i18n="role2_b3">Profiled hot paths with Easy Profiler and refactored the critical loops
+                    (RAII, STL algorithms) to hold the real-time budget.</span>
                 </li>
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role2_b4">Resolved AUTOSAR, MISRA C, and ISO 26262 violations using Axivion static
-                    analysis.</span>
+                  <span data-i18n="role2_b4">Covered owned modules with Google Test unit and component tests tracked by
+                    gcov, and cleared Axivion and MISRA C findings under ISO 26262 with targeted, traceable fixes.</span>
                 </li>
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role2_b5">Profiled and optimised execution paths with Easy Profiler, reducing
-                    latency in safety-critical modules.</span>
+                  <span data-i18n="role2_b5">Diagnosed integration defects by replaying MFK5/HCP2 ECU recordings in
+                    ADTF3 resimulation.</span>
                 </li>
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
-                  <span data-i18n="role2_b6">Worked in Agile/Scrum with ~60 developers across multiple teams.</span>
+                  <span data-i18n="role2_b6">Reviewed merge requests and onboarded engineers in an 8–10 dev team,
+                    inside a ~60-engineer C++ programme.</span>
                 </li>
               </ul>
               <div class="flex flex-wrap gap-1.5">
                 <span
-                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">C++</span>
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">C++11/14</span>
                 <span
-                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">ADTF</span>
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">Qt</span>
                 <span
-                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">AUTOSAR</span>
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">ADTF3</span>
                 <span
-                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">ISO
-                  26262</span>
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">GTest</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">gcov</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">CMake</span>
                 <span
                   class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">Axivion</span>
                 <span
-                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">GTest</span>
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">MISRA
+                  C</span>
+                <span
+                  class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">ISO
+                  26262</span>
                 <span
                   class="font-mono text-xs bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2 py-0.5 rounded">VW
                   PPE</span>
@@ -1488,10 +1605,19 @@
                   <p class="text-sm text-slate-500 mt-0.5">Tishreen University · Faculty of Engineering <span
                       class="text-slate-700">· Lattakia, SY</span></p>
                 </div>
-                <span
-                  class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded self-start">#edu</span>
+                <div class="flex items-center gap-2 self-start">
+                  <!-- The final grade is treasure, so it is styled as such. -->
+                  <span class="bounty font-mono text-xs font-semibold px-2 py-0.5 rounded">„sehr gut“</span>
+                  <span
+                    class="font-mono text-xs text-slate-400 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded">#edu</span>
+                </div>
               </div>
               <ul class="space-y-1.5 mb-4">
+                <li class="flex gap-3 text-sm text-slate-400">
+                  <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
+                  <span data-i18n="edu1_b0">Five-year engineering programme (10 semesters), overall grade „sehr
+                    gut“.</span>
+                </li>
                 <li class="flex gap-3 text-sm text-slate-400">
                   <span class="text-blue-500/60 flex-shrink-0 mt-0.5">›</span>
                   <span data-i18n="edu1_b1">Specialization: Mechatronics — Mechanical &amp; Electrical
@@ -1502,6 +1628,34 @@
                   <span data-i18n="edu1_b2">Thesis: Stereo-Vision Robotic Arm — Autonomous Olive Harvester.</span>
                 </li>
               </ul>
+
+              <!-- Degree recognition — a foreign degree only counts in Germany once the
+                   ZAB has assessed it, so the assessment gets its own row rather than
+                   being buried among the tags. -->
+              <a href="https://drive.google.com/file/d/1NtZuaFoCHsZEul3Vuzji_RqyfEmkyJC-/view?usp=sharing"
+                target="_blank" rel="noopener"
+                class="flex items-center justify-between gap-4 mb-4 bg-blue-500/10 border border-blue-500/20 rounded-xl px-4 py-3 hover:border-blue-500/40 transition-colors group">
+                <div class="flex items-center gap-3 min-w-0">
+                  <span
+                    class="flex-shrink-0 w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                    <!-- Seal: a stamped certificate of equivalence -->
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="9" r="6" />
+                      <path d="m8.5 14.5-1 7.5 4.5-2.5 4.5 2.5-1-7.5" />
+                    </svg>
+                  </span>
+                  <div class="min-w-0">
+                    <div class="text-sm text-slate-300 group-hover:text-slate-100 transition-colors"
+                      data-i18n="zab_title">ZAB Zeugnisbewertung</div>
+                    <div class="font-mono text-xs text-slate-600" data-i18n="zab_sub">degree recognised at German
+                      Bachelor level</div>
+                  </div>
+                </div>
+                <span
+                  class="text-slate-600 group-hover:text-slate-400 transition-colors font-mono flex-shrink-0">↗</span>
+              </a>
+
               <div class="flex flex-wrap gap-1.5">
                 <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">Mechatronics</span>
                 <span class="font-mono text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded">Robotics</span>
@@ -1731,6 +1885,17 @@ linkedin = <span class="text-slate-300">"linkedin.com/in/jacob-joseph-dev"</span
     </main><!-- /main -->
   </div><!-- /layout root -->
 
+
+  <!-- The ship's song. preload="none" keeps it off the critical path entirely —
+       nothing is fetched until playback is actually started.
+
+       Opus/WebM first (1.9 MB, and its pre-skip makes the loop seam gapless in a
+       way MP3's encoder padding never is); the MP3 is the 3.8 MB fallback for
+       browsers that can't take WebM audio — only ever fetched by those. -->
+  <audio id="ship-song" loop preload="none" playsinline>
+    <source src="assets/Ja-Cob.webm" type="audio/webm; codecs=opus" />
+    <source src="assets/Ja-Cob.mp3" type="audio/mpeg" />
+  </audio>
 
   <script src="assets/js/main.js" defer></script>
 

@@ -349,7 +349,10 @@ body::before {
     /* paper grain */
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 100% 100%, 220px 220px;
-  opacity: var(--paper-grain);
+  /* --swell is 0 unless the ship's song is playing, so a silent page keeps
+     exactly the opacity it had before; a mode that sets its base to 0
+     (dark) stays at 0 because the swell is a multiplier, not a summand. */
+  opacity: calc(var(--paper-grain) * (1 + var(--swell) * 0.25));
   mix-blend-mode: multiply;
 }
 
@@ -364,7 +367,7 @@ body::after {
     transparent 0%,
     color-mix(in srgb, var(--sidebar) 40%, transparent) 70%,
     color-mix(in srgb, var(--sidebar) 85%, transparent) 100%);
-  opacity: var(--sea-depth);
+  opacity: calc(var(--sea-depth) * (1 + var(--swell) * 0.12));
 }
 
 /* Content sits above both texture layers.
@@ -398,6 +401,10 @@ body::after {
 .jolly-roger {
   display: block;
   color: var(--accent);
+  /* The crew mark breathes with the bass while the song plays. */
+  transform: scale(calc(1 + var(--swell) * 0.035));
+  filter: drop-shadow(0 0 calc(var(--swell) * 7px)
+    color-mix(in srgb, var(--accent) 55%, transparent));
 }
 .jolly-roger--sm { width: 18px; height: 18px; }
 .jolly-roger--md { width: 28px; height: 28px; }
@@ -406,7 +413,7 @@ body::after {
    Replaces the old status LED. The needle points at whichever
    section you're reading — main.js writes --needle from the
    same scroll-spy pass that highlights the nav link. */
-#log-pose {
+#instruments {
   background-color: var(--led-bg);
   border-color: var(--border);
 }
@@ -416,7 +423,7 @@ body::after {
   overflow: visible;
 }
 .log-pose__glass {
-  fill: color-mix(in srgb, var(--accent) 10%, transparent);
+  fill: color-mix(in srgb, var(--accent) calc(10% + var(--swell) * 16%), transparent);
   stroke: var(--border-hi);
   stroke-width: 1;
 }
@@ -507,9 +514,11 @@ body::after {
   padding: 3px;
   background: color-mix(in srgb, var(--poster-ink) 4%, transparent);
 }
-/* 4:5 portrait box. The source is 1080×1483 (0.73), so a landscape
-   frame would crop the face to a strip — this keeps hairline to
-   collar inside the cut with room to spare. */
+/* 4:5 portrait box. The source is 900×878 (1.03), wider than the frame,
+   so `cover` trims ~11% off each side — shoulders, never the face — and
+   nothing is cropped vertically: hairline to collar sits inside the cut.
+   object-position's vertical half is therefore inert here; it is kept so
+   a taller source can be dropped in without re-deriving the framing. */
 .wanted-poster__frame img {
   display: block;
   width: 100%;
@@ -568,6 +577,9 @@ body::after {
   background-color: color-mix(in srgb, var(--gold) 10%, transparent);
   letter-spacing: 0.08em;
   white-space: nowrap;
+  /* Berry figures catch the light on the upper mids. */
+  text-shadow: 0 0 calc(var(--shimmer) * 12px)
+    color-mix(in srgb, var(--gold) 50%, transparent);
 }
 
 /* ── Grand Line banner ──────────────────────────────────
@@ -581,14 +593,300 @@ body::after {
   border: 1px solid var(--border);
 }
 
+/* ── Tone Dial ──────────────────────────────────────────
+   A Tone Dial is the shell that stores a recording, so the
+   music control is one: press it and the ship sings. It
+   docks with the log pose inside #instruments rather than
+   claiming a second corner of its own.
+
+   Three states, all driven by main.js:
+     .is-ringing  waiting for the browser to allow sound
+     .is-playing  the song is running
+     (neither)    silent by choice — sticky across visits
+────────────────────────────────────────────────────────── */
+.instruments__rope {
+  width: 3px;
+  height: 15px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  background-image: repeating-linear-gradient(
+    115deg,
+    var(--rope) 0 3px,
+    transparent 3px 5px
+  );
+  opacity: 0.6;
+}
+
+.tone-dial {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 7px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: var(--muted);
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+.tone-dial:hover,
+.tone-dial:focus-visible {
+  color: var(--text-hi);
+  border-color: color-mix(in srgb, var(--gold) 45%, transparent);
+  background-color: color-mix(in srgb, var(--gold) 12%, transparent);
+}
+
+.tone-dial__shell {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  color: var(--dim);
+  transition: color 0.25s ease;
+}
+.tone-dial.is-ringing .tone-dial__shell,
+.tone-dial.is-playing .tone-dial__shell { color: var(--gold); }
+
+/* The spiral turns like a groove under a needle. */
+.tone-dial__spiral {
+  transform-origin: 12px 12px;
+}
+.tone-dial.is-playing .tone-dial__spiral {
+  animation: dial-spin 14s linear infinite;
+}
+@keyframes dial-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Ringing: a Den Den Mushi call the visitor hasn't picked up yet. */
+.tone-dial.is-ringing::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  width: 19px;
+  height: 19px;
+  margin-top: -9.5px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  animation: dial-ring 1.9s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes dial-ring {
+  0%   { opacity: 0.65; transform: scale(0.55); }
+  70%  { opacity: 0;    transform: scale(1.7); }
+  100% { opacity: 0;    transform: scale(1.7); }
+}
+
+/* Four bars, fed straight off the analyser — see initShipSong().
+   scaleY on a fixed-height bar keeps this on the compositor. */
+.tone-dial__bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 13px;
+}
+.tone-dial__bars i {
+  width: 2px;
+  height: 13px;
+  border-radius: 1px;
+  background-color: var(--dim);
+  opacity: 0.55;
+  transform: scaleY(var(--b, 0.12));
+  transform-origin: 50% 100%;
+  transition: transform 0.09s linear, background-color 0.25s ease, opacity 0.25s ease;
+}
+.tone-dial.is-playing .tone-dial__bars i {
+  background-color: var(--accent);
+  opacity: 0.9;
+}
+
+/* No Web Audio (or reduced data / older Safari): the bars still move,
+   they just move on a loop instead of to the actual spectrum. */
+.tone-dial.is-playing.no-analyser .tone-dial__bars i {
+  animation: bar-bounce 0.9s ease-in-out infinite alternate;
+}
+.tone-dial.is-playing.no-analyser .tone-dial__bars i:nth-child(2) { animation-delay: 0.15s; }
+.tone-dial.is-playing.no-analyser .tone-dial__bars i:nth-child(3) { animation-delay: 0.32s; }
+.tone-dial.is-playing.no-analyser .tone-dial__bars i:nth-child(4) { animation-delay: 0.08s; }
+@keyframes bar-bounce {
+  from { transform: scaleY(0.18); }
+  to   { transform: scaleY(0.85); }
+}
+
+/* Track title — folded away until the cluster is hovered or the song runs. */
+.tone-dial__title {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  color: var(--muted);
+  transition: max-width 0.35s ease, opacity 0.25s ease;
+}
+#instruments:hover .tone-dial__title,
+.tone-dial:focus-visible .tone-dial__title,
+.tone-dial.is-playing .tone-dial__title {
+  max-width: 84px;
+  opacity: 1;
+}
+@media (max-width: 639px) {
+  .tone-dial__title { display: none; }
+}
+
+/* Sidebar mirror of the same control. */
+.tone-dial--mini {
+  gap: 5px;
+  padding: 2px 6px;
+  border-color: var(--border);
+  color: var(--muted);
+}
+.tone-dial--mini .tone-dial__shell { width: 14px; height: 14px; }
+.tone-dial--mini.is-ringing::before {
+  left: 6px;
+  width: 14px;
+  height: 14px;
+  margin-top: -7px;
+}
+
+/* The mini dial carries one label per state; only the matching one is
+   shown, so the wording stays plain declarative i18n. */
+.tone-dial__label { display: none; font-size: 12px; }
+.tone-dial:not(.is-playing):not(.is-ringing) .tone-dial__label--idle,
+.tone-dial.is-ringing .tone-dial__label--ring,
+.tone-dial.is-playing .tone-dial__label--play { display: inline; }
+
+/* ── Audio-reactive channel ─────────────────────────────
+   --swell (bass) and --shimmer (upper mids) are the ONLY
+   values the audio loop writes to CSS. Both sit at 0 while
+   the page is silent, so every consumer above collapses to
+   exactly its old value and costs nothing. */
+:root {
+  --swell: 0;
+  --shimmer: 0;
+}
+
+/* ── The poster gets nailed up ──────────────────────────
+   Nails punch in, then the sheet drops and swings to rest
+   on the same -1.4deg / -26px it has always sat at. */
+@keyframes poster-nail-up {
+  0%   { opacity: 0; transform: rotate(-9deg) translateY(-70px); }
+  55%  { opacity: 1; transform: rotate(-2.8deg) translateY(-21px); }
+  78%  { transform: rotate(-0.5deg) translateY(-28px); }
+  100% { transform: rotate(-1.4deg) translateY(-26px); }
+}
+.wanted-poster {
+  animation: poster-nail-up 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s backwards;
+}
+@keyframes nail-punch {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+.wanted-poster__nail {
+  animation: nail-punch 0.3s ease-out backwards;
+}
+
+/* ── Kinetic name ───────────────────────────────────────
+   initMotion() splits the two hero name lines into per-character
+   spans and numbers them with --i; the heading keeps an aria-label
+   so a screen reader still hears one word. */
+.kin > span {
+  display: inline-block;
+  animation: kin-rise 0.55s cubic-bezier(0.2, 0.9, 0.3, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 32ms + 0.2s);
+}
+@keyframes kin-rise {
+  from { opacity: 0; transform: translateY(18px) rotate(3deg); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Staggered reveals ──────────────────────────────────
+   The section still fades in as one block; its direct children
+   then rise in sequence, which reads far more deliberate than a
+   single fade for no extra observer work.
+
+   Own keyframe rather than Tailwind's `fadeUp`: Tailwind only emits a
+   keyframe when its matching `animate-*` utility appears in the markup,
+   and nothing here uses `animate-fadeUp`. */
+@keyframes reveal-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+.reveal.is-visible > .reveal-child {
+  animation: reveal-rise 0.5s ease backwards;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+
+/* ── Lantern ────────────────────────────────────────────
+   A light carried across the chart: project cards pick up a
+   soft accent glow that follows the cursor. It sits at z-index -1
+   so it washes over the card's own surface and stays behind the
+   text — `isolation` guarantees that containment. */
+#projects article {
+  position: relative;
+  isolation: isolate;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+#projects article::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 16%, transparent), transparent 72%);
+}
+@media (hover: hover) and (pointer: fine) {
+  #projects article:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px -28px color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+  #projects article:hover::before { opacity: 1; }
+}
+
+/* ── Sea drift ──────────────────────────────────────────
+   The chart turns very slightly under you as you scroll. Driven
+   by a scroll timeline, so it runs off the main thread and needs
+   no JS; browsers without it keep today's static overlay.
+   scale() covers the corners the rotation would otherwise expose. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    body::before {
+      animation: chart-drift linear both;
+      animation-timeline: scroll(root block);
+    }
+    @keyframes chart-drift {
+      from { transform: rotate(0deg) scale(1.25); }
+      to   { transform: rotate(4deg) scale(1.25); }
+    }
+  }
+}
+
 /* ── Reduced motion ─────────────────────────────────────
    Kill the ambient motion; the needle still moves to the
-   right heading, it just gets there instantly. */
+   right heading, it just gets there instantly. The song is
+   sound, not motion — it still plays, the picture just
+   stops dancing (main.js never starts the analyser loop). */
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee { animation: none; }
   .animate-pulse_led { animation: none; }
   .log-pose__needle { transition: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal.is-visible > .reveal-child { animation: none; }
+  .wanted-poster,
+  .wanted-poster__nail,
+  .kin > span { animation: none; }
+  .tone-dial.is-playing .tone-dial__spiral,
+  .tone-dial.is-ringing::before,
+  .tone-dial.is-playing.no-analyser .tone-dial__bars i { animation: none; }
+  .tone-dial__bars i { transition: none; }
+  #projects article { transition: border-color 0.3s ease; }
+  #projects article:hover { transform: none; box-shadow: none; }
 }
 
 /* ══════════════════════════════════════════════════════
