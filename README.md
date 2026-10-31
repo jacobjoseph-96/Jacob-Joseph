@@ -1,6 +1,6 @@
 # Jacob Joseph — Portfolio
 
-Personal portfolio site for Jacob Joseph, ADAS & Embedded Systems Specialist.
+Personal portfolio site for Jacob Joseph, C++ Software Engineer.
 Static HTML + Tailwind CSS, no framework, no build server.
 
 One Piece themed: light is an aged sea chart, dark is the Grand Line at night.
