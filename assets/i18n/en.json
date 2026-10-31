@@ -159,7 +159,6 @@
   "modern_stl": "STL &amp; algorithms",
   "modern_templates": "Templates / generics",
   "modern_move": "Move semantics",
-  "modern_concurrency": "Concurrency &amp; threading",
   "modern_patterns": "Design patterns",
   "modern_realtime": "Real-time constraints",
   "domain_fusion": "Sensor &amp; map fusion",
