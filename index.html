@@ -1106,6 +1106,26 @@
                 <span class="bg-slate-800 text-slate-400 px-2 py-0.5 rounded">Closed</span>
               </div>
             </div>
+            <!-- Video -->
+            <div class="border-t border-slate-800/60">
+              <div class="flex items-center justify-between px-4 py-2 bg-slate-950/60">
+                <div class="flex items-center gap-2">
+                  <div class="flex gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500/40"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/40"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-500/40"></span>
+                  </div>
+                  <span class="font-mono text-xs text-slate-600">huntboard_demo.mp4</span>
+                </div>
+                <button id="huntboard-fullscreen"
+                  class="font-mono text-xs text-slate-600 hover:text-slate-300 transition-colors"
+                  aria-label="Fullscreen">⛶</button>
+              </div>
+              <video id="huntboard-video" src="assets/huntboard-demo.mp4" poster="assets/huntboard-demo-poster.jpg"
+                autoplay muted loop playsinline preload="metadata" width="1440" height="860"
+                aria-label="Huntboard demo: home, job search, dragging a job on the board, a ticket's fit and interview tabs"
+                class="w-full h-auto block"></video>
+            </div>
           </article>
 
           <!-- Featured project card: PolyGuard -->

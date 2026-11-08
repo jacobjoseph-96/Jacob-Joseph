@@ -261,6 +261,18 @@
     }
   }
 
+  // Huntboard demo: loops muted; the button takes it fullscreen so the UI text is readable.
+  function initHuntboardVideo() {
+    var vid = document.getElementById('huntboard-video');
+    var btn = document.getElementById('huntboard-fullscreen');
+    if (!vid || !btn) return;
+    vid.addEventListener('error', function () { vid.controls = true; });
+    btn.addEventListener('click', function () {
+      var req = vid.requestFullscreen || vid.webkitRequestFullscreen || vid.webkitEnterFullscreen;
+      if (req) req.call(vid);
+    });
+  }
+
   /* ══════════════════════════════════════════════════════
      SHIP'S SONG — the Tone Dial
 
@@ -660,6 +672,7 @@
   initNav();
   initReveal();
   initVideo();
+  initHuntboardVideo();
   initMotion();
   initShipSong();
 })();
